@@ -4,20 +4,18 @@ import { Loader2 } from 'lucide-react'
 import * as React from 'react'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95',
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90', // White bg, Black text
-        destructive: 'bg-red-500 text-white hover:bg-red-600',
-        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground', // Bordered
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80', // Dark Slate
-        accent: 'bg-accent text-accent-foreground hover:bg-accent/90', // Gold
-        ghost: 'hover:bg-accent hover:text-accent-foreground',
+        default: 'bg-primary text-primary-foreground shadow hover:bg-gray-200 hover:shadow-md', // White bg, Black text
+        destructive: 'bg-red-500 text-white shadow-sm hover:bg-red-600 hover:shadow-md',
+        outline: 'border border-slate-200 bg-transparent shadow-sm hover:bg-slate-100 hover:text-slate-900 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-white',
+        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-slate-700 hover:shadow-md', // Dark Slate
+        accent: 'bg-accent text-accent-foreground shadow-sm hover:bg-[#C5A332] hover:shadow-md', // Gold
+        ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white',
         link: 'text-primary underline-offset-4 hover:underline',
-        // Special variants for dark/light contexts if needed, but 'default' (white) works on dark.
-        // For light backgrounds, we might want a dark button.
-        dark: 'bg-[#000A0D] text-white hover:bg-[#000A0D]/90',
+        dark: 'bg-[#000A0D] text-white shadow hover:bg-gray-900 hover:shadow-md',
       },
       size: {
         default: 'h-10 px-4 py-2',
