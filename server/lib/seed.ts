@@ -40,7 +40,7 @@ const IMAGES_INTERIOR = [
 
 export function ensureSeed(): void {
   ensureDataDir()
-  // if (dbExists()) return // Force re-seed for this task to populate data
+  if (dbExists()) return // Force re-seed for this task to populate data
 
   const sourceId = newId()
   
