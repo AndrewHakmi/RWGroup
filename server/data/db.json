@@ -1,7 +1,7 @@
 {
   "home": {
     "hero": {
-      "title": "Эксперты по недвижимости!!!",
+      "title": "Эксперты по недвижимости",
       "subtitle": "RWgroup — агентство недвижимости",
       "address": "Москва",
       "phone": "+7 (495) 410-15-68",
@@ -80,12 +80,14 @@
         {
           "name": "Саша",
           "role": "Основатель",
-          "story": "Личный подход и внимание к деталям."
+          "story": "Личный подход и внимание к деталям.",
+          "photo_url": "https://ui-avatars.com/api/?name=Sasha&background=random&size=200"
         },
         {
           "name": "Настя",
           "role": "Сооснователь",
-          "story": "Фокус на сервисе и доверии."
+          "story": "Фокус на сервисе и доверии.",
+          "photo_url": "https://ui-avatars.com/api/?name=Nastya&background=random&size=200"
         }
       ],
       "links": [
@@ -115,120 +117,2716 @@
     },
     "featured": {
       "complexes": [
-        "fc2379d8-00cd-495c-a807-d5b55b736969"
+        "3de7bc97-7e94-421e-86ec-0cbe999c747d",
+        "129bbbd6-1707-4094-9e74-8e458c72c9f3",
+        "3b18bfb0-f2f7-4f15-8f66-ee38618e1e4c"
       ],
       "properties": [
-        "49315117-0c99-4322-837e-8c129ab4ac88",
-        "ac373537-d4c2-409f-8a3d-3b959181a048"
+        "7312035e-e850-4715-8c91-1601efb99106",
+        "791726e1-9d41-4d65-8a55-b04331cfd6d5",
+        "3a4fb30d-6b5d-4309-9d28-0dba3a85b071",
+        "459ab992-ff75-45e4-850a-3dbf11e453be",
+        "cef2a261-9122-47ea-b433-bfea6141d07a",
+        "d9a0923b-a740-4fc1-bfee-52eac48a56e8"
       ],
       "collections": [
-        "82d23be8-c5e8-4304-a6cd-bc1123bd62bb"
+        "68103faf-b498-4167-bcfe-2f76c2dd5eda",
+        "d02bf5a4-3ebb-43ae-95ae-1379516090d1"
       ]
     },
-    "updated_at": "2026-01-23T15:21:13.356Z"
+    "updated_at": "2026-02-04T20:03:38.392Z"
   },
   "feed_sources": [
     {
-      "id": "abc81381-f233-4f27-9fb9-3e2629c4b7bc",
+      "id": "ff68d811-4768-4df3-8456-96b3309844f6",
       "name": "Демо-источник",
       "mode": "upload",
       "format": "json",
       "is_active": true,
-      "created_at": "2026-01-21T19:21:58.794Z"
+      "created_at": "2026-02-04T20:03:38.392Z"
     }
   ],
   "complexes": [
     {
-      "id": "fc2379d8-00cd-495c-a807-d5b55b736969",
-      "source_id": "abc81381-f233-4f27-9fb9-3e2629c4b7bc",
+      "id": "3de7bc97-7e94-421e-86ec-0cbe999c747d",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
       "external_id": "c-001",
-      "slug": "жк-river-park",
-      "title": "ЖК River Park",
+      "slug": "жк-sky-quarter-1",
+      "title": "ЖК Sky Quarter 1",
       "category": "newbuild",
-      "district": "ЦАО",
+      "district": "ЗАО",
       "metro": [
-        "Киевская"
+        "Павелецкая"
       ],
-      "price_from": 18500000,
-      "area_from": 42,
+      "price_from": 27000000,
+      "area_from": 58,
       "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9"
+      ],
+      "developer": "Stone Hedge",
+      "class": "De Luxe",
+      "finish_type": "Whitebox",
+      "handover_date": "IV кв. 2027",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "129bbbd6-1707-4094-9e74-8e458c72c9f3",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-002",
+      "slug": "жк-tower-residence-2",
+      "title": "ЖК Tower Residence 2",
+      "category": "newbuild",
+      "district": "ЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "price_from": 40000000,
+      "area_from": 78,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9"
+      ],
+      "developer": "Pioneer",
+      "class": "De Luxe",
+      "finish_type": "Whitebox",
+      "handover_date": "IV кв. 2027",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "3b18bfb0-f2f7-4f15-8f66-ee38618e1e4c",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-003",
+      "slug": "жк-sky-residence-3",
+      "title": "ЖК Sky Residence 3",
+      "category": "newbuild",
+      "district": "ЮАО",
+      "metro": [
+        "Октябрьская"
+      ],
+      "price_from": 20000000,
+      "area_from": 44,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9"
+      ],
+      "developer": "MR Group",
+      "class": "Premium",
+      "finish_type": "Whitebox",
+      "handover_date": "IV кв. 2025",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "78691378-51c8-4d72-9661-a6b68939da98",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-004",
+      "slug": "жк-river-house-4",
+      "title": "ЖК River House 4",
+      "category": "newbuild",
+      "district": "ЗАО",
+      "metro": [
+        "Арбатская"
+      ],
+      "price_from": 58000000,
+      "area_from": 76,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9"
+      ],
+      "developer": "Pioneer",
+      "class": "Premium",
+      "finish_type": "С отделкой",
+      "handover_date": "IV кв. 2026",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "ef2985e5-92c0-4203-9d38-68d8b489d2a4",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-005",
+      "slug": "жк-tower-quarter-5",
+      "title": "ЖК Tower Quarter 5",
+      "category": "newbuild",
+      "district": "ЮВАО",
+      "metro": [
+        "Боровицкая"
+      ],
+      "price_from": 45000000,
+      "area_from": 77,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9",
         "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9"
       ],
+      "developer": "MR Group",
+      "class": "De Luxe",
+      "finish_type": "Без отделки",
+      "handover_date": "IV кв. 2026",
       "status": "active",
-      "updated_at": "2026-01-21T19:21:58.794Z"
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "4a7a89c5-2a7f-4428-9c9b-692c2ba63914",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-006",
+      "slug": "жк-park-residence-6",
+      "title": "ЖК Park Residence 6",
+      "category": "newbuild",
+      "district": "ЮАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "price_from": 38000000,
+      "area_from": 67,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9"
+      ],
+      "developer": "MR Group",
+      "class": "De Luxe",
+      "finish_type": "Без отделки",
+      "handover_date": "IV кв. 2025",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "01b1fcf3-359a-4ae9-99ad-a96f2716a638",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-007",
+      "slug": "жк-view-estate-7",
+      "title": "ЖК View Estate 7",
+      "category": "newbuild",
+      "district": "ЮЗАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "price_from": 35000000,
+      "area_from": 75,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9"
+      ],
+      "developer": "Pioneer",
+      "class": "Premium",
+      "finish_type": "Без отделки",
+      "handover_date": "IV кв. 2024",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "0fd2b8e3-00dc-4edb-b81c-9bee22019926",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-008",
+      "slug": "жк-city-quarter-8",
+      "title": "ЖК City Quarter 8",
+      "category": "newbuild",
+      "district": "СВАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "price_from": 69000000,
+      "area_from": 39,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9"
+      ],
+      "developer": "MR Group",
+      "class": "De Luxe",
+      "finish_type": "Whitebox",
+      "handover_date": "IV кв. 2027",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.389Z"
+    },
+    {
+      "id": "d687202d-b7b7-4e60-bf7b-ada9ea02cbff",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-009",
+      "slug": "жк-park-house-9",
+      "title": "ЖК Park House 9",
+      "category": "newbuild",
+      "district": "СВАО",
+      "metro": [
+        "Кропоткинская"
+      ],
+      "price_from": 46000000,
+      "area_from": 67,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9"
+      ],
+      "developer": "Vesper",
+      "class": "Business",
+      "finish_type": "Whitebox",
+      "handover_date": "IV кв. 2026",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "348fcd8d-f3c6-46d1-9c8e-040fdcc8c247",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-010",
+      "slug": "жк-view-estate-10",
+      "title": "ЖК View Estate 10",
+      "category": "newbuild",
+      "district": "ВАО",
+      "metro": [
+        "Полянка"
+      ],
+      "price_from": 20000000,
+      "area_from": 52,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9"
+      ],
+      "developer": "Stone Hedge",
+      "class": "Premium",
+      "finish_type": "Без отделки",
+      "handover_date": "IV кв. 2024",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "e5ab4645-bf78-4df5-a2cd-8061aff49b8c",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-011",
+      "slug": "жк-park-residence-11",
+      "title": "ЖК Park Residence 11",
+      "category": "newbuild",
+      "district": "ЮЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "price_from": 59000000,
+      "area_from": 74,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "developer": "Stone Hedge",
+      "class": "Premium",
+      "finish_type": "С отделкой",
+      "handover_date": "IV кв. 2025",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "22bd73f6-785a-4905-81ac-5e53a3b9bbb2",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-012",
+      "slug": "жк-prime-estate-12",
+      "title": "ЖК Prime Estate 12",
+      "category": "newbuild",
+      "district": "САО",
+      "metro": [
+        "Полянка"
+      ],
+      "price_from": 23000000,
+      "area_from": 63,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9"
+      ],
+      "developer": "Stone Hedge",
+      "class": "Premium",
+      "finish_type": "С отделкой",
+      "handover_date": "IV кв. 2026",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "ba6009d9-f613-42f4-9029-345a7f9f52b3",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-013",
+      "slug": "жк-park-quarter-13",
+      "title": "ЖК Park Quarter 13",
+      "category": "newbuild",
+      "district": "СВАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "price_from": 26000000,
+      "area_from": 56,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20residential%20complex%20in%20moscow%2C%20sunset%2C%20wide%20angle%2C%20real%20estate%20photography%2C%20clean%20facades%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "developer": "Stone Hedge",
+      "class": "De Luxe",
+      "finish_type": "Без отделки",
+      "handover_date": "IV кв. 2026",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "ebe4f852-56f8-45c9-be27-9ac252db70d1",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-014",
+      "slug": "жк-river-house-14",
+      "title": "ЖК River House 14",
+      "category": "newbuild",
+      "district": "СВАО",
+      "metro": [
+        "Цветной бульвар"
+      ],
+      "price_from": 40000000,
+      "area_from": 63,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=premium%20club%20house%20moscow%20center%2C%20classic%20architecture%2C%20morning%20light&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9"
+      ],
+      "developer": "Stone Hedge",
+      "class": "De Luxe",
+      "finish_type": "С отделкой",
+      "handover_date": "IV кв. 2027",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "ca18064a-40f7-483f-9717-75a9376d84d1",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "c-015",
+      "slug": "жк-grand-estate-15",
+      "title": "ЖК Grand Estate 15",
+      "category": "newbuild",
+      "district": "ЮВАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "price_from": 48000000,
+      "area_from": 35,
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20skyscraper%20moscow%20city%20style%2C%20night%20view%2C%20glass%20facade%2C%20cinematic%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9"
+      ],
+      "developer": "MR Group",
+      "class": "Business",
+      "finish_type": "Whitebox",
+      "handover_date": "IV кв. 2026",
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
     }
   ],
   "properties": [
     {
-      "id": "49315117-0c99-4322-837e-8c129ab4ac88",
-      "source_id": "abc81381-f233-4f27-9fb9-3e2629c4b7bc",
-      "external_id": "p-001",
-      "slug": "2-комнатная-в-жк-river-park",
-      "lot_number": "A-1204",
-      "complex_id": "fc2379d8-00cd-495c-a807-d5b55b736969",
+      "id": "7312035e-e850-4715-8c91-1601efb99106",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-001",
+      "slug": "1-комнатная-в-жк-city-quarter-8-1",
+      "lot_number": "A-191",
+      "complex_id": "0fd2b8e3-00dc-4edb-b81c-9bee22019926",
+      "complex_external_id": "c-008",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 139 м²",
+      "bedrooms": 1,
+      "price": 166200000,
+      "area_total": 139,
+      "district": "СВАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "791726e1-9d41-4d65-8a55-b04331cfd6d5",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-002",
+      "slug": "3-комнатная-в-жк-park-quarter-13-2",
+      "lot_number": "A-943",
+      "complex_id": "ba6009d9-f613-42f4-9029-345a7f9f52b3",
+      "complex_external_id": "c-013",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 65 м²",
+      "bedrooms": 3,
+      "price": 75700000,
+      "area_total": 65,
+      "district": "СВАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "3a4fb30d-6b5d-4309-9d28-0dba3a85b071",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-003",
+      "slug": "3-комнатная-в-жк-park-residence-6-3",
+      "lot_number": "A-798",
+      "complex_id": "4a7a89c5-2a7f-4428-9c9b-692c2ba63914",
+      "complex_external_id": "c-006",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 86 м²",
+      "bedrooms": 3,
+      "price": 72600000,
+      "area_total": 86,
+      "district": "ЮАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "459ab992-ff75-45e4-850a-3dbf11e453be",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-004",
+      "slug": "2-комнатная-в-жк-park-residence-11-4",
+      "lot_number": "A-987",
+      "complex_id": "e5ab4645-bf78-4df5-a2cd-8061aff49b8c",
+      "complex_external_id": "c-011",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "2-комнатная квартира, 84 м²",
+      "bedrooms": 2,
+      "price": 96300000,
+      "area_total": 84,
+      "district": "ЮЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "cef2a261-9122-47ea-b433-bfea6141d07a",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-005",
+      "slug": "3-комнатная-в-жк-tower-residence-2-5",
+      "lot_number": "A-963",
+      "complex_id": "129bbbd6-1707-4094-9e74-8e458c72c9f3",
+      "complex_external_id": "c-002",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 61 м²",
+      "bedrooms": 3,
+      "price": 60000000,
+      "area_total": 61,
+      "district": "ЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "d9a0923b-a740-4fc1-bfee-52eac48a56e8",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-006",
+      "slug": "3-комнатная-в-жк-park-house-9-6",
+      "lot_number": "A-890",
+      "complex_id": "d687202d-b7b7-4e60-bf7b-ada9ea02cbff",
+      "complex_external_id": "c-009",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 191 м²",
+      "bedrooms": 3,
+      "price": 183200000,
+      "area_total": 191,
+      "district": "СВАО",
+      "metro": [
+        "Кропоткинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "f4195e5f-bd45-4fc4-95da-4f669a7a1ba7",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-007",
+      "slug": "3-комнатная-в-жк-park-residence-6-7",
+      "lot_number": "A-559",
+      "complex_id": "4a7a89c5-2a7f-4428-9c9b-692c2ba63914",
+      "complex_external_id": "c-006",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 80 м²",
+      "bedrooms": 3,
+      "price": 80200000,
+      "area_total": 80,
+      "district": "ЮАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "6febfc24-1f87-4b06-a305-964e30724711",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-008",
+      "slug": "3-комнатная-в-жк-view-estate-7-8",
+      "lot_number": "A-588",
+      "complex_id": "01b1fcf3-359a-4ae9-99ad-a96f2716a638",
+      "complex_external_id": "c-007",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 61 м²",
+      "bedrooms": 3,
+      "price": 58000000,
+      "area_total": 61,
+      "district": "ЮЗАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "2897137c-7e58-4fdc-a92b-832a1a252ed0",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-009",
+      "slug": "4-комнатная-в-жк-view-estate-7-9",
+      "lot_number": "A-642",
+      "complex_id": "01b1fcf3-359a-4ae9-99ad-a96f2716a638",
+      "complex_external_id": "c-007",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 87 м²",
+      "bedrooms": 4,
+      "price": 85800000,
+      "area_total": 87,
+      "district": "ЮЗАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "20cc17f7-49b2-4dcb-949c-7014956de51f",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-010",
+      "slug": "3-комнатная-в-жк-prime-estate-12-10",
+      "lot_number": "A-483",
+      "complex_id": "22bd73f6-785a-4905-81ac-5e53a3b9bbb2",
+      "complex_external_id": "c-012",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 117 м²",
+      "bedrooms": 3,
+      "price": 48000000,
+      "area_total": 117,
+      "district": "САО",
+      "metro": [
+        "Полянка"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "46d43f6e-f2ec-4ec0-859f-883cc08671a2",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-011",
+      "slug": "3-комнатная-в-жк-prime-estate-12-11",
+      "lot_number": "A-863",
+      "complex_id": "22bd73f6-785a-4905-81ac-5e53a3b9bbb2",
+      "complex_external_id": "c-012",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 198 м²",
+      "bedrooms": 3,
+      "price": 117000000,
+      "area_total": 198,
+      "district": "САО",
+      "metro": [
+        "Полянка"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "33702eeb-af69-4dcf-811e-945f4fb1adc3",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-012",
+      "slug": "1-комнатная-в-жк-park-residence-6-12",
+      "lot_number": "A-343",
+      "complex_id": "4a7a89c5-2a7f-4428-9c9b-692c2ba63914",
+      "complex_external_id": "c-006",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 41 м²",
+      "bedrooms": 1,
+      "price": 18400000,
+      "area_total": 41,
+      "district": "ЮАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "1094cbce-fa12-4c53-adb4-e30a84656c6c",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-013",
+      "slug": "1-комнатная-в-жк-city-quarter-8-13",
+      "lot_number": "A-262",
+      "complex_id": "0fd2b8e3-00dc-4edb-b81c-9bee22019926",
+      "complex_external_id": "c-008",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 140 м²",
+      "bedrooms": 1,
+      "price": 79700000,
+      "area_total": 140,
+      "district": "СВАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "50208288-78be-41ba-8fa1-4edc80c21ce6",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-014",
+      "slug": "4-комнатная-в-жк-sky-residence-3-14",
+      "lot_number": "A-941",
+      "complex_id": "3b18bfb0-f2f7-4f15-8f66-ee38618e1e4c",
+      "complex_external_id": "c-003",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 167 м²",
+      "bedrooms": 4,
+      "price": 188900000,
+      "area_total": 167,
+      "district": "ЮАО",
+      "metro": [
+        "Октябрьская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "d031bd4a-abd0-4ea8-97fd-265774b5c0f9",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-015",
+      "slug": "3-комнатная-в-жк-park-house-9-15",
+      "lot_number": "A-616",
+      "complex_id": "d687202d-b7b7-4e60-bf7b-ada9ea02cbff",
+      "complex_external_id": "c-009",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 185 м²",
+      "bedrooms": 3,
+      "price": 80300000,
+      "area_total": 185,
+      "district": "СВАО",
+      "metro": [
+        "Кропоткинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "887d1b53-36df-453e-be4d-7ca4463bb455",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-016",
+      "slug": "3-комнатная-в-жк-grand-estate-15-16",
+      "lot_number": "A-613",
+      "complex_id": "ca18064a-40f7-483f-9717-75a9376d84d1",
+      "complex_external_id": "c-015",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 129 м²",
+      "bedrooms": 3,
+      "price": 140700000,
+      "area_total": 129,
+      "district": "ЮВАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "5dc127c4-475d-4f09-acb6-ce927b3cdef1",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-017",
+      "slug": "2-комнатная-в-жк-tower-residence-2-17",
+      "lot_number": "A-704",
+      "complex_id": "129bbbd6-1707-4094-9e74-8e458c72c9f3",
+      "complex_external_id": "c-002",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "2-комнатная квартира, 121 м²",
+      "bedrooms": 2,
+      "price": 112200000,
+      "area_total": 121,
+      "district": "ЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "0f4a31b6-4ad3-424e-9224-0c0bbda4c9b1",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-018",
+      "slug": "3-комнатная-в-жк-prime-estate-12-18",
+      "lot_number": "A-667",
+      "complex_id": "22bd73f6-785a-4905-81ac-5e53a3b9bbb2",
+      "complex_external_id": "c-012",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 80 м²",
+      "bedrooms": 3,
+      "price": 86900000,
+      "area_total": 80,
+      "district": "САО",
+      "metro": [
+        "Полянка"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "934f07e4-a069-4c10-bd15-ca69937a02f6",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-019",
+      "slug": "1-комнатная-в-жк-park-house-9-19",
+      "lot_number": "A-420",
+      "complex_id": "d687202d-b7b7-4e60-bf7b-ada9ea02cbff",
+      "complex_external_id": "c-009",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 90 м²",
+      "bedrooms": 1,
+      "price": 60800000,
+      "area_total": 90,
+      "district": "СВАО",
+      "metro": [
+        "Кропоткинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "e1521c38-aa91-4ce8-b1f7-78494b9cb54b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-020",
+      "slug": "2-комнатная-в-жк-park-quarter-13-20",
+      "lot_number": "A-112",
+      "complex_id": "ba6009d9-f613-42f4-9029-345a7f9f52b3",
+      "complex_external_id": "c-013",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "2-комнатная квартира, 93 м²",
+      "bedrooms": 2,
+      "price": 99000000,
+      "area_total": 93,
+      "district": "СВАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "7b05d365-5015-4bc7-93d8-4196f1c000cd",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-021",
+      "slug": "3-комнатная-в-жк-sky-quarter-1-21",
+      "lot_number": "A-297",
+      "complex_id": "3de7bc97-7e94-421e-86ec-0cbe999c747d",
       "complex_external_id": "c-001",
       "deal_type": "sale",
       "category": "newbuild",
-      "title": "2-комнатная в ЖК River Park",
+      "title": "3-комнатная квартира, 147 м²",
+      "bedrooms": 3,
+      "price": 104700000,
+      "area_total": 147,
+      "district": "ЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "f8f8730d-9f22-4417-9925-2f235933dab0",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-022",
+      "slug": "3-комнатная-в-жк-park-residence-11-22",
+      "lot_number": "A-239",
+      "complex_id": "e5ab4645-bf78-4df5-a2cd-8061aff49b8c",
+      "complex_external_id": "c-011",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 114 м²",
+      "bedrooms": 3,
+      "price": 46700000,
+      "area_total": 114,
+      "district": "ЮЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "7a689066-0afa-42ed-91c3-81fea1eb0f4d",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-023",
+      "slug": "1-комнатная-в-жк-river-house-14-23",
+      "lot_number": "A-144",
+      "complex_id": "ebe4f852-56f8-45c9-be27-9ac252db70d1",
+      "complex_external_id": "c-014",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 52 м²",
       "bedrooms": 1,
-      "price": 23900000,
-      "area_total": 56.2,
+      "price": 42200000,
+      "area_total": 52,
+      "district": "СВАО",
+      "metro": [
+        "Цветной бульвар"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "c8aa1cde-b964-4e2c-998b-f934b5ae95b9",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-024",
+      "slug": "2-комнатная-в-жк-river-house-4-24",
+      "lot_number": "A-733",
+      "complex_id": "78691378-51c8-4d72-9661-a6b68939da98",
+      "complex_external_id": "c-004",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "2-комнатная квартира, 101 м²",
+      "bedrooms": 2,
+      "price": 83700000,
+      "area_total": 101,
+      "district": "ЗАО",
+      "metro": [
+        "Арбатская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "04402c42-6674-4105-8b28-0a9b8184d990",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-025",
+      "slug": "1-комнатная-в-жк-tower-residence-2-25",
+      "lot_number": "A-296",
+      "complex_id": "129bbbd6-1707-4094-9e74-8e458c72c9f3",
+      "complex_external_id": "c-002",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 198 м²",
+      "bedrooms": 1,
+      "price": 134800000,
+      "area_total": 198,
+      "district": "ЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "6e8a9546-0474-46b9-81b0-99bf7ec5559c",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-026",
+      "slug": "4-комнатная-в-жк-park-quarter-13-26",
+      "lot_number": "A-613",
+      "complex_id": "ba6009d9-f613-42f4-9029-345a7f9f52b3",
+      "complex_external_id": "c-013",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 111 м²",
+      "bedrooms": 4,
+      "price": 86400000,
+      "area_total": 111,
+      "district": "СВАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "b5559cd2-3225-486f-a3e5-5c8b196a128b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-027",
+      "slug": "3-комнатная-в-жк-tower-quarter-5-27",
+      "lot_number": "A-289",
+      "complex_id": "ef2985e5-92c0-4203-9d38-68d8b489d2a4",
+      "complex_external_id": "c-005",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 167 м²",
+      "bedrooms": 3,
+      "price": 169700000,
+      "area_total": 167,
+      "district": "ЮВАО",
+      "metro": [
+        "Боровицкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "01eb1919-f7e6-4ccb-b222-fe246e66ba23",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-028",
+      "slug": "3-комнатная-в-жк-tower-residence-2-28",
+      "lot_number": "A-434",
+      "complex_id": "129bbbd6-1707-4094-9e74-8e458c72c9f3",
+      "complex_external_id": "c-002",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 108 м²",
+      "bedrooms": 3,
+      "price": 87700000,
+      "area_total": 108,
+      "district": "ЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "21c99496-49d6-4ed7-9f8b-d96108532ddc",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-029",
+      "slug": "4-комнатная-в-жк-sky-quarter-1-29",
+      "lot_number": "A-724",
+      "complex_id": "3de7bc97-7e94-421e-86ec-0cbe999c747d",
+      "complex_external_id": "c-001",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 111 м²",
+      "bedrooms": 4,
+      "price": 107000000,
+      "area_total": 111,
+      "district": "ЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "47b67644-131f-4d00-98d2-040431397a13",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-030",
+      "slug": "3-комнатная-в-жк-park-house-9-30",
+      "lot_number": "A-643",
+      "complex_id": "d687202d-b7b7-4e60-bf7b-ada9ea02cbff",
+      "complex_external_id": "c-009",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 172 м²",
+      "bedrooms": 3,
+      "price": 162000000,
+      "area_total": 172,
+      "district": "СВАО",
+      "metro": [
+        "Кропоткинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "67ad6929-1d4f-4e95-ba33-cede147da5cd",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-031",
+      "slug": "3-комнатная-в-жк-view-estate-7-31",
+      "lot_number": "A-615",
+      "complex_id": "01b1fcf3-359a-4ae9-99ad-a96f2716a638",
+      "complex_external_id": "c-007",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 78 м²",
+      "bedrooms": 3,
+      "price": 78300000,
+      "area_total": 78,
+      "district": "ЮЗАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "ce842f5d-54ff-49fe-80b9-192646003daa",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-032",
+      "slug": "4-комнатная-в-жк-city-quarter-8-32",
+      "lot_number": "A-845",
+      "complex_id": "0fd2b8e3-00dc-4edb-b81c-9bee22019926",
+      "complex_external_id": "c-008",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 157 м²",
+      "bedrooms": 4,
+      "price": 186700000,
+      "area_total": 157,
+      "district": "СВАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "dd0f2d1d-99b0-4a74-a47f-59d093622471",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-033",
+      "slug": "4-комнатная-в-жк-sky-quarter-1-33",
+      "lot_number": "A-407",
+      "complex_id": "3de7bc97-7e94-421e-86ec-0cbe999c747d",
+      "complex_external_id": "c-001",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 87 м²",
+      "bedrooms": 4,
+      "price": 48300000,
+      "area_total": 87,
+      "district": "ЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "1dc3e22a-df49-440d-a360-bc1c07087a51",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-034",
+      "slug": "4-комнатная-в-жк-river-house-4-34",
+      "lot_number": "A-565",
+      "complex_id": "78691378-51c8-4d72-9661-a6b68939da98",
+      "complex_external_id": "c-004",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 181 м²",
+      "bedrooms": 4,
+      "price": 118400000,
+      "area_total": 181,
+      "district": "ЗАО",
+      "metro": [
+        "Арбатская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "5ee27b29-974a-4079-8faf-570135947048",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-035",
+      "slug": "2-комнатная-в-жк-view-estate-7-35",
+      "lot_number": "A-123",
+      "complex_id": "01b1fcf3-359a-4ae9-99ad-a96f2716a638",
+      "complex_external_id": "c-007",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "2-комнатная квартира, 46 м²",
+      "bedrooms": 2,
+      "price": 52600000,
+      "area_total": 46,
+      "district": "ЮЗАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.390Z"
+    },
+    {
+      "id": "74c2541b-b450-40ca-b595-64df2f210e9f",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-036",
+      "slug": "4-комнатная-в-жк-tower-quarter-5-36",
+      "lot_number": "A-987",
+      "complex_id": "ef2985e5-92c0-4203-9d38-68d8b489d2a4",
+      "complex_external_id": "c-005",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 84 м²",
+      "bedrooms": 4,
+      "price": 70800000,
+      "area_total": 84,
+      "district": "ЮВАО",
+      "metro": [
+        "Боровицкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "c540c059-aae4-42ea-ad70-86c956936c07",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-037",
+      "slug": "4-комнатная-в-жк-grand-estate-15-37",
+      "lot_number": "A-456",
+      "complex_id": "ca18064a-40f7-483f-9717-75a9376d84d1",
+      "complex_external_id": "c-015",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 138 м²",
+      "bedrooms": 4,
+      "price": 83100000,
+      "area_total": 138,
+      "district": "ЮВАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "475cc1a0-3b20-47ee-abcc-b93f0bc03e40",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-038",
+      "slug": "3-комнатная-в-жк-park-residence-11-38",
+      "lot_number": "A-209",
+      "complex_id": "e5ab4645-bf78-4df5-a2cd-8061aff49b8c",
+      "complex_external_id": "c-011",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "3-комнатная квартира, 60 м²",
+      "bedrooms": 3,
+      "price": 48700000,
+      "area_total": 60,
+      "district": "ЮЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "85ebab35-e0d8-48ce-8ba3-2216f88be440",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-039",
+      "slug": "4-комнатная-в-жк-grand-estate-15-39",
+      "lot_number": "A-487",
+      "complex_id": "ca18064a-40f7-483f-9717-75a9376d84d1",
+      "complex_external_id": "c-015",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "4-комнатная квартира, 163 м²",
+      "bedrooms": 4,
+      "price": 85900000,
+      "area_total": 163,
+      "district": "ЮВАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "b080cd0f-564e-4a8f-9132-fd6ee919c8f6",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-nb-040",
+      "slug": "1-комнатная-в-жк-river-house-14-40",
+      "lot_number": "A-876",
+      "complex_id": "ebe4f852-56f8-45c9-be27-9ac252db70d1",
+      "complex_external_id": "c-014",
+      "deal_type": "sale",
+      "category": "newbuild",
+      "title": "1-комнатная квартира, 45 м²",
+      "bedrooms": 1,
+      "price": 48600000,
+      "area_total": 45,
+      "district": "СВАО",
+      "metro": [
+        "Цветной бульвар"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "d93dd630-672e-4690-8b64-a3fc58952df4",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-001",
+      "slug": "квартира-на-остоженке-1",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "1-комнатная квартира, 248 м²",
+      "bedrooms": 1,
+      "price": 46000000,
+      "area_total": 248,
+      "district": "ЮАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "5fc37c19-77f2-4a0b-9c0e-41c60403c9ed",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-002",
+      "slug": "квартира-на-остоженке-2",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "3-комнатная квартира, 226 м²",
+      "bedrooms": 3,
+      "price": 126000000,
+      "area_total": 226,
+      "district": "ЮВАО",
+      "metro": [
+        "Цветной бульвар"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "164c7a37-c234-44f7-b443-5361cacc7f8f",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-003",
+      "slug": "квартира-на-остоженке-3",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "1-комнатная квартира, 193 м²",
+      "bedrooms": 1,
+      "price": 42000000,
+      "area_total": 193,
+      "district": "ЗАО",
+      "metro": [
+        "Смоленская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "c82e6fee-8263-4d14-87f4-ddb433cf1668",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-004",
+      "slug": "квартира-на-якиманке-4",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "4-комнатная квартира, 227 м²",
+      "bedrooms": 4,
+      "price": 67000000,
+      "area_total": 227,
+      "district": "ЮВАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "8af182be-f6d7-4da9-8343-6bb2d9b17ca8",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-005",
+      "slug": "квартира-на-тверской-5",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "3-комнатная квартира, 185 м²",
+      "bedrooms": 3,
+      "price": 54000000,
+      "area_total": 185,
+      "district": "ВАО",
+      "metro": [
+        "Динамо"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "2e17cddc-50cc-449b-94e9-40576dd0eccf",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-006",
+      "slug": "квартира-на-якиманке-6",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "4-комнатная квартира, 88 м²",
+      "bedrooms": 4,
+      "price": 46000000,
+      "area_total": 88,
       "district": "ЦАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "69fdf1c3-9eb9-4fe9-b7a3-703611e56a14",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-007",
+      "slug": "квартира-на-тверской-7",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "1-комнатная квартира, 126 м²",
+      "bedrooms": 1,
+      "price": 73000000,
+      "area_total": 126,
+      "district": "ЦАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "a0fc4248-2093-4d54-9435-df8ab4513923",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-008",
+      "slug": "квартира-на-якиманке-8",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "1-комнатная квартира, 210 м²",
+      "bedrooms": 1,
+      "price": 60000000,
+      "area_total": 210,
+      "district": "ЮАО",
+      "metro": [
+        "Чеховская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "9045fd00-68ae-4395-b835-1090cc19ff6e",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-009",
+      "slug": "квартира-на-тверской-9",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 237 м²",
+      "bedrooms": 2,
+      "price": 137000000,
+      "area_total": 237,
+      "district": "ЮВАО",
+      "metro": [
+        "Смоленская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "feb1c883-57e0-4b22-b80e-a4970e7de4ce",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-010",
+      "slug": "квартира-на-остоженке-10",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 84 м²",
+      "bedrooms": 2,
+      "price": 90000000,
+      "area_total": 84,
+      "district": "СВАО",
+      "metro": [
+        "Октябрьская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "e31a8098-a137-4812-bb3a-ab452be1ec9d",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-011",
+      "slug": "квартира-на-арбате-11",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 216 м²",
+      "bedrooms": 5,
+      "price": 80000000,
+      "area_total": 216,
+      "district": "САО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "f078841b-bacd-464d-be3c-25db467c1c40",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-012",
+      "slug": "квартира-на-остоженке-12",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 117 м²",
+      "bedrooms": 2,
+      "price": 31000000,
+      "area_total": 117,
+      "district": "ВАО",
+      "metro": [
+        "Пушкинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "884d84ad-7012-4085-aadc-89decece44a1",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-013",
+      "slug": "квартира-на-тверской-13",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "3-комнатная квартира, 106 м²",
+      "bedrooms": 3,
+      "price": 108000000,
+      "area_total": 106,
+      "district": "СЗАО",
+      "metro": [
+        "Тверская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "29cdd91a-b63d-455f-a4d9-40a055094729",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-014",
+      "slug": "квартира-на-якиманке-14",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 197 м²",
+      "bedrooms": 5,
+      "price": 66000000,
+      "area_total": 197,
+      "district": "ЮВАО",
+      "metro": [
+        "Пушкинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "4cd9bbfa-1fd6-4437-a8c1-5c45667b6843",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-015",
+      "slug": "квартира-на-тверской-15",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 204 м²",
+      "bedrooms": 2,
+      "price": 35000000,
+      "area_total": 204,
+      "district": "САО",
+      "metro": [
+        "Таганская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "19a1360c-ba75-4075-96b6-7d12878d2f6b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-016",
+      "slug": "квартира-на-остоженке-16",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "3-комнатная квартира, 83 м²",
+      "bedrooms": 3,
+      "price": 145000000,
+      "area_total": 83,
+      "district": "ВАО",
+      "metro": [
+        "Октябрьская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "feb50f4b-a6cc-43bf-824f-bfdca8dca638",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-017",
+      "slug": "квартира-на-остоженке-17",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "1-комнатная квартира, 202 м²",
+      "bedrooms": 1,
+      "price": 95000000,
+      "area_total": 202,
+      "district": "ВАО",
+      "metro": [
+        "Чеховская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "e3b17f75-6c71-4f18-889c-f2a4e306f0d9",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-018",
+      "slug": "квартира-на-остоженке-18",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "4-комнатная квартира, 226 м²",
+      "bedrooms": 4,
+      "price": 79000000,
+      "area_total": 226,
+      "district": "САО",
       "metro": [
         "Киевская"
       ],
       "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "3c12c147-21f5-4f48-8c47-28a4af2f0830",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-019",
+      "slug": "квартира-на-патриарших-19",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "4-комнатная квартира, 112 м²",
+      "bedrooms": 4,
+      "price": 29000000,
+      "area_total": 112,
+      "district": "ЮЗАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "c31fd1c5-e446-47d6-ba0a-2dd8f1cd9bd5",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-020",
+      "slug": "квартира-на-остоженке-20",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 123 м²",
+      "bedrooms": 2,
+      "price": 30000000,
+      "area_total": 123,
+      "district": "ЮВАО",
+      "metro": [
+        "Чеховская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "82ca4118-d4d9-439f-af08-504fb82004df",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-021",
+      "slug": "квартира-на-якиманке-21",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 202 м²",
+      "bedrooms": 5,
+      "price": 73000000,
+      "area_total": 202,
+      "district": "САО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
         "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
       ],
       "status": "active",
-      "updated_at": "2026-01-21T19:21:58.794Z"
+      "updated_at": "2026-02-04T20:03:38.391Z"
     },
     {
-      "id": "ac373537-d4c2-409f-8a3d-3b959181a048",
-      "source_id": "abc81381-f233-4f27-9fb9-3e2629c4b7bc",
-      "external_id": "p-002",
-      "slug": "1-комнатная-аренда-у-метро",
-      "deal_type": "rent",
-      "category": "rent",
-      "title": "1-комнатная аренда у метро",
-      "bedrooms": 0,
-      "price": 120000,
-      "price_period": "month",
-      "area_total": 34.5,
+      "id": "2a7f6477-fe9d-45f0-9413-c82d507d7e86",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-022",
+      "slug": "квартира-на-остоженке-22",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 130 м²",
+      "bedrooms": 5,
+      "price": 128000000,
+      "area_total": 130,
+      "district": "ЗАО",
+      "metro": [
+        "Добрынинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "cdc82e0c-b82d-4376-8506-10cf18c2f539",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-023",
+      "slug": "квартира-на-остоженке-23",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 221 м²",
+      "bedrooms": 2,
+      "price": 63000000,
+      "area_total": 221,
       "district": "САО",
       "metro": [
         "Динамо"
       ],
       "images": [
-        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20apartment%20interior%2C%20kitchen%20and%20living%20area%2C%20real%20estate%20photography%2C%20soft%20light%2C%20high%20detail&image_size=landscape_16_9"
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
       ],
       "status": "active",
-      "updated_at": "2026-01-21T19:21:58.794Z"
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "8a3c9b09-fb41-4c57-b491-2ec55adceaac",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-024",
+      "slug": "квартира-на-остоженке-24",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 225 м²",
+      "bedrooms": 2,
+      "price": 110000000,
+      "area_total": 225,
+      "district": "САО",
+      "metro": [
+        "Таганская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "78cfa22b-74ee-4033-b950-68f51a3ac382",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-025",
+      "slug": "квартира-на-остоженке-25",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 93 м²",
+      "bedrooms": 5,
+      "price": 40000000,
+      "area_total": 93,
+      "district": "ЮВАО",
+      "metro": [
+        "Павелецкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "2800d61a-2171-4542-8c41-0ffdfe0d92bc",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-026",
+      "slug": "квартира-на-тверской-26",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "2-комнатная квартира, 92 м²",
+      "bedrooms": 2,
+      "price": 66000000,
+      "area_total": 92,
+      "district": "ЮВАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "1bd0a177-f4db-47d3-b7ca-042657020161",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-027",
+      "slug": "квартира-на-патриарших-27",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 154 м²",
+      "bedrooms": 5,
+      "price": 66000000,
+      "area_total": 154,
+      "district": "ЗАО",
+      "metro": [
+        "Серпуховская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "ee69bb48-f601-4655-bc23-3386ca3d2748",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-028",
+      "slug": "квартира-на-патриарших-28",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "1-комнатная квартира, 194 м²",
+      "bedrooms": 1,
+      "price": 97000000,
+      "area_total": 194,
+      "district": "ЦАО",
+      "metro": [
+        "Фрунзенская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "a2354518-a5e7-4dea-9c63-f6eed3b3340b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-029",
+      "slug": "квартира-на-остоженке-29",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "5-комнатная квартира, 227 м²",
+      "bedrooms": 5,
+      "price": 128000000,
+      "area_total": 227,
+      "district": "СЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "7a65df14-12fd-45d4-a50e-7c2f0efe87a3",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-sec-030",
+      "slug": "квартира-на-якиманке-30",
+      "deal_type": "sale",
+      "category": "secondary",
+      "title": "3-комнатная квартира, 234 м²",
+      "bedrooms": 3,
+      "price": 106000000,
+      "area_total": 234,
+      "district": "ЮАО",
+      "metro": [
+        "Фрунзенская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "7a94e2fb-3bf0-4795-a51f-8eb6be9d9615",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-001",
+      "slug": "аренда-2-к-квартиры-1",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "2-комнатная квартира, 91 м²",
+      "bedrooms": 2,
+      "price": 553000,
+      "price_period": "month",
+      "area_total": 91,
+      "district": "ЦАО",
+      "metro": [
+        "Пушкинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "b4e13be3-643e-4ea0-8f4d-56a2d24f5175",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-002",
+      "slug": "аренда-1-к-квартиры-2",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 71 м²",
+      "bedrooms": 1,
+      "price": 578000,
+      "price_period": "month",
+      "area_total": 71,
+      "district": "ВАО",
+      "metro": [
+        "Цветной бульвар"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "2e625ff7-68f5-45a9-8040-58647b9de383",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-003",
+      "slug": "аренда-3-к-квартиры-3",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "3-комнатная квартира, 63 м²",
+      "bedrooms": 3,
+      "price": 353000,
+      "price_period": "month",
+      "area_total": 63,
+      "district": "СЗАО",
+      "metro": [
+        "Киевская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "dd96a8df-cc7c-4e53-97a6-2ca060b35295",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-004",
+      "slug": "аренда-1-к-квартиры-4",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 114 м²",
+      "bedrooms": 1,
+      "price": 428000,
+      "price_period": "month",
+      "area_total": 114,
+      "district": "СВАО",
+      "metro": [
+        "Боровицкая"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "cc49f406-30e3-4736-9495-7b1704d092de",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-005",
+      "slug": "аренда-4-к-квартиры-5",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 145 м²",
+      "bedrooms": 4,
+      "price": 692000,
+      "price_period": "month",
+      "area_total": 145,
+      "district": "САО",
+      "metro": [
+        "Пушкинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "399fadd7-135f-4fab-aaa7-b70d3f62d91b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-006",
+      "slug": "аренда-4-к-квартиры-6",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 119 м²",
+      "bedrooms": 4,
+      "price": 744000,
+      "price_period": "month",
+      "area_total": 119,
+      "district": "ЦАО",
+      "metro": [
+        "Тверская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "c39f4bf3-d089-4940-bb72-943c56a6671a",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-007",
+      "slug": "аренда-1-к-квартиры-7",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 137 м²",
+      "bedrooms": 1,
+      "price": 793000,
+      "price_period": "month",
+      "area_total": 137,
+      "district": "САО",
+      "metro": [
+        "Арбатская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "b7e98548-50f6-43b7-86f1-50d1ceebc6e0",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-008",
+      "slug": "аренда-2-к-квартиры-8",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "2-комнатная квартира, 127 м²",
+      "bedrooms": 2,
+      "price": 222000,
+      "price_period": "month",
+      "area_total": 127,
+      "district": "ЮАО",
+      "metro": [
+        "Арбатская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "7502cbe5-c3aa-4568-8cec-a40ab3a8494a",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-009",
+      "slug": "аренда-2-к-квартиры-9",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "2-комнатная квартира, 139 м²",
+      "bedrooms": 2,
+      "price": 273000,
+      "price_period": "month",
+      "area_total": 139,
+      "district": "ЗАО",
+      "metro": [
+        "Цветной бульвар"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "d4c815f7-50e9-4e25-8821-b2c582efece8",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-010",
+      "slug": "аренда-1-к-квартиры-10",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 103 м²",
+      "bedrooms": 1,
+      "price": 787000,
+      "price_period": "month",
+      "area_total": 103,
+      "district": "ВАО",
+      "metro": [
+        "Фрунзенская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "6c364090-1610-4c11-a133-81d842434231",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-011",
+      "slug": "аренда-1-к-квартиры-11",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 146 м²",
+      "bedrooms": 1,
+      "price": 453000,
+      "price_period": "month",
+      "area_total": 146,
+      "district": "ЮЗАО",
+      "metro": [
+        "Белорусская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "fbcd9d24-342a-49a9-a28d-3eb673325902",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-012",
+      "slug": "аренда-4-к-квартиры-12",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 117 м²",
+      "bedrooms": 4,
+      "price": 226000,
+      "price_period": "month",
+      "area_total": 117,
+      "district": "ЮВАО",
+      "metro": [
+        "Октябрьская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "44000c17-2201-4f70-a661-5e9ccfe9630e",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-013",
+      "slug": "аренда-4-к-квартиры-13",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 135 м²",
+      "bedrooms": 4,
+      "price": 452000,
+      "price_period": "month",
+      "area_total": 135,
+      "district": "ЦАО",
+      "metro": [
+        "Арбатская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "85873279-ea93-44e1-8096-4d3f7632541b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-014",
+      "slug": "аренда-3-к-квартиры-14",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "3-комнатная квартира, 46 м²",
+      "bedrooms": 3,
+      "price": 315000,
+      "price_period": "month",
+      "area_total": 46,
+      "district": "ЮАО",
+      "metro": [
+        "Тверская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "a2cba8c5-4b60-40ef-a7f8-917222fff14b",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-015",
+      "slug": "аренда-3-к-квартиры-15",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "3-комнатная квартира, 58 м²",
+      "bedrooms": 3,
+      "price": 602000,
+      "price_period": "month",
+      "area_total": 58,
+      "district": "ЮЗАО",
+      "metro": [
+        "Пушкинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "ad5e96a4-309c-4450-b907-b3ecd9957cef",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-016",
+      "slug": "аренда-3-к-квартиры-16",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "3-комнатная квартира, 130 м²",
+      "bedrooms": 3,
+      "price": 540000,
+      "price_period": "month",
+      "area_total": 130,
+      "district": "СЗАО",
+      "metro": [
+        "Маяковская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "23fd68e4-b998-47bb-bef4-cc664ede238c",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-017",
+      "slug": "аренда-2-к-квартиры-17",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "2-комнатная квартира, 90 м²",
+      "bedrooms": 2,
+      "price": 327000,
+      "price_period": "month",
+      "area_total": 90,
+      "district": "ВАО",
+      "metro": [
+        "Динамо"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "e1146c5c-0279-4e85-991a-d7f69040bbe9",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-018",
+      "slug": "аренда-4-к-квартиры-18",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 55 м²",
+      "bedrooms": 4,
+      "price": 444000,
+      "price_period": "month",
+      "area_total": 55,
+      "district": "ЦАО",
+      "metro": [
+        "Серпуховская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "20fffacd-5cfc-48ee-b278-b811b87754ef",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-019",
+      "slug": "аренда-2-к-квартиры-19",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "2-комнатная квартира, 51 м²",
+      "bedrooms": 2,
+      "price": 740000,
+      "price_period": "month",
+      "area_total": 51,
+      "district": "САО",
+      "metro": [
+        "Таганская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "70115330-b6f1-4c65-8f09-966e244642cc",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-020",
+      "slug": "аренда-1-к-квартиры-20",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 87 м²",
+      "bedrooms": 1,
+      "price": 788000,
+      "price_period": "month",
+      "area_total": 87,
+      "district": "ЦАО",
+      "metro": [
+        "Тверская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "da81543e-cc1f-4bf6-a06b-9042354b3e42",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-021",
+      "slug": "аренда-4-к-квартиры-21",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 66 м²",
+      "bedrooms": 4,
+      "price": 740000,
+      "price_period": "month",
+      "area_total": 66,
+      "district": "СВАО",
+      "metro": [
+        "Киевская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "7c2cd222-01ca-43e0-ba99-11d9b4d23517",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-022",
+      "slug": "аренда-1-к-квартиры-22",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "1-комнатная квартира, 74 м²",
+      "bedrooms": 1,
+      "price": 761000,
+      "price_period": "month",
+      "area_total": 74,
+      "district": "САО",
+      "metro": [
+        "Киевская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "07901113-7d73-4863-aede-63f6b032135c",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-023",
+      "slug": "аренда-3-к-квартиры-23",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "3-комнатная квартира, 143 м²",
+      "bedrooms": 3,
+      "price": 302000,
+      "price_period": "month",
+      "area_total": 143,
+      "district": "ЗАО",
+      "metro": [
+        "Арбатская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "c32fcb54-ce21-40dd-861b-6fc900f95db0",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-024",
+      "slug": "аренда-2-к-квартиры-24",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "2-комнатная квартира, 131 м²",
+      "bedrooms": 2,
+      "price": 205000,
+      "price_period": "month",
+      "area_total": 131,
+      "district": "СЗАО",
+      "metro": [
+        "Пушкинская"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=bright%20modern%20apartment%20interior%2C%20living%20room%20with%20panoramic%20windows%2C%20real%20estate%20photography%2C%20neutral%20colors%2C%20high%20detail&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=spacious%20bathroom%20with%20freestanding%20tub%2C%20stone%20tiles%2C%20spa%20atmosphere&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "835d5dd9-de2d-44ac-83c0-f18331dd8dfb",
+      "source_id": "ff68d811-4768-4df3-8456-96b3309844f6",
+      "external_id": "p-rent-025",
+      "slug": "аренда-4-к-квартиры-25",
+      "deal_type": "rent",
+      "category": "rent",
+      "title": "4-комнатная квартира, 120 м²",
+      "bedrooms": 4,
+      "price": 246000,
+      "price_period": "month",
+      "area_total": 120,
+      "district": "ЮАО",
+      "metro": [
+        "Полянка"
+      ],
+      "images": [
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20kitchen%20with%20island%2C%20marble%20countertops%2C%20premium%20appliances%2C%20dark%20wood&image_size=landscape_16_9",
+        "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20bedroom%20interior%2C%20beige%20tones%2C%20king%20size%20bed%2C%20soft%20lighting&image_size=landscape_16_9"
+      ],
+      "status": "active",
+      "updated_at": "2026-02-04T20:03:38.391Z"
     }
   ],
   "collections": [
     {
-      "id": "82d23be8-c5e8-4304-a6cd-bc1123bd62bb",
+      "id": "68103faf-b498-4167-bcfe-2f76c2dd5eda",
       "slug": "лучшие-предложения-недели",
       "title": "Лучшие предложения недели",
       "description": "Подборка актуальных объектов и ЖК на этой неделе.",
-      "cover_image": "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=moscow%20skyline%20panorama%2C%20premium%20real%20estate%20mood%2C%20cinematic%20lighting%2C%20high%20detail&image_size=landscape_16_9",
+      "cover_image": "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9",
       "priority": 10,
       "items": [
         {
           "type": "complex",
-          "ref_id": "fc2379d8-00cd-495c-a807-d5b55b736969"
+          "ref_id": "3de7bc97-7e94-421e-86ec-0cbe999c747d"
         },
         {
           "type": "property",
-          "ref_id": "49315117-0c99-4322-837e-8c129ab4ac88"
+          "ref_id": "7312035e-e850-4715-8c91-1601efb99106"
         },
         {
           "type": "property",
-          "ref_id": "ac373537-d4c2-409f-8a3d-3b959181a048"
+          "ref_id": "2e17cddc-50cc-449b-94e9-40576dd0eccf"
         }
       ],
-      "updated_at": "2026-01-21T19:21:58.794Z"
+      "updated_at": "2026-02-04T20:03:38.391Z"
+    },
+    {
+      "id": "d02bf5a4-3ebb-43ae-95ae-1379516090d1",
+      "slug": "старт-продаж-2025",
+      "title": "Старт продаж 2025",
+      "description": "Самые ожидаемые премьеры года.",
+      "cover_image": "https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=elite%20residential%20quarter%20with%20park%2C%20summer%20day%2C%20greenery%2C%20modern%20design&image_size=landscape_16_9",
+      "priority": 9,
+      "items": [
+        {
+          "type": "complex",
+          "ref_id": "129bbbd6-1707-4094-9e74-8e458c72c9f3"
+        },
+        {
+          "type": "complex",
+          "ref_id": "3b18bfb0-f2f7-4f15-8f66-ee38618e1e4c"
+        }
+      ],
+      "updated_at": "2026-02-04T20:03:38.391Z"
     }
   ],
   "leads": [],

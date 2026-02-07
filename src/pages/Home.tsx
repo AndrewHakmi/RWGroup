@@ -33,14 +33,14 @@ export default function Home() {
       {/* 1. Hero Section - Full Screen */}
       <section className="relative h-[calc(100vh-80px)] min-h-[600px] w-full overflow-hidden bg-[#000A0D]">
         <div className="absolute inset-0">
-          <img src={heroBg} alt="Moscow City" className="h-full w-full object-cover opacity-60" />
+          <img src="/hero-bg.jpg" alt="Luxury Real Estate" className="h-full w-full object-cover opacity-60 max-w-full max-h-full scale-110" style={{ objectPosition: 'center 20%' }} />
           <div className="absolute inset-0 bg-gradient-to-r from-[#000A0D]/90 via-[#000A0D]/40 to-transparent" />
         </div>
         
-        <div className="relative mx-auto flex h-full w-full max-w-7xl flex-col justify-center px-4 pb-20 pt-10">
-          <Heading size="h1" className="max-w-4xl text-white">
-            Агентство <br />
-            <span className="text-gray-400">элитной недвижимости</span>
+        <div className="relative mx-auto flex h-full w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-10">
+          <Heading size="h1" className="w-full text-left text-5xl font-bold leading-[1.1] tracking-tight text-white md:text-7xl lg:text-9xl xl:text-[10rem]">
+            <span className="block">Эксперты</span>
+            <span className="block text-gray-400">по недвижимости</span>
           </Heading>
           
           <div className="mt-12 flex flex-col gap-4 sm:flex-row">
