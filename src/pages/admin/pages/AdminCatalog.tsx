@@ -1,0 +1,181 @@
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import Button from '@/components/ui/Button'
+import { apiGet, apiDelete, apiPut } from '@/lib/api'
+import { useUiStore } from '@/store/useUiStore'
+import PropertyCard from '@/components/catalog/PropertyCard'
+import ComplexCard from '@/components/catalog/ComplexCard'
+import type { Complex, Property } from '../../../../shared/types'
+import Modal from '@/components/ui/Modal'
+import Input from '@/components/ui/Input'
+import Select from '@/components/ui/Select'
+
+export default function AdminCatalogPage() {
+  const token = useUiStore((s) => s.adminToken)
+  const headers = useMemo(() => ({ 'x-admin-token': token || '' }), [token])
+  const [tab, setTab] = useState<'property' | 'complex'>('property')
+  const [items, setItems] = useState<(Property | Complex)[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  
+  // Editing state
+  const [editingItem, setEditingItem] = useState<Property | Complex | null>(null)
+  const [editForm, setEditForm] = useState<Record<string, any>>({})
+
+  const load = useCallback(() => {
+    setLoading(true)
+    apiGet<{ items: (Property | Complex)[]; total: number }>(`/api/admin/catalog/items?type=${tab}&limit=100`, headers)
+      .then((res) => setItems(res.items))
+      .catch((e) => setError(e instanceof Error ? e.message : 'Ошибка'))
+      .finally(() => setLoading(false))
+  }, [headers, tab])
+
+  useEffect(() => {
+    load()
+  }, [load])
+
+  const handleDelete = async (id: string) => {
+    if (!confirm('Вы уверены? Это действие нельзя отменить.')) return
+    try {
+      await apiDelete(`/api/admin/catalog/items/${tab}/${id}`, headers)
+      setItems(items.filter((i) => i.id !== id))
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Ошибка при удалении')
+    }
+  }
+
+  const handleEdit = (item: Property | Complex) => {
+    setEditingItem(item)
+    setEditForm({ ...item })
+  }
+
+  const handleSave = async () => {
+    if (!editingItem) return
+    try {
+      await apiPut(`/api/admin/catalog/items/${tab}/${editingItem.id}`, editForm, headers)
+      setEditingItem(null)
+      load()
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Ошибка при сохранении')
+    }
+  }
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <div className="text-sm font-semibold">Каталог</div>
+          <div className="mt-1 text-sm text-slate-600">Управление объектами (удаление, редактирование).</div>
+        </div>
+        <div className="flex gap-2">
+          <Button variant={tab === 'property' ? 'default' : 'secondary'} onClick={() => setTab('property')}>Лоты</Button>
+          <Button variant={tab === 'complex' ? 'default' : 'secondary'} onClick={() => setTab('complex')}>ЖК</Button>
+        </div>
+      </div>
+
+      {loading ? (
+        <div className="text-sm text-slate-500">Загрузка...</div>
+      ) : error ? (
+        <div className="text-sm text-rose-600">{error}</div>
+      ) : (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {items.map((item) => (
+            <div key={item.id} className="relative group">
+              {tab === 'property' ? (
+                <PropertyCard item={item as Property} />
+              ) : (
+                <ComplexCard item={item as Complex} />
+              )}
+              
+              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
+                <a 
+                  href={tab === 'property' ? `/property/${item.id}` : `/complex/${item.id}`} 
+                  target="_blank" 
+                  rel="noreferrer"
+                  className="inline-flex h-8 items-center justify-center rounded-md bg-white px-3 text-xs font-medium text-slate-700 shadow hover:bg-slate-50 hover:text-slate-900"
+                >
+                  На сайт
+                </a>
+                <Button size="sm" onClick={() => handleEdit(item)}>
+                  Ред.
+                </Button>
+                <Button size="sm" variant="secondary" className="bg-rose-50 text-rose-600 hover:bg-rose-100" onClick={() => handleDelete(item.id)}>
+                  Уд.
+                </Button>
+              </div>
+            </div>
+          ))}
+          {items.length === 0 && <div className="col-span-full text-center text-slate-500">Нет объектов</div>}
+        </div>
+      )}
+
+      {editingItem && (
+        <Modal open={!!editingItem} onClose={() => setEditingItem(null)} title="Редактирование">
+          <div className="space-y-4 max-h-[70vh] overflow-y-auto p-1">
+            <div>
+              <label className="text-xs font-medium text-slate-700">Название</label>
+              <Input 
+                value={editForm.title || ''} 
+                onChange={(e) => setEditForm({...editForm, title: e.target.value})} 
+              />
+            </div>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-xs font-medium text-slate-700">Цена</label>
+                <Input 
+                  type="number"
+                  value={editForm.price || editForm.price_from || 0} 
+                  onChange={(e) => setEditForm({...editForm, [tab === 'property' ? 'price' : 'price_from']: Number(e.target.value)})} 
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium text-slate-700">Площадь</label>
+                <Input 
+                  type="number"
+                  value={editForm.area_total || editForm.area_from || 0} 
+                  onChange={(e) => setEditForm({...editForm, [tab === 'property' ? 'area_total' : 'area_from']: Number(e.target.value)})} 
+                />
+              </div>
+            </div>
+
+            {tab === 'property' && (
+              <div>
+                 <label className="text-xs font-medium text-slate-700">Спальни</label>
+                 <Input 
+                  type="number"
+                  value={editForm.bedrooms || 0} 
+                  onChange={(e) => setEditForm({...editForm, bedrooms: Number(e.target.value)})} 
+                />
+              </div>
+            )}
+
+            <div>
+              <label className="text-xs font-medium text-slate-700">Район</label>
+              <Input 
+                value={editForm.district || ''} 
+                onChange={(e) => setEditForm({...editForm, district: e.target.value})} 
+              />
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-slate-700">Статус</label>
+              <Select 
+                value={editForm.status || 'active'} 
+                onChange={(e) => setEditForm({...editForm, status: e.target.value})}
+              >
+                <option value="active">Активен</option>
+                <option value="hidden">Скрыт</option>
+                <option value="archived">Архив</option>
+              </Select>
+            </div>
+            
+            <div className="pt-4 flex justify-end gap-2">
+              <Button variant="secondary" onClick={() => setEditingItem(null)}>Отмена</Button>
+              <Button onClick={handleSave}>Сохранить</Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </div>
+  )
+}

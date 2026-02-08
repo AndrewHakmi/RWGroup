@@ -85,6 +85,7 @@ export interface FeedSource {
   url?: string
   format: 'xlsx' | 'csv' | 'xml' | 'json'
   is_active: boolean
+  mapping?: Record<string, string>
   created_at: string
 }
 
@@ -97,6 +98,23 @@ export interface ImportRun {
   status: 'success' | 'failed' | 'partial'
   stats: { inserted: number; updated: number; hidden: number }
   error_log?: string
+}
+
+export interface ImportPreviewRow {
+  rowIndex: number
+  data: Record<string, unknown>
+  mappedFields: string[]
+  errors: string[]
+  warnings: string[]
+}
+
+export interface ImportPreview {
+  totalRows: number
+  sampleRows: ImportPreviewRow[]
+  mappedItems: (Property | Complex)[]
+  fieldMappings: Record<string, string[]>
+  validRows: number
+  invalidRows: number
 }
 
 export interface HomeContent {

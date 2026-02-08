@@ -10,6 +10,7 @@ import { apiGet } from '@/lib/api'
 import { cn } from '@/lib/utils'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
+import Roadmap from '@/components/Roadmap'
 import type { Collection, Complex, HomeContent, Property } from '../../shared/types'
 
 type HomeApi = {
@@ -31,10 +32,10 @@ export default function Home() {
   return (
     <SiteLayout>
       {/* 1. Hero Section - Full Screen */}
-      <section className="relative h-[calc(100vh-80px)] min-h-[600px] w-full overflow-hidden bg-[#000A0D]">
+      <section className="relative h-[calc(100vh-80px)] min-h-[600px] w-full overflow-hidden bg-background">
         <div className="absolute inset-0">
           <img src="/hero-bg.jpg" alt="Luxury Real Estate" className="h-full w-full object-cover opacity-60 max-w-full max-h-full scale-110" style={{ objectPosition: 'center 20%' }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#000A0D]/90 via-[#000A0D]/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
         </div>
         
         <div className="relative mx-auto flex h-full w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-10">
@@ -46,7 +47,7 @@ export default function Home() {
           <div className="mt-12 flex flex-col gap-4 sm:flex-row">
             <Button
               variant="default"
-              className="h-14 bg-white px-8 text-lg text-black hover:bg-gray-200"
+              className="h-14 px-8 text-lg"
               onClick={() => {
                 trackEvent('click_consultation', { page: 'home', block: 'hero' })
                 openLeadModal('consultation', { page: 'home', block: 'hero' })
@@ -56,7 +57,7 @@ export default function Home() {
             </Button>
             <Button
               variant="outline"
-              className="h-14 border-white/20 px-8 text-lg text-white hover:bg-white/10"
+              className="h-14 px-8 text-lg text-white border-white/20 hover:bg-white/10 hover:text-white"
               onClick={() => {
                 document.getElementById('catalog-categories')?.scrollIntoView({ behavior: 'smooth' })
               }}
@@ -68,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* 2. Catalog Categories (Whitewill style blocks) */}
-      <section id="catalog-categories" className="bg-[#000A0D] py-20">
+      <section id="catalog-categories" className="bg-background py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-6 md:grid-cols-3">
             {[
@@ -102,7 +103,7 @@ export default function Home() {
       </section>
 
       {/* 3. Buy / Sell / Rent (Large Typography) */}
-      <section id="buy-sell" className="bg-white py-24 text-[#000A0D]">
+      <section id="buy-sell" className="bg-white py-24 text-background">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-12 lg:grid-cols-2">
             <div className="flex flex-col justify-center">
@@ -114,8 +115,7 @@ export default function Home() {
               </Text>
               <div className="mt-8">
                 <Button 
-                  variant="default" 
-                  className="bg-[#000A0D] text-white hover:bg-black"
+                  variant="dark" 
                   onClick={() => navigate('/catalog?tab=newbuild')}
                 >
                   Найти квартиру
@@ -148,8 +148,7 @@ export default function Home() {
               </Text>
               <div className="mt-8">
                 <Button 
-                  variant="default" 
-                  className="bg-[#000A0D] text-white hover:bg-black"
+                  variant="dark"
                   onClick={() => {
                     trackEvent('click_buy_sell', { page: 'home', block: 'big_sell', tab: 'sell' })
                     openLeadModal('buy_sell', { page: 'home', block: 'big_sell' }, { initialTab: 'sell' })
@@ -164,7 +163,7 @@ export default function Home() {
       </section>
 
       {/* 4. Best Offers (Featured) */}
-      <section className="bg-[#000A0D] py-24 text-white">
+      <section className="bg-background py-24 text-white">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-12 flex items-end justify-between">
             <div>
@@ -198,6 +197,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* 5. Roadmap */}
+      <Roadmap />
 
       {/* 5. Stages (Miel style - Clean steps) */}
       <section className="bg-[#F5F5F5] py-24 text-[#000A0D]">

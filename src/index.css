@@ -6,16 +6,18 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: #1A2326;
+    --foreground: #FFFFFF;
   }
  
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-  }
-
+  /* Removing .dark class reliance for now since the design seems single-mode dark theme focused based on the palette */
+  
   body {
     @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  /* Global link styles */
+  a {
+    @apply text-primary transition-colors duration-300 hover:text-primary-hover;
   }
 }

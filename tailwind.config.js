@@ -13,23 +13,30 @@ export default {
     },
     extend: {
       colors: {
-        background: "#000A0D", // Dark graphite from Whitewill
+        background: "#1A2326", // Main background
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#FFFFFF",
-          foreground: "#000A0D",
+          DEFAULT: "#A6A267", // Contrast 1 (Gold/Greenish)
+          foreground: "#FFFFFF",
+          hover: "#8E8A54",
         },
         secondary: {
-          DEFAULT: "#1E293B",
+          DEFAULT: "#61747A", // Secondary (Grayish Blue)
           foreground: "#FFFFFF",
+          hover: "#4F5F64",
         },
         accent: {
-          DEFAULT: "#D4AF37", // Gold-ish accent for premium feel
+          DEFAULT: "#A66777", // Contrast 2 (Pinkish)
           foreground: "#FFFFFF",
+          hover: "#8C5563",
+        },
+        surface: {
+          DEFAULT: "#26251A", // Additional dark
+          alt: "#261A1D", // Additional dark 2
         },
         muted: {
-          DEFAULT: "#64748B",
-          foreground: "#E2E8F0",
+          DEFAULT: "#61747A",
+          foreground: "#C0C0C0",
         }
       },
       fontFamily: {

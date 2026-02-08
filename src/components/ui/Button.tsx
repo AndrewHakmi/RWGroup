@@ -8,14 +8,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground shadow hover:bg-gray-200 hover:shadow-md', // White bg, Black text
+        default: 'bg-primary text-primary-foreground shadow hover:bg-primary-hover hover:shadow-md active:bg-primary-hover',
         destructive: 'bg-red-500 text-white shadow-sm hover:bg-red-600 hover:shadow-md',
-        outline: 'border border-slate-200 bg-transparent shadow-sm hover:bg-slate-100 hover:text-slate-900 dark:border-slate-700 dark:hover:bg-slate-800 dark:hover:text-white',
-        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-slate-700 hover:shadow-md', // Dark Slate
-        accent: 'bg-accent text-accent-foreground shadow-sm hover:bg-[#C5A332] hover:shadow-md', // Gold
-        ghost: 'hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white',
-        link: 'text-primary underline-offset-4 hover:underline',
-        dark: 'bg-[#000A0D] text-white shadow hover:bg-gray-900 hover:shadow-md',
+        outline: 'border border-primary text-primary bg-transparent shadow-sm hover:bg-primary hover:text-primary-foreground',
+        secondary: 'bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary-hover hover:shadow-md',
+        accent: 'bg-accent text-accent-foreground shadow-sm hover:bg-accent-hover hover:shadow-md',
+        ghost: 'hover:bg-surface text-foreground hover:text-primary',
+        link: 'text-primary underline-offset-4 hover:underline hover:text-primary-hover',
+        dark: 'bg-surface text-white shadow hover:bg-surface-alt hover:shadow-md',
       },
       size: {
         default: 'h-10 px-4 py-2',

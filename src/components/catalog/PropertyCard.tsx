@@ -62,7 +62,7 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
           </div>
         </CardContent>
         <CardFooter className="p-4 pt-0 mt-auto flex items-center justify-between">
-          <Link to={`/property/${item.id}`} className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors">
+          <Link to={`/property/${item.id}`} className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
             Подробнее
           </Link>
           <Button

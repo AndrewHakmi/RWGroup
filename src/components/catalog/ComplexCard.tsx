@@ -25,7 +25,7 @@ export default function ComplexCard({ item }: { item: Complex }) {
           <Link
             to={`/complex/${item.id}`}
             onClick={() => trackEvent('open_card', { type: 'complex', id: item.id })}
-            className="text-base font-semibold leading-snug text-slate-900 hover:underline hover:text-sky-600 transition-colors"
+            className="text-base font-semibold leading-snug text-slate-900 hover:underline hover:text-primary transition-colors"
           >
             {item.title}
           </Link>

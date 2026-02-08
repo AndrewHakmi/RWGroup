@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/Button'
 
 type Tab = 'newbuild' | 'secondary' | 'rent'
 
@@ -9,19 +9,18 @@ export default function CatalogTabs({ value, onChange }: { value: Tab; onChange:
     { key: 'rent', title: 'Аренда' },
   ]
   return (
-    <div className="inline-flex rounded-lg border border-slate-200 bg-white p-1">
+    <div className="inline-flex rounded-lg border border-slate-700 bg-surface p-1 gap-1">
       {tabs.map((t) => (
-        <button
+        <Button
           key={t.key}
           type="button"
           onClick={() => onChange(t.key)}
-          className={cn(
-            'h-9 rounded-md px-3 text-sm font-medium transition-colors',
-            value === t.key ? 'bg-slate-900 text-white' : 'text-slate-700 hover:bg-slate-100',
-          )}
+          variant={value === t.key ? 'default' : 'ghost'}
+          size="sm"
+          className={value === t.key ? '' : 'text-slate-400 hover:bg-white/5 hover:text-white'}
         >
           {t.title}
-        </button>
+        </Button>
       ))}
     </div>
   )

@@ -1,0 +1,220 @@
+This XML file does not appear to have any style information associated with it. The document tree is shown below.
+<realty-feed xmlns="http://webmaster.yandex.ru/schemas/feed/realty/2010-06">
+<generation-date>2026-02-07T07:31:01+03:00</generation-date>
+<offer internal-id="10190067">
+<crm_id>134</crm_id>
+<type>продажа</type>
+<property-type>жилая</property-type>
+<category>Квартира</category>
+<renovation>Черновая</renovation>
+<creation-date>2025-01-10T17:08:50+05:00</creation-date>
+<location>
+<country>Россия</country>
+<locality-name>Москва</locality-name>
+<address>проспект Автозаводская 23с16</address>
+</location>
+<deal-status>первичная продажа</deal-status>
+<price>
+<value>50140000</value>
+<currency>RUR</currency>
+</price>
+<oldprice>
+<value>66853334</value>
+<currency>RUR</currency>
+</oldprice>
+<sales-agent>
+<organization>«СТРАНА Девелопмент»</organization>
+<url>https://strana.com/msk//</url>
+<category>developer</category>
+<photo>https://dev.vasnaidut.ru/html/strana/pdf/img/logo.jpg</photo>
+<phone>+74954632864</phone>
+</sales-agent>
+<rooms>4</rooms>
+<new-flat>1</new-flat>
+<floor>6</floor>
+<floors-total>20</floors-total>
+<building-name>ЖК WOW</building-name>
+<yandex-building-id>2915902</yandex-building-id>
+<yandex-house-id>2915942</yandex-house-id>
+<building-section>2</building-section>
+<building-state>unfinished</building-state>
+<ready-quarter>3</ready-quarter>
+<built-year>2024</built-year>
+<image tag="plan">https://pb4988.strana.profitbase.ru/uploads/preset/4988/63d7c82ae60c9.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/layout/4988/63d7b7ddc1a5c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/house/4988/63907e0da413b.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/63907d23919a0.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/63907eb20ed30.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080191388c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390803d763bc.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080515b055.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390806cb9bc0.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080962a410.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080bb11ffc.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080eba1020.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081066419c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081431714c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390816a5b562.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390819570c93.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081b3bccd7.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081d5d4425.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081f12711d.jpg</image>
+<description>Жилой комплекс «WOW» представляет собой камерный дом на берегу Москвы-реки. WOW - проект бизнес-класса. Архитектуру разрабатывало российское агентство APEX, известное культовыми проектами, например, "ГЭС-2". Бюро разработало дома в классическом стиле с башнями, которые открывают великолепные виды на водную гладь и яркий мегаполис. В архитектурном ансамбле будут и малоэтажные дома со своим шармом и концепцией загородных резиденций. Выбор форматов квартир бесконечный: с террасами и патио, с окнами в ванной, с потолками до 5 метров и любимые всеми мастер-спальни. Если у вас кипит фантазия, можно выбрать черновую отделку и превратить квартирную мечту в реальность. Для решительных и быстрых у нас есть wow -отделка в стилях Light, Sand, StoneНа огороженной и охраняемой территории организовано видеонаблюдение, детские игровые комплексы с зонами для отдыха. Предусмотрены открытые и закрытые гостевые автостоянки, подземный паркинг на 338 мест. В шаговой доступности находятся школы, детский сад, остановки общественного транспорта и станция метро, медицинские учреждения, торговые центры, парк и река Москва. Срок сдачи 1 квартал 2024 года.</description>
+<area>
+<value>91.4</value>
+<unit>кв. м</unit>
+</area>
+<living-space>
+<value>62.44</value>
+<unit>кв. м</unit>
+</living-space>
+<kitchen-space>
+<value>26.69</value>
+<unit>кв. м</unit>
+</kitchen-space>
+</offer>
+<offer internal-id="10190240">
+<crm_id>307</crm_id>
+<type>продажа</type>
+<property-type>жилая</property-type>
+<category>Квартира</category>
+<renovation>Черновая</renovation>
+<creation-date>2025-01-10T17:08:50+05:00</creation-date>
+<location>
+<country>Россия</country>
+<locality-name>Москва</locality-name>
+<address>проспект Автозаводская 23с16</address>
+</location>
+<deal-status>первичная продажа</deal-status>
+<price>
+<value>55290000</value>
+<currency>RUR</currency>
+</price>
+<oldprice>
+<value>73720000</value>
+<currency>RUR</currency>
+</oldprice>
+<sales-agent>
+<organization>«СТРАНА Девелопмент»</organization>
+<url>https://strana.com/msk//</url>
+<category>developer</category>
+<photo>https://dev.vasnaidut.ru/html/strana/pdf/img/logo.jpg</photo>
+<phone>+74954632864</phone>
+</sales-agent>
+<rooms>3</rooms>
+<new-flat>1</new-flat>
+<floor>19</floor>
+<floors-total>20</floors-total>
+<building-name>ЖК WOW</building-name>
+<yandex-building-id>2915902</yandex-building-id>
+<yandex-house-id>2915942</yandex-house-id>
+<building-section>3</building-section>
+<building-state>unfinished</building-state>
+<ready-quarter>3</ready-quarter>
+<built-year>2024</built-year>
+<image tag="plan">https://pb4988.strana.profitbase.ru/uploads/preset/4988/63d7ce85cfa54.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/layout/4988/63d7b7abecf8e.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/house/4988/63907e0da413b.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/63907d23919a0.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/63907eb20ed30.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080191388c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390803d763bc.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080515b055.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390806cb9bc0.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080962a410.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080bb11ffc.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080eba1020.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081066419c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081431714c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390816a5b562.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390819570c93.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081b3bccd7.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081d5d4425.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081f12711d.jpg</image>
+<description>Жилой комплекс «WOW» представляет собой камерный дом на берегу Москвы-реки. WOW - проект бизнес-класса. Архитектуру разрабатывало российское агентство APEX, известное культовыми проектами, например, "ГЭС-2". Бюро разработало дома в классическом стиле с башнями, которые открывают великолепные виды на водную гладь и яркий мегаполис. В архитектурном ансамбле будут и малоэтажные дома со своим шармом и концепцией загородных резиденций. Выбор форматов квартир бесконечный: с террасами и патио, с окнами в ванной, с потолками до 5 метров и любимые всеми мастер-спальни. Если у вас кипит фантазия, можно выбрать черновую отделку и превратить квартирную мечту в реальность. Для решительных и быстрых у нас есть wow -отделка в стилях Light, Sand, StoneНа огороженной и охраняемой территории организовано видеонаблюдение, детские игровые комплексы с зонами для отдыха. Предусмотрены открытые и закрытые гостевые автостоянки, подземный паркинг на 338 мест. В шаговой доступности находятся школы, детский сад, остановки общественного транспорта и станция метро, медицинские учреждения, торговые центры, парк и река Москва. Срок сдачи 1 квартал 2024 года.</description>
+<area>
+<value>111.02</value>
+<unit>кв. м</unit>
+</area>
+<living-space>
+<value>46.17</value>
+<unit>кв. м</unit>
+</living-space>
+<kitchen-space>
+<value>31.66</value>
+<unit>кв. м</unit>
+</kitchen-space>
+</offer>
+<offer internal-id="10190372">
+<crm_id>439</crm_id>
+<type>продажа</type>
+<property-type>жилая</property-type>
+<category>Квартира</category>
+<renovation>под ключ</renovation>
+<creation-date>2025-01-10T17:08:50+05:00</creation-date>
+<location>
+<country>Россия</country>
+<locality-name>Москва</locality-name>
+<address>проспект Автозаводская 23с16</address>
+</location>
+<deal-status>первичная продажа</deal-status>
+<price>
+<value>39090000</value>
+<currency>RUR</currency>
+</price>
+<oldprice>
+<value>52120000</value>
+<currency>RUR</currency>
+</oldprice>
+<sales-agent>
+<organization>«СТРАНА Девелопмент»</organization>
+<url>https://strana.com/msk//</url>
+<category>developer</category>
+<photo>https://dev.vasnaidut.ru/html/strana/pdf/img/logo.jpg</photo>
+<phone>+74954632864</phone>
+</sales-agent>
+<rooms>3</rooms>
+<new-flat>1</new-flat>
+<floor>12</floor>
+<floors-total>20</floors-total>
+<building-name>ЖК WOW</building-name>
+<yandex-building-id>2915902</yandex-building-id>
+<yandex-house-id>2915942</yandex-house-id>
+<building-section>5</building-section>
+<building-state>unfinished</building-state>
+<ready-quarter>3</ready-quarter>
+<built-year>2024</built-year>
+<image tag="plan">https://pb4988.strana.profitbase.ru/uploads/preset/4988/63d7d86167616.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/layout/4988/63d7b6b858d36.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/house/4988/63907e0da413b.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/63907d23919a0.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/63907eb20ed30.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080191388c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390803d763bc.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080515b055.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390806cb9bc0.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080962a410.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080bb11ffc.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639080eba1020.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081066419c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081431714c.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390816a5b562.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/6390819570c93.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081b3bccd7.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081d5d4425.jpg</image>
+<image>https://pb4988.strana.profitbase.ru/uploads/building_image/4988/639081f12711d.jpg</image>
+<description>Жилой комплекс «WOW» представляет собой камерный дом на берегу Москвы-реки. WOW - проект бизнес-класса. Архитектуру разрабатывало российское агентство APEX, известное культовыми проектами, например, "ГЭС-2". Бюро разработало дома в классическом стиле с башнями, которые открывают великолепные виды на водную гладь и яркий мегаполис. В архитектурном ансамбле будут и малоэтажные дома со своим шармом и концепцией загородных резиденций. Выбор форматов квартир бесконечный: с террасами и патио, с окнами в ванной, с потолками до 5 метров и любимые всеми мастер-спальни. Если у вас кипит фантазия, можно выбрать черновую отделку и превратить квартирную мечту в реальность. Для решительных и быстрых у нас есть wow -отделка в стилях Light, Sand, StoneНа огороженной и охраняемой территории организовано видеонаблюдение, детские игровые комплексы с зонами для отдыха. Предусмотрены открытые и закрытые гостевые автостоянки, подземный паркинг на 338 мест. В шаговой доступности находятся школы, детский сад, остановки общественного транспорта и станция метро, медицинские учреждения, торговые центры, парк и река Москва. Срок сдачи 1 квартал 2024 года.</description>
+<area>
+<value>58.38</value>
+<unit>кв. м</unit>
+</area>
+<living-space>
+<value>41.86</value>
+<unit>кв. м</unit>
+</living-space>
+<kitchen-space>
+<value>20.17</value>
+<unit>кв. м</unit>
+</kitchen-space>
+</offer>
+</realty-feed>

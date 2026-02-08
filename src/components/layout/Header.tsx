@@ -15,7 +15,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#000A0D]/90 backdrop-blur text-white">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-background/90 backdrop-blur text-white">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4">
           
           {/* Left: Logo + Tagline */}
@@ -27,7 +27,7 @@ export default function Header() {
             <div className="hidden h-10 w-[1px] bg-white/20 sm:block" />
             
             <h1 className="hidden max-w-[120px] text-xs font-medium uppercase leading-tight tracking-wide text-gray-300 sm:block">
-              Эксперты по<br />недвижимости
+              Точность<br />в каждой сделке
             </h1>
           </div>
 
@@ -46,7 +46,7 @@ export default function Header() {
 
             <Button
               variant="default"
-              className="bg-white text-black hover:bg-gray-200 border-none font-semibold hidden sm:flex"
+              className="font-semibold hidden sm:flex"
               onClick={() => {
                 trackEvent('click_consultation', { page: loc.pathname, block: 'header' })
                 openLeadModal('consultation', { page: loc.pathname, block: 'header' })
@@ -55,12 +55,14 @@ export default function Header() {
               Получить консультацию
             </Button>
 
-            <button 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => toggleMenu(true)}
-              className="p-1 hover:text-accent transition-colors"
+              className="text-white hover:text-accent hover:bg-transparent"
             >
               <Menu className="h-8 w-8" />
-            </button>
+            </Button>
           </div>
         </div>
       </header>
