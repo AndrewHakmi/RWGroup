@@ -201,44 +201,35 @@ export default function Home() {
       {/* 5. Roadmap */}
       <Roadmap />
 
-      {/* 5. Stages (Miel style - Clean steps) */}
-      <section className="bg-[#F5F5F5] py-24 text-[#000A0D]">
-        <div className="mx-auto max-w-7xl px-4">
-          <Heading size="h2" className="mb-16 text-center">Этапы работы</Heading>
-          
-          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
-            {[
-              { num: '01', title: 'Заявка', text: 'Оставляете заявку на сайте или по телефону' },
-              { num: '02', title: 'Подбор', text: 'Формируем персональную подборку объектов' },
-              { num: '03', title: 'Показ', text: 'Организуем просмотры в удобное время' },
-              { num: '04', title: 'Сделка', text: 'Полное юридическое сопровождение' },
-              { num: '05', title: 'Ключи', text: 'Поздравляем вас с новосельем' },
-            ].map((step) => (
-              <div key={step.num} className="group relative pt-8">
-                <div className="absolute top-0 h-[1px] w-full bg-gray-200 transition-colors group-hover:bg-[#000A0D]" />
-                <div className="text-4xl font-light text-gray-300 transition-colors group-hover:text-accent">{step.num}</div>
-                <Heading size="h4" className="mt-4">{step.title}</Heading>
-                <Text size="sm" className="mt-2 text-gray-500">{step.text}</Text>
-              </div>
-            ))}
-          </div>
+      {/* 6. Mission */}
+      <section className="relative w-full py-24 md:py-32 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" 
+            alt="Mission Background" 
+            className="h-full w-full object-cover"
+          />
+          {/* Soft white gradient overlay to blend with card */}
+          <div className="absolute inset-0 bg-white/20" />
         </div>
-      </section>
 
-      {/* 6. Mission (Text block) */}
-      <section className="bg-[#E5E5E5] py-24 text-[#000A0D]">
-        <div className="mx-auto max-w-4xl px-4 text-center">
-          <Heading size="h6" className="mb-8 font-bold uppercase tracking-widest text-gray-500">Миссия</Heading>
-          <Text size="lg" className="leading-relaxed font-light md:text-4xl">
-            «Мы не просто продаем квадратные метры. Мы помогаем людям найти дом, где они будут счастливы, и создаем безопасное пространство для принятия важных решений»
-          </Text>
-          <div className="mt-8 flex justify-center gap-4">
-             <div className="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
-                <img src="https://ui-avatars.com/api/?name=Саша&background=random" alt="Founder" />
-             </div>
-             <div className="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
-                <img src="https://ui-avatars.com/api/?name=Настя&background=random" alt="Co-founder" />
-             </div>
+        <div className="relative mx-auto max-w-5xl px-4">
+          <div className="rounded-3xl bg-white/70 p-10 text-center backdrop-blur-md shadow-sm md:p-16 border border-white/50">
+            <Heading size="h6" className="mb-6 text-sm font-bold uppercase tracking-[0.2em] text-gray-500">Миссия</Heading>
+            
+            <Text className="mx-auto max-w-4xl text-xl font-light leading-snug text-slate-800 md:text-3xl lg:text-4xl">
+              «Мы не просто продаем квадратные метры. Мы помогаем людям найти дом, где они будут счастливы, и создаем безопасное пространство для принятия важных решений»
+            </Text>
+            
+            <div className="mt-10 flex justify-center gap-4">
+               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#9FB4FF] text-white font-medium text-sm shadow-sm">
+                  СА
+               </div>
+               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#6B9E78] text-white font-medium text-sm shadow-sm">
+                  НА
+               </div>
+            </div>
           </div>
         </div>
       </section>

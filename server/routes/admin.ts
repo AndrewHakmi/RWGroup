@@ -4,6 +4,8 @@ import { z } from 'zod'
 import { adminAuth } from '../middleware/adminAuth.js'
 import { withDb } from '../lib/storage.js'
 import { newId, slugify } from '../lib/ids.js'
+import fs from 'fs'
+import path from 'path'
 import { 
   upsertComplexes, 
   upsertProperties, 
@@ -44,6 +46,36 @@ router.post('/login', (req: Request, res: Response) => {
 })
 
 router.use(adminAuth)
+
+router.post('/upload', upload.single('file'), (req: Request, res: Response) => {
+  if (!req.file) {
+    res.status(400).json({ success: false, error: 'No file provided' })
+    return
+  }
+
+  try {
+    const ext = path.extname(req.file.originalname).toLowerCase()
+    const allowed = ['.jpg', '.jpeg', '.png', '.webp', '.gif']
+    if (!allowed.includes(ext)) {
+      res.status(400).json({ success: false, error: 'Invalid file type' })
+      return
+    }
+
+    const filename = `${newId()}${ext}`
+    const uploadsDir = path.join(process.cwd(), 'server', 'uploads')
+    
+    if (!fs.existsSync(uploadsDir)) {
+      fs.mkdirSync(uploadsDir, { recursive: true })
+    }
+
+    const filePath = path.join(uploadsDir, filename)
+    fs.writeFileSync(filePath, req.file.buffer)
+
+    res.json({ success: true, data: { url: `/uploads/${filename}` } })
+  } catch (e) {
+    res.status(500).json({ success: false, error: e instanceof Error ? e.message : 'Upload failed' })
+  }
+})
 
 router.get('/home', (req: Request, res: Response) => {
   const data = withDb((db) => db.home)
@@ -257,6 +289,7 @@ router.put('/catalog/items/:type/:id', (req: Request, res: Response) => {
     // Add other fields as needed
     price_from: z.number().optional(),
     area_from: z.number().optional(),
+    images: z.array(z.string()).optional(),
   })
   
   const parsed = schema.safeParse(req.body)
@@ -437,6 +470,7 @@ interface PreviewRow {
 interface PreviewResult {
   totalRows: number
   sampleRows: PreviewRow[]
+  mappedItems: (Property | Complex)[]
   fieldMappings: Record<string, string[]>
   validRows: number
   invalidRows: number

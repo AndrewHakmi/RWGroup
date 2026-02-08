@@ -106,13 +106,34 @@ export default function AdminImportPage() {
         mapping: Object.keys(feedForm.mapping).length > 0 ? feedForm.mapping : undefined
       }
 
+      let newFeedId: string | null = null
+
       if (editingFeedId) {
         await apiPut(`/api/admin/feeds/${editingFeedId}`, payload, headers)
       } else {
-        await apiPost('/api/admin/feeds', payload, headers)
+        const res = await apiPost<{ id: string }>('/api/admin/feeds', payload, headers)
+        newFeedId = res.id
       }
       setIsFeedModalOpen(false)
       load()
+
+      if (newFeedId) {
+        // Auto-select new feed for import
+        const newFeed: FeedSource = {
+          id: newFeedId,
+          name: feedForm.name,
+          mode: feedForm.mode,
+          url: feedForm.mode === 'url' ? feedForm.url : undefined,
+          format: feedForm.format,
+          is_active: true,
+          mapping: feedForm.mapping,
+          created_at: new Date().toISOString()
+        }
+        setActiveImportSource(newFeed)
+        setFile(null)
+        setPreview(null)
+        setIsPreviewMode(false)
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Ошибка сохранения фида')
     }
@@ -308,11 +329,14 @@ export default function AdminImportPage() {
                   <th className="px-3 py-2">Формат</th>
                   <th className="px-3 py-2">Режим</th>
                   <th className="px-3 py-2">Маппинг</th>
+                  <th className="px-3 py-2">Статус</th>
                   <th className="px-3 py-2 text-right">Действия</th>
                 </tr>
               </thead>
               <tbody>
-                {feeds.map((f) => (
+                {feeds.map((f) => {
+                  const lastRun = runs.filter(r => r.source_id === f.id).sort((a,b) => (b.started_at || '').localeCompare(a.started_at || ''))[0]
+                  return (
                   <tr key={f.id} className="border-t border-slate-200">
                     <td className="px-3 py-2 font-medium text-slate-900">{f.name}</td>
                     <td className="px-3 py-2 text-slate-700">{f.format}</td>
@@ -324,9 +348,19 @@ export default function AdminImportPage() {
                     <td className="px-3 py-2 text-slate-500 text-xs">
                       {f.mapping ? Object.keys(f.mapping).length + ' полей' : 'Авто'}
                     </td>
+                    <td className="px-3 py-2">
+                      {lastRun ? (
+                        <div className="flex flex-col items-start gap-1">
+                          <Badge variant={lastRun.status === 'success' ? 'default' : lastRun.status === 'partial' ? 'warning' : 'destructive'}>{lastRun.status}</Badge>
+                          <span className="text-[10px] text-slate-500">{new Date(lastRun.started_at).toLocaleDateString()}</span>
+                        </div>
+                      ) : (
+                        <span className="text-xs text-slate-400">Не импортировано</span>
+                      )}
+                    </td>
                     <td className="px-3 py-2 text-right space-x-2">
-                      <Button size="sm" onClick={() => handleStartImport(f)}>
-                        Импорт
+                      <Button size="sm" variant={lastRun ? "secondary" : "default"} onClick={() => handleStartImport(f)}>
+                        {lastRun ? 'Импорт' : 'Запустить'}
                       </Button>
                       <Button size="sm" variant="secondary" onClick={() => openEditFeed(f)}>
                         Настроить
@@ -336,7 +370,7 @@ export default function AdminImportPage() {
                       </Button>
                     </td>
                   </tr>
-                ))}
+                )})}
                 {feeds.length === 0 && (
                   <tr>
                     <td colSpan={5} className="px-3 py-8 text-center text-slate-500">

@@ -48,6 +48,35 @@ export default function AdminCatalogPage() {
     setEditForm({ ...item })
   }
 
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || !e.target.files[0]) return
+    const file = e.target.files[0]
+    
+    const fd = new FormData()
+    fd.append('file', file)
+    
+    try {
+      const res = await fetch('/api/admin/upload', {
+        method: 'POST',
+        headers: { 'x-admin-token': token || '' },
+        body: fd
+      })
+      const json = await res.json()
+      if (!json.success) throw new Error(json.error)
+      
+      const newImages = [...(editForm.images || []), json.data.url]
+      setEditForm({ ...editForm, images: newImages })
+    } catch (e) {
+      alert(e instanceof Error ? e.message : 'Upload failed')
+    }
+  }
+
+  const removeImage = (index: number) => {
+    const newImages = [...(editForm.images || [])]
+    newImages.splice(index, 1)
+    setEditForm({ ...editForm, images: newImages })
+  }
+
   const handleSave = async () => {
     if (!editingItem) return
     try {
@@ -155,6 +184,27 @@ export default function AdminCatalogPage() {
                 value={editForm.district || ''} 
                 onChange={(e) => setEditForm({...editForm, district: e.target.value})} 
               />
+            </div>
+
+            <div>
+              <label className="text-xs font-medium text-slate-700 block mb-2">Фотографии</label>
+              <div className="grid grid-cols-4 gap-2 mb-2">
+                {(editForm.images || []).map((img: string, i: number) => (
+                  <div key={i} className="relative group aspect-square bg-slate-100 rounded overflow-hidden">
+                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <button 
+                      className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity"
+                      onClick={() => removeImage(i)}
+                    >
+                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                  </div>
+                ))}
+                <label className="flex flex-col items-center justify-center border-2 border-dashed border-slate-300 rounded cursor-pointer hover:bg-slate-50 aspect-square">
+                  <span className="text-xs text-slate-500">+</span>
+                  <input type="file" className="hidden" accept="image/*" onChange={handleUpload} />
+                </label>
+              </div>
             </div>
 
             <div>
