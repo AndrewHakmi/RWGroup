@@ -47,11 +47,24 @@ export interface Property {
   bedrooms: number
   price: number
   price_period?: 'month'
+  old_price?: number
   area_total: number
+  area_living?: number
+  area_kitchen?: number
   district: string
   metro: string[]
   images: string[]
   status: RecordStatus
+  // Additional fields from XML feeds
+  floor?: number
+  floors_total?: number
+  renovation?: string // "Предчистовая", "Под ключ", "Без отделки", etc.
+  is_euroflat?: boolean
+  building_section?: string
+  building_state?: string // "unfinished", "built"
+  ready_quarter?: number
+  built_year?: number
+  description?: string
   last_seen_at?: string
   updated_at: string
 }

@@ -15,7 +15,8 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
   const img = selectCoverImage(item.images)
   const dealTypeLabel = item.deal_type === 'rent' ? 'Аренда' : 'Продажа'
   const priceSuffix = item.price_period ? ' / мес' : ''
-  const priceLabel = `${formatPriceRub(item.price)}${priceSuffix}`
+  const hasDiscount = item.old_price && item.old_price > item.price
+  const discount = hasDiscount ? Math.round((1 - item.price / item.old_price!) * 100) : 0
 
   return (
     <Card
@@ -28,10 +29,20 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
         {img ? (
           <img src={img} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
         ) : null}
-        <div className="absolute top-3 left-3">
+        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
            <Badge variant="secondary" className="bg-white/90 text-slate-900 backdrop-blur-sm shadow-sm">
              {dealTypeLabel}
            </Badge>
+           {hasDiscount && (
+             <Badge variant="default" className="bg-green-600/90 text-white backdrop-blur-sm shadow-sm">
+               −{discount}%
+             </Badge>
+           )}
+           {item.is_euroflat && (
+             <Badge variant="accent" className="bg-blue-600/90 text-white backdrop-blur-sm shadow-sm">
+               Евро
+             </Badge>
+           )}
         </div>
       </Link>
       <div className={cn('flex flex-col', variant === 'list' && 'flex-1')}>
@@ -58,9 +69,14 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
               <Ruler className="h-3.5 w-3.5 text-slate-400" />
               <span>{formatArea(item.area_total)}</span>
             </div>
-            <div className="inline-flex items-center gap-1.5">
-              <Tag className="h-3.5 w-3.5 text-slate-400" />
-              <span className="font-medium text-slate-900">{priceLabel}</span>
+            <div className="inline-flex flex-col gap-0.5">
+              <div className="inline-flex items-center gap-1.5">
+                <Tag className="h-3.5 w-3.5 text-slate-400" />
+                <span className="font-medium text-slate-900">{formatPriceRub(item.price)}{priceSuffix}</span>
+              </div>
+              {hasDiscount && (
+                <span className="text-[10px] text-slate-400 line-through ml-5">{formatPriceRub(item.old_price!)}</span>
+              )}
             </div>
           </div>
         </CardContent>

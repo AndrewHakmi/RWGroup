@@ -68,6 +68,11 @@ export default function AdminImportPage() {
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
   const [editForm, setEditForm] = useState<Record<string, any>>({})
 
+  const getRowExternalId = (row: ImportPreview['sampleRows'][number]) => {
+    const data = row.data as Record<string, any>
+    return data.external_id || data.id || data.externalId || ''
+  }
+
   const load = useCallback(() => {
     apiGet<FeedSource[]>('/api/admin/feeds', headers).then(setFeeds).catch(() => setFeeds([]))
     apiGet<ImportRun[]>('/api/admin/import/runs', headers).then(setRuns).catch(() => setRuns([]))
@@ -534,6 +539,33 @@ export default function AdminImportPage() {
                   </div>
                 </div>
               </div>
+
+              {preview.invalidRows > 0 && (
+                <div className="rounded border border-rose-200 bg-rose-50 p-3 text-xs text-rose-700">
+                  <div className="font-semibold mb-2">Ошибки в предпросмотре</div>
+                  <div className="space-y-2 max-h-[220px] overflow-y-auto">
+                    {preview.sampleRows
+                      .filter((r) => r.errors.length > 0)
+                      .slice(0, 20)
+                      .map((row) => (
+                        <div key={row.rowIndex} className="rounded bg-white/70 p-2 border border-rose-100">
+                          <div className="font-medium">
+                            Строка {row.rowIndex}
+                            {getRowExternalId(row) ? ` (ID: ${getRowExternalId(row)})` : ''}
+                          </div>
+                          <div className="mt-1 space-y-1">
+                            {row.errors.map((err, i) => (
+                              <div key={i}>• {err}</div>
+                            ))}
+                          </div>
+                        </div>
+                      ))}
+                    {preview.invalidRows > 20 && (
+                      <div className="text-rose-600">Показаны первые 20 строк с ошибками.</div>
+                    )}
+                  </div>
+                </div>
+              )}
 
               {preview.totalRows > preview.sampleRows.length && (
                 <div className="text-xs text-amber-600 bg-amber-50 border border-amber-200 p-2 rounded">

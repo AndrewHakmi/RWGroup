@@ -79,8 +79,12 @@ export default function PropertyPage() {
               </Card>
 
             <Card className="border-slate-200 bg-white p-6">
-              <Badge variant="secondary" className="mb-2">{data.property.deal_type === 'rent' ? 'Аренда' : 'Продажа'}</Badge>
-              <Heading size="h2" className="mt-1">{data.property.title}</Heading>
+              <div className="flex items-start gap-2">
+                <Badge variant="secondary">{data.property.deal_type === 'rent' ? 'Аренда' : 'Продажа'}</Badge>
+                {data.property.is_euroflat && <Badge variant="accent">Европланировка</Badge>}
+                {data.property.renovation && <Badge variant="outline">{data.property.renovation}</Badge>}
+              </div>
+              <Heading size="h2" className="mt-3">{data.property.title}</Heading>
               <Text className="mt-2 text-slate-600">
                 {data.property.district}
                 {data.property.metro?.[0] ? ` • ${data.property.metro[0]}` : ''}
@@ -97,22 +101,61 @@ export default function PropertyPage() {
               <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
                 <div>
                   <Text size="xs" muted>Цена</Text>
-                  <Text size="lg" weight="semibold">
-                    {formatPriceRub(data.property.price)}{data.property.price_period ? ' / мес' : ''}
-                  </Text>
+                  <div className="flex items-baseline gap-2">
+                    <Text size="lg" weight="semibold">
+                      {formatPriceRub(data.property.price)}{data.property.price_period ? ' / мес' : ''}
+                    </Text>
+                    {data.property.old_price && data.property.old_price > data.property.price && (
+                      <span className="text-xs text-slate-400 line-through">{formatPriceRub(data.property.old_price)}</span>
+                    )}
+                  </div>
+                  {data.property.old_price && data.property.old_price > data.property.price && (
+                    <div className="mt-1 text-xs text-green-600 font-medium">
+                      Скидка {Math.round((1 - data.property.price / data.property.old_price) * 100)}%
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <Text size="xs" muted>Площадь</Text>
+                  <Text size="xs" muted>Площадь общая</Text>
                   <Text size="lg" weight="semibold">{formatArea(data.property.area_total)}</Text>
                 </div>
+                {data.property.area_living && (
+                  <div>
+                    <Text size="xs" muted>Жилая площадь</Text>
+                    <Text size="lg" weight="semibold">{formatArea(data.property.area_living)}</Text>
+                  </div>
+                )}
+                {data.property.area_kitchen && (
+                  <div>
+                    <Text size="xs" muted>Площадь кухни</Text>
+                    <Text size="lg" weight="semibold">{formatArea(data.property.area_kitchen)}</Text>
+                  </div>
+                )}
                 <div>
                   <Text size="xs" muted>Спальни</Text>
                   <Text size="lg" weight="semibold">{data.property.bedrooms}</Text>
                 </div>
-                <div>
-                  <Text size="xs" muted>Статус</Text>
-                  <Badge variant="outline" className="mt-1">{data.property.status === 'active' ? 'Актуально' : data.property.status}</Badge>
-                </div>
+                {data.property.floor && data.property.floors_total && (
+                  <div>
+                    <Text size="xs" muted>Этаж</Text>
+                    <Text size="lg" weight="semibold">{data.property.floor} из {data.property.floors_total}</Text>
+                  </div>
+                )}
+                {data.property.lot_number && (
+                  <div>
+                    <Text size="xs" muted>Номер квартиры</Text>
+                    <Text size="lg" weight="semibold">{data.property.lot_number}</Text>
+                  </div>
+                )}
+                {(data.property.ready_quarter || data.property.built_year) && (
+                  <div>
+                    <Text size="xs" muted>Срок сдачи</Text>
+                    <Text size="lg" weight="semibold">
+                      {data.property.ready_quarter && `${data.property.ready_quarter} кв. `}
+                      {data.property.built_year}
+                    </Text>
+                  </div>
+                )}
               </div>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -144,6 +187,64 @@ export default function PropertyPage() {
               </div>
             </Card>
           </div>
+
+          {/* Description Section */}
+          {data.property.description && (
+            <Card className="mt-6 border-slate-200 bg-white p-6">
+              <Heading size="h3" className="mb-3">Описание</Heading>
+              <Text className="whitespace-pre-line text-slate-700 leading-relaxed">
+                {data.property.description}
+              </Text>
+            </Card>
+          )}
+
+          {/* Additional Info Section */}
+          {(data.property.building_section || data.property.building_state || data.complex?.developer) && (
+            <Card className="mt-6 border-slate-200 bg-white p-6">
+              <Heading size="h3" className="mb-4">Дополнительная информация</Heading>
+              <div className="grid gap-3 text-sm md:grid-cols-2">
+                {data.complex?.developer && (
+                  <div className="flex items-start gap-2">
+                    <span className="text-slate-500">Застройщик:</span>
+                    <span className="font-medium text-slate-900">{data.complex.developer}</span>
+                  </div>
+                )}
+                {data.property.building_section && (
+                  <div className="flex items-start gap-2">
+                    <span className="text-slate-500">Секция:</span>
+                    <span className="font-medium text-slate-900">{data.property.building_section}</span>
+                  </div>
+                )}
+                {data.property.building_state && (
+                  <div className="flex items-start gap-2">
+                    <span className="text-slate-500">Состояние:</span>
+                    <span className="font-medium text-slate-900">
+                      {data.property.building_state === 'unfinished' ? 'В процессе строительства' :
+                       data.property.building_state === 'built' ? 'Построено' : data.property.building_state}
+                    </span>
+                  </div>
+                )}
+                {data.complex?.handover_date && (
+                  <div className="flex items-start gap-2">
+                    <span className="text-slate-500">Срок сдачи ЖК:</span>
+                    <span className="font-medium text-slate-900">{data.complex.handover_date}</span>
+                  </div>
+                )}
+                {data.complex?.class && (
+                  <div className="flex items-start gap-2">
+                    <span className="text-slate-500">Класс жилья:</span>
+                    <span className="font-medium text-slate-900">{data.complex.class}</span>
+                  </div>
+                )}
+                {data.complex?.finish_type && (
+                  <div className="flex items-start gap-2">
+                    <span className="text-slate-500">Тип отделки ЖК:</span>
+                    <span className="font-medium text-slate-900">{data.complex.finish_type}</span>
+                  </div>
+                )}
+              </div>
+            </Card>
+          )}
 
           {/* Floor Plans Section */}
           {layoutImages.length > 0 && (

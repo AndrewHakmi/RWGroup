@@ -9,6 +9,7 @@ import PropertyCard from '@/components/catalog/PropertyCard'
 import Input from '@/components/ui/Input'
 import ImageGallery from '@/components/ui/ImageGallery'
 import { apiGet } from '@/lib/api'
+import { formatArea, formatPriceRub } from '@/lib/format'
 import { selectCoverImage, getPresentableImages } from '@/lib/images'
 import type { Complex, Property } from '../../shared/types'
 import { useUiStore } from '@/store/useUiStore'
@@ -68,14 +69,53 @@ export default function ComplexPage() {
                 </div>
               </button>
               <CardContent className="p-6">
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <Badge variant="secondary" className="mb-2">Жилой комплекс</Badge>
+                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                  <div className="flex-1">
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      <Badge variant="secondary">Жилой комплекс</Badge>
+                      {data.complex.class && <Badge variant="accent">{data.complex.class}</Badge>}
+                    </div>
                     <Heading size="h2" className="mt-1">{data.complex.title}</Heading>
                     <Text className="mt-2 text-slate-600">
                       {data.complex.district}
                       {data.complex.metro?.[0] ? ` • ${data.complex.metro[0]}` : ''}
                     </Text>
+
+                    {/* ЖК Info Grid */}
+                    {(data.complex.developer || data.complex.handover_date || data.complex.finish_type || data.complex.price_from) && (
+                      <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
+                        {data.complex.price_from && (
+                          <div>
+                            <Text size="xs" muted>Цена от</Text>
+                            <Text weight="semibold">{formatPriceRub(data.complex.price_from)}</Text>
+                          </div>
+                        )}
+                        {data.complex.area_from && (
+                          <div>
+                            <Text size="xs" muted>Площадь от</Text>
+                            <Text weight="semibold">{formatArea(data.complex.area_from)}</Text>
+                          </div>
+                        )}
+                        {data.complex.developer && (
+                          <div>
+                            <Text size="xs" muted>Застройщик</Text>
+                            <Text weight="semibold">{data.complex.developer}</Text>
+                          </div>
+                        )}
+                        {data.complex.handover_date && (
+                          <div>
+                            <Text size="xs" muted>Срок сдачи</Text>
+                            <Text weight="semibold">{data.complex.handover_date}</Text>
+                          </div>
+                        )}
+                        {data.complex.finish_type && (
+                          <div className="col-span-2">
+                            <Text size="xs" muted>Тип отделки</Text>
+                            <Text weight="semibold">{data.complex.finish_type}</Text>
+                          </div>
+                        )}
+                      </div>
+                    )}
                   </div>
                   <Button
                     onClick={() =>

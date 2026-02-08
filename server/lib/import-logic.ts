@@ -24,6 +24,26 @@ export function asStringArray(v: unknown): string[] {
     .filter(Boolean)
 }
 
+function normalizeLocationValue(v: unknown): string {
+  const s = asString(v).trim()
+  if (!s) return ''
+  if (s.toLowerCase() === 'array') return ''
+  if (s === '[object Object]') return ''
+  return s
+}
+
+function pickLocationText(loc: Record<string, unknown>): string {
+  const address = normalizeLocationValue(loc.address ?? loc['address'])
+  if (address) return address
+  const subLocality = normalizeLocationValue(loc['sub-locality-name'] ?? loc['sub_locality_name'])
+  if (subLocality) return subLocality
+  const locality = normalizeLocationValue(loc['locality-name'] ?? loc['locality_name'])
+  if (locality) return locality
+  const region = normalizeLocationValue(loc.region ?? loc['region'])
+  if (region) return region
+  return ''
+}
+
 export function getField(row: Record<string, unknown>, field: string, mapping?: Record<string, string>, aliases: string[] = []): unknown {
   if (mapping && mapping[field]) {
     return row[mapping[field]]
@@ -75,6 +95,13 @@ export function normalizeYandexRealty(row: Record<string, unknown>): Record<stri
     normalized.price = asNumber(row.price)
   }
 
+  // Old price for discount display: <oldprice><value>29533333</value></oldprice>
+  if (row.oldprice && typeof row.oldprice === 'object' && 'value' in row.oldprice) {
+    normalized.old_price = asNumber((row.oldprice as Record<string, unknown>).value)
+  } else if (row.oldprice) {
+    normalized.old_price = asNumber(row.oldprice)
+  }
+
   // Nested area: <area><value>59.5</value></area>
   if (row.area && typeof row.area === 'object' && 'value' in row.area) {
     normalized.area_total = asNumber((row.area as Record<string, unknown>).value)
@@ -82,12 +109,26 @@ export function normalizeYandexRealty(row: Record<string, unknown>): Record<stri
     normalized.area_total = asNumber(row.area)
   }
 
+  // Living space: <living-space><value>43.81</value></living-space>
+  if (row['living-space'] && typeof row['living-space'] === 'object' && 'value' in row['living-space']) {
+    normalized.area_living = asNumber((row['living-space'] as Record<string, unknown>).value)
+  } else if (row.living_space) {
+    normalized.area_living = asNumber(row.living_space)
+  }
+
+  // Kitchen space: <kitchen-space><value>6.65</value></kitchen-space>
+  if (row['kitchen-space'] && typeof row['kitchen-space'] === 'object' && 'value' in row['kitchen-space']) {
+    normalized.area_kitchen = asNumber((row['kitchen-space'] as Record<string, unknown>).value)
+  } else if (row.kitchen_space) {
+    normalized.area_kitchen = asNumber(row.kitchen_space)
+  }
+
   // Location: <location><address>...</address><metro>...</metro></location>
   if (row.location && typeof row.location === 'object') {
     const loc = row.location as Record<string, unknown>
 
     // District from address (temporary - will be mapped to reference list later)
-    normalized.district = asString(loc.address || loc['locality-name'])
+    normalized.district = pickLocationText(loc)
 
     // Metro: extract from <metro><name>...</name></metro> if present
     const metros: string[] = []
@@ -132,19 +173,61 @@ export function normalizeYandexRealty(row: Record<string, unknown>): Record<stri
     normalized.handover_date = readyQuarter ? `${readyQuarter} кв. ${builtYear}` : String(builtYear)
   }
 
-  // Images: extract all <image> tags (usually floor plans, not photos)
-  const images: string[] = []
+  // Images: extract images but PRIORITIZE presentable photos over floor plans
+  // In XML: images WITHOUT tag attribute are building photos
+  //         images WITH tag="plan" are floor plans
+  // Order: building photos first, then plans
+  const buildingImages: string[] = []
+  const planImages: string[] = []
+
   if (Array.isArray(row.image)) {
     for (const img of row.image) {
-      if (typeof img === 'string') images.push(img)
-      else if (img && typeof img === 'object' && '#text' in img) images.push(asString((img as Record<string, unknown>)['#text']))
-      else if (img && typeof img === 'object' && 'url' in img) images.push(asString((img as Record<string, unknown>).url))
+      let url = ''
+      let tag = ''
+
+      if (typeof img === 'string') {
+        url = img
+      } else if (img && typeof img === 'object') {
+        // Get URL from #text or url property
+        url = asString((img as Record<string, unknown>)['#text'] || (img as Record<string, unknown>).url)
+        // Get tag attribute if present
+        tag = asString((img as Record<string, unknown>)['@_tag'] || '')
+      }
+
+      if (url) {
+        // If tag="plan" or URL contains /preset/ or /layout/ => floor plan
+        if (tag === 'plan' || url.includes('/preset/') || url.includes('/layout/')) {
+          planImages.push(url)
+        } else {
+          // Building photo or other presentable image
+          buildingImages.push(url)
+        }
+      }
     }
   } else if (row.image) {
-    if (typeof row.image === 'string') images.push(row.image)
-    else if (typeof row.image === 'object' && '#text' in row.image) images.push(asString((row.image as Record<string, unknown>)['#text']))
+    let url = ''
+    let tag = ''
+
+    if (typeof row.image === 'string') {
+      url = row.image
+    } else if (typeof row.image === 'object') {
+      url = asString((row.image as Record<string, unknown>)['#text'] || (row.image as Record<string, unknown>).url)
+      tag = asString((row.image as Record<string, unknown>)['@_tag'] || '')
+    }
+
+    if (url) {
+      if (tag === 'plan' || url.includes('/preset/') || url.includes('/layout/')) {
+        planImages.push(url)
+      } else {
+        buildingImages.push(url)
+      }
+    }
   }
-  normalized.images = images.filter(Boolean).join(',')
+
+  // Put building images FIRST, then floor plans
+  // This way selectCoverImage() will pick building photos
+  const allImages = [...buildingImages, ...planImages]
+  normalized.images = allImages.filter(Boolean).join(',')
 
   // Category: determine by deal type and property status
   const dealStatus = asString(row['deal-status'] || row.deal_status)
@@ -167,10 +250,18 @@ export function normalizeYandexRealty(row: Record<string, unknown>): Record<stri
   // Description
   normalized.description = asString(row.description)
 
-  // Additional fields for potential use
+  // Additional fields
   normalized.floor = asNumber(row.floor)
   normalized.floors_total = asNumber(row['floors-total'] || row.floors_total)
   normalized.renovation = asString(row.renovation)
+  normalized.is_euroflat = asString(row.euroflat) === '1' || asString(row.is_euroflat) === 'true'
+  normalized.building_section = asString(row['building-section'] || row.building_section)
+  normalized.building_state = asString(row['building-state'] || row.building_state)
+  normalized.ready_quarter = asNumber(row['ready-quarter'] || row.ready_quarter)
+  normalized.built_year = asNumber(row['built-year'] || row.built_year)
+
+  // Lot number from apartment field
+  normalized.lot_number = asString(row.apartment || row.lot_number)
 
   return normalized
 }
@@ -187,6 +278,8 @@ export function aggregateComplexesFromRows(rows: Record<string, unknown>[], sour
     images: Set<string>
     developer?: string
     handover_date?: string
+    class?: string
+    finish_type?: string
     district?: string
     metro: Set<string>
     description?: string
@@ -252,7 +345,7 @@ export function aggregateComplexesFromRows(rows: Record<string, unknown>[], sour
     const date = asString(getField(row, 'handover_date', mapping, ['handoverDate']))
     if (date) c.handover_date = date
 
-    const district = asString(getField(row, 'district', mapping, ['area', 'region']))
+    const district = normalizeLocationValue(getField(row, 'district', mapping, ['area', 'region']))
     if (district) c.district = district
 
     const metros = asStringArray(getField(row, 'metro', mapping))
@@ -260,6 +353,12 @@ export function aggregateComplexesFromRows(rows: Record<string, unknown>[], sour
 
     const desc = asString(getField(row, 'description', mapping))
     if (desc && !c.description) c.description = desc
+
+    const classType = asString(getField(row, 'class', mapping, ['class_type', 'housing_class']))
+    if (classType && !c.class) c.class = classType
+
+    const finishType = asString(getField(row, 'finish_type', mapping, ['finishType', 'finishing']))
+    if (finishType && !c.finish_type) c.finish_type = finishType
   }
 
   const result: Omit<Complex, 'id'>[] = []
@@ -277,9 +376,10 @@ export function aggregateComplexesFromRows(rows: Record<string, unknown>[], sour
       images: Array.from(data.images),
       status: 'active',
       developer: data.developer,
-      class: undefined,
-      finish_type: undefined,
+      class: data.class,
+      finish_type: data.finish_type,
       handover_date: data.handover_date,
+      description: data.description,
       geo_lat: undefined,
       geo_lon: undefined,
       last_seen_at: now,
@@ -373,7 +473,7 @@ export function upsertProperties(db: DbShape, sourceId: string, rows: Record<str
         source_id: sourceId,
         external_id: externalId,
         slug: slugify(title || externalId),
-        lot_number: asString(getField(row, 'lot_number', mapping, ['lotNumber'])),
+        lot_number: asString(getField(row, 'lot_number', mapping, ['lotNumber', 'apartment'])),
         complex_id: complexId,
         complex_external_id: complexExternal || undefined,
         deal_type: dealType,
@@ -381,11 +481,23 @@ export function upsertProperties(db: DbShape, sourceId: string, rows: Record<str
         title: title || externalId,
         bedrooms,
         price,
+        old_price: asNumber(getField(row, 'old_price', mapping, ['oldPrice', 'oldprice'])) || undefined,
         price_period: dealType === 'rent' ? 'month' : undefined,
         area_total: area,
-        district: asString(getField(row, 'district', mapping, ['area', 'region'])),
+        area_living: asNumber(getField(row, 'area_living', mapping, ['areaLiving', 'living_space'])) || undefined,
+        area_kitchen: asNumber(getField(row, 'area_kitchen', mapping, ['areaKitchen', 'kitchen_space'])) || undefined,
+        floor: asNumber(getField(row, 'floor', mapping)) || undefined,
+        floors_total: asNumber(getField(row, 'floors_total', mapping, ['floorsTotal', 'floors-total'])) || undefined,
+        district: normalizeLocationValue(getField(row, 'district', mapping, ['area', 'region'])),
         metro: asStringArray(getField(row, 'metro', mapping)),
         images: asStringArray(getField(row, 'images', mapping, ['image_urls', 'photos'])),
+        renovation: asString(getField(row, 'renovation', mapping)) || undefined,
+        is_euroflat: asString(getField(row, 'is_euroflat', mapping, ['euroflat'])) === 'true' || asString(getField(row, 'is_euroflat', mapping, ['euroflat'])) === '1' || false,
+        building_section: asString(getField(row, 'building_section', mapping, ['buildingSection', 'building-section'])) || undefined,
+        building_state: asString(getField(row, 'building_state', mapping, ['buildingState', 'building-state'])) || undefined,
+        ready_quarter: asNumber(getField(row, 'ready_quarter', mapping, ['readyQuarter', 'ready-quarter'])) || undefined,
+        built_year: asNumber(getField(row, 'built_year', mapping, ['builtYear', 'built-year'])) || undefined,
+        description: asString(getField(row, 'description', mapping)) || undefined,
         status: normalizeStatus(getField(row, 'status', mapping)),
         last_seen_at: now,
         updated_at: now,
@@ -423,7 +535,7 @@ export function upsertProperties(db: DbShape, sourceId: string, rows: Record<str
 export function mapRowToProperty(row: Record<string, unknown>): Property {
   const title = asString(row.title || row.name)
   const externalId = asString(row.external_id || row.id || row.externalId)
-  
+
   return {
     id: externalId, // Temporary ID for preview
     source_id: 'preview',
@@ -434,11 +546,24 @@ export function mapRowToProperty(row: Record<string, unknown>): Property {
     deal_type: normalizeDealType(row.deal_type),
     bedrooms: asNumber(row.bedrooms ?? row.rooms) || 0,
     price: asNumber(row.price) || 0,
+    old_price: asNumber(row.old_price ?? row.oldprice),
     area_total: asNumber(row.area_total ?? row.area) || 0,
-    district: asString(row.district || row.area || row.region) || 'Не указан',
+    area_living: asNumber(row.area_living ?? row.living_space),
+    area_kitchen: asNumber(row.area_kitchen ?? row.kitchen_space),
+    district: normalizeLocationValue(row.district || row.area || row.region) || 'Не указан',
     metro: asStringArray(row.metro),
     images: asStringArray(row.images ?? row.image_urls ?? row.photos),
     status: normalizeStatus(row.status),
+    floor: asNumber(row.floor),
+    floors_total: asNumber(row.floors_total),
+    renovation: asString(row.renovation),
+    is_euroflat: asString(row.is_euroflat) === 'true' || asString(row.euroflat) === '1',
+    building_section: asString(row.building_section),
+    building_state: asString(row.building_state),
+    ready_quarter: asNumber(row.ready_quarter),
+    built_year: asNumber(row.built_year),
+    description: asString(row.description),
+    lot_number: asString(row.lot_number ?? row.apartment),
     updated_at: new Date().toISOString()
   }
 }
@@ -454,7 +579,7 @@ export function mapRowToComplex(row: Record<string, unknown>): Complex {
     slug: slugify(title || externalId),
     title: title || externalId || 'Без названия',
     category: 'newbuild',
-    district: asString(row.district || row.area || row.region) || 'Не указан',
+    district: normalizeLocationValue(row.district || row.area || row.region) || 'Не указан',
     metro: asStringArray(row.metro),
     price_from: asNumber(row.price_from ?? row.priceFrom ?? row.price_min ?? row.price),
     area_from: asNumber(row.area_from ?? row.areaFrom ?? row.area_min ?? row.area_total ?? row.area),
@@ -463,5 +588,3 @@ export function mapRowToComplex(row: Record<string, unknown>): Complex {
     updated_at: new Date().toISOString()
   }
 }
-
-

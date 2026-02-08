@@ -477,6 +477,16 @@ router.post('/collections/:id/validate-items', (req: Request, res: Response) => 
   res.json({ success: true, data: result })
 })
 
+router.get('/catalog/outdated', (req: Request, res: Response) => {
+  const data = withDb((db) => {
+    const isOutdated = (x: { district: string }) => x.district === 'Array'
+    const properties = db.properties.filter(isOutdated).length
+    const complexes = db.complexes.filter(isOutdated).length
+    return { properties, complexes, total: properties + complexes }
+  })
+  res.json({ success: true, data })
+})
+
 router.get('/catalog/items', (req: Request, res: Response) => {
   const type = req.query.type as string
   const page = Math.max(parseInt(req.query.page as string) || 1, 1)
@@ -521,22 +531,54 @@ router.get('/catalog/items', (req: Request, res: Response) => {
 
 router.put('/catalog/items/:type/:id', (req: Request, res: Response) => {
   const { type, id } = req.params
-  const schema = z.object({
+
+  // Common fields for both Property and Complex
+  const commonFields = {
     title: z.string().min(1).optional(),
-    price: z.number().optional(),
-    area_total: z.number().optional(),
-    bedrooms: z.number().optional(),
+    description: z.string().optional(),
     district: z.string().optional(),
+    metro: z.array(z.string()).optional(),
     status: z.enum(['active', 'hidden', 'archived']).optional(),
-    // Add other fields as needed
+    images: z.array(z.string()).optional(),
+  }
+
+  // Property-specific fields
+  const propertyFields = {
+    ...commonFields,
+    deal_type: z.enum(['sale', 'rent']).optional(),
+    price: z.number().optional(),
+    old_price: z.number().optional(),
+    area_total: z.number().optional(),
+    area_living: z.number().optional(),
+    area_kitchen: z.number().optional(),
+    bedrooms: z.number().optional(),
+    floor: z.number().optional(),
+    floors_total: z.number().optional(),
+    lot_number: z.string().optional(),
+    renovation: z.string().optional(),
+    is_euroflat: z.boolean().optional(),
+    building_section: z.string().optional(),
+    building_state: z.string().optional(),
+    ready_quarter: z.number().optional(),
+    built_year: z.number().optional(),
+  }
+
+  // Complex-specific fields
+  const complexFields = {
+    ...commonFields,
     price_from: z.number().optional(),
     area_from: z.number().optional(),
-    images: z.array(z.string()).optional(),
-  })
-  
+    developer: z.string().optional(),
+    handover_date: z.string().optional(),
+    class: z.string().optional(),
+    finish_type: z.string().optional(),
+  }
+
+  const schema = type === 'property' ? z.object(propertyFields) : z.object(complexFields)
   const parsed = schema.safeParse(req.body)
+
   if (!parsed.success) {
-    res.status(400).json({ success: false, error: 'Invalid payload' })
+    res.status(400).json({ success: false, error: 'Invalid payload', details: parsed.error })
     return
   }
 
