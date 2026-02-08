@@ -5,6 +5,18 @@ import Drawer from '@/components/ui/Drawer'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
 
+const NAV_LINKS = [
+  { to: '/catalog?tab=newbuild', label: 'Новостройки' },
+  { to: '/catalog?tab=secondary', label: 'Вторичная недвижимость' },
+  { to: '/catalog?tab=rent', label: 'Аренда квартир' },
+]
+
+const NAV_ANCHORS = [
+  { href: '#team', label: 'Команда' },
+  { href: '#blog', label: 'Блог' },
+]
+
+
 export default function Header() {
   const loc = useLocation()
   const { openLeadModal, isMenuOpen, toggleMenu } = useUiStore()
@@ -74,34 +86,27 @@ export default function Header() {
           </div>
           
           <nav className="flex flex-col gap-4">
-            <Link 
-              to="/catalog?tab=newbuild" 
-              className="text-xl font-medium hover:text-accent transition-colors"
-              onClick={handleNavClick}
-            >
-              Новостройки
-            </Link>
-            <Link 
-              to="/catalog?tab=secondary" 
-              className="text-xl font-medium hover:text-accent transition-colors"
-              onClick={handleNavClick}
-            >
-              Вторичная недвижимость
-            </Link>
-            <Link 
-              to="/catalog?tab=rent" 
-              className="text-xl font-medium hover:text-accent transition-colors"
-              onClick={handleNavClick}
-            >
-              Аренда квартир
-            </Link>
+            {NAV_LINKS.map((link) => (
+              <Link 
+                key={link.to}
+                to={link.to} 
+                className="text-xl font-medium hover:text-accent transition-colors"
+                onClick={handleNavClick}
+              >
+                {link.label}
+              </Link>
+            ))}
             <div className="my-2 h-[1px] bg-border" />
-            <a href="#team" className="text-lg hover:text-accent transition-colors" onClick={handleNavClick}>
-              Команда
-            </a>
-            <a href="#blog" className="text-lg hover:text-accent transition-colors" onClick={handleNavClick}>
-              Блог
-            </a>
+            {NAV_ANCHORS.map((link) => (
+              <a 
+                key={link.href}
+                href={link.href}
+                className="text-lg hover:text-accent transition-colors"
+                onClick={handleNavClick}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <div className="mt-auto flex flex-col gap-4">

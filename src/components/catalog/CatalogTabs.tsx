@@ -2,15 +2,16 @@ import { Button } from '@/components/ui/Button'
 
 type Tab = 'newbuild' | 'secondary' | 'rent'
 
+const TABS: { key: Tab; title: string }[] = [
+  { key: 'newbuild', title: 'Новостройки' },
+  { key: 'secondary', title: 'Вторичка' },
+  { key: 'rent', title: 'Аренда' },
+]
+
 export default function CatalogTabs({ value, onChange }: { value: Tab; onChange: (t: Tab) => void }) {
-  const tabs: { key: Tab; title: string }[] = [
-    { key: 'newbuild', title: 'Новостройки' },
-    { key: 'secondary', title: 'Вторичка' },
-    { key: 'rent', title: 'Аренда' },
-  ]
   return (
     <div className="inline-flex rounded-lg border border-slate-700 bg-surface p-1 gap-1">
-      {tabs.map((t) => (
+      {TABS.map((t) => (
         <Button
           key={t.key}
           type="button"

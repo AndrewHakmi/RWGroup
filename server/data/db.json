@@ -468,13 +468,11 @@
       "district": "Пресненский Вал",
       "metro": [],
       "images": [
-        "https://pb4988.strana.profitbase.ru/uploads/preset/4988/67bdd258bac6e.jpg",
-        "https://pb4988.strana.profitbase.ru/uploads/layout/4988/67bdd3b1f2ee2.jpg",
         "https://pb4988.strana.profitbase.ru/uploads/house/4988/696f341c8fe54.jpg"
       ],
       "status": "active",
       "last_seen_at": "2026-02-08T01:12:58.605Z",
-      "updated_at": "2026-02-08T01:12:58.605Z"
+      "updated_at": "2026-02-08T01:30:04.061Z"
     },
     {
       "id": "9bf624f2-71fc-4402-bcf7-2fae49b1fdc3",
@@ -5417,6 +5415,14 @@
         }
       ],
       "updated_at": "2026-02-07T19:20:42.910Z"
+    },
+    {
+      "id": "d0c0df11-df29-421d-a5b9-c4e78ac786af",
+      "slug": "1",
+      "title": "1",
+      "priority": 0,
+      "items": [],
+      "updated_at": "2026-02-08T01:29:38.989Z"
     }
   ],
   "leads": [],

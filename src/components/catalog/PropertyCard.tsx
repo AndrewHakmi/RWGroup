@@ -5,7 +5,6 @@ import { formatArea, formatPriceRub } from '@/lib/format'
 import Button from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { Card, CardContent, CardFooter } from '@/components/ui/Card'
-import { Text } from '@/components/ui/Typography'
 import type { Property } from '../../../shared/types'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
@@ -13,6 +12,9 @@ import { trackEvent } from '@/lib/analytics'
 export default function PropertyCard({ item, variant = 'grid' }: { item: Property; variant?: 'grid' | 'list' }) {
   const openLeadModal = useUiStore((s) => s.openLeadModal)
   const img = item.images?.[0]
+  const dealTypeLabel = item.deal_type === 'rent' ? 'Аренда' : 'Продажа'
+  const priceSuffix = item.price_period ? ' / мес' : ''
+  const priceLabel = `${formatPriceRub(item.price)}${priceSuffix}`
 
   return (
     <Card
@@ -27,7 +29,7 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
         ) : null}
         <div className="absolute top-3 left-3">
            <Badge variant="secondary" className="bg-white/90 text-slate-900 backdrop-blur-sm shadow-sm">
-             {item.deal_type === 'rent' ? 'Аренда' : 'Продажа'}
+             {dealTypeLabel}
            </Badge>
         </div>
       </Link>
@@ -57,7 +59,7 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
             </div>
             <div className="inline-flex items-center gap-1.5">
               <Tag className="h-3.5 w-3.5 text-slate-400" />
-              <span className="font-medium text-slate-900">{formatPriceRub(item.price)}{item.price_period ? ' / мес' : ''}</span>
+              <span className="font-medium text-slate-900">{priceLabel}</span>
             </div>
           </div>
         </CardContent>
