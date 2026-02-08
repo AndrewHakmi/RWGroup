@@ -8,7 +8,7 @@ import { Home, Loader2, Mail, Search, Trash2 } from 'lucide-react'
 
 export default function UiKitPage() {
   return (
-    <div className="min-h-screen bg-slate-50 p-10 space-y-10">
+    <div className="min-h-screen bg-background p-10 space-y-10 text-foreground">
       <Heading size="h1">UI Kit & Design System</Heading>
       <Text size="lg" muted>
         Base components and styles for RWGroup website.
@@ -16,7 +16,7 @@ export default function UiKitPage() {
 
       <section className="space-y-4">
         <Heading size="h3">Typography</Heading>
-        <div className="space-y-2 border p-4 rounded-lg bg-white">
+        <div className="space-y-2 border border-slate-700 p-4 rounded-lg bg-surface">
           <Heading size="h1">Heading 1 (Manrope)</Heading>
           <Heading size="h2">Heading 2</Heading>
           <Heading size="h3">Heading 3</Heading>
@@ -31,10 +31,10 @@ export default function UiKitPage() {
 
       <section className="space-y-4">
         <Heading size="h3">Buttons</Heading>
-        <div className="flex flex-wrap gap-4 border p-4 rounded-lg bg-white items-center">
+        <div className="flex flex-wrap gap-4 border border-slate-700 p-4 rounded-lg bg-surface items-center">
           <Button>Default (Primary)</Button>
           <Button variant="secondary">Secondary</Button>
-          <Button variant="accent">Accent (Gold)</Button>
+          <Button variant="accent">Accent</Button>
           <Button variant="outline">Outline</Button>
           <Button variant="ghost">Ghost</Button>
           <Button variant="destructive">Destructive</Button>
@@ -46,17 +46,17 @@ export default function UiKitPage() {
           <Button size="icon"><Home className="h-4 w-4" /></Button>
           <Button icon={<Mail className="h-4 w-4" />}>With Icon</Button>
         </div>
-        <div className="flex flex-wrap gap-4 border p-4 rounded-lg bg-[#000A0D] items-center">
+        <div className="flex flex-wrap gap-4 border border-slate-700 p-4 rounded-lg bg-background items-center">
            <Text className="text-white">Dark Background:</Text>
            <Button variant="default">Default</Button>
-           <Button variant="outline">Outline (Dark)</Button>
+           <Button variant="outline">Outline</Button>
            <Button variant="accent">Accent</Button>
         </div>
       </section>
 
       <section className="space-y-4">
         <Heading size="h3">Inputs & Selects</Heading>
-        <div className="grid gap-4 max-w-md border p-4 rounded-lg bg-white">
+        <div className="grid gap-4 max-w-md border border-slate-700 p-4 rounded-lg bg-surface">
           <Input placeholder="Default Input" />
           <Input placeholder="Error Input" error />
           <Input placeholder="Disabled Input" disabled />
@@ -78,7 +78,7 @@ export default function UiKitPage() {
 
       <section className="space-y-4">
         <Heading size="h3">Badges</Heading>
-        <div className="flex gap-2 border p-4 rounded-lg bg-white">
+        <div className="flex gap-2 border border-slate-700 p-4 rounded-lg bg-surface">
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>

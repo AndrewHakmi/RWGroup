@@ -5,6 +5,18 @@ import Drawer from '@/components/ui/Drawer'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
 
+const NAV_LINKS = [
+  { to: '/catalog?tab=newbuild', label: 'Новостройки' },
+  { to: '/catalog?tab=secondary', label: 'Вторичная недвижимость' },
+  { to: '/catalog?tab=rent', label: 'Аренда квартир' },
+]
+
+const NAV_ANCHORS = [
+  { href: '#team', label: 'Команда' },
+  { href: '#blog', label: 'Блог' },
+]
+
+
 export default function Header() {
   const loc = useLocation()
   const { openLeadModal, isMenuOpen, toggleMenu } = useUiStore()
@@ -15,7 +27,7 @@ export default function Header() {
 
   return (
     <>
-      <header className="sticky top-0 z-40 border-b border-white/10 bg-[#000A0D]/90 backdrop-blur text-white">
+      <header className="sticky top-0 z-40 border-b border-white/10 bg-background/90 backdrop-blur text-white">
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-4">
           
           {/* Left: Logo + Tagline */}
@@ -27,7 +39,7 @@ export default function Header() {
             <div className="hidden h-10 w-[1px] bg-white/20 sm:block" />
             
             <h1 className="hidden max-w-[120px] text-xs font-medium uppercase leading-tight tracking-wide text-gray-300 sm:block">
-              Эксперты по<br />недвижимости
+              Точность<br />в каждой сделке
             </h1>
           </div>
 
@@ -46,7 +58,7 @@ export default function Header() {
 
             <Button
               variant="default"
-              className="bg-white text-black hover:bg-gray-200 border-none font-semibold hidden sm:flex"
+              className="font-semibold hidden sm:flex"
               onClick={() => {
                 trackEvent('click_consultation', { page: loc.pathname, block: 'header' })
                 openLeadModal('consultation', { page: loc.pathname, block: 'header' })
@@ -55,12 +67,14 @@ export default function Header() {
               Получить консультацию
             </Button>
 
-            <button 
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => toggleMenu(true)}
-              className="p-1 hover:text-accent transition-colors"
+              className="text-white hover:text-accent hover:bg-transparent"
             >
               <Menu className="h-8 w-8" />
-            </button>
+            </Button>
           </div>
         </div>
       </header>
@@ -72,34 +86,27 @@ export default function Header() {
           </div>
           
           <nav className="flex flex-col gap-4">
-            <Link 
-              to="/catalog?tab=newbuild" 
-              className="text-xl font-medium hover:text-accent transition-colors"
-              onClick={handleNavClick}
-            >
-              Новостройки
-            </Link>
-            <Link 
-              to="/catalog?tab=secondary" 
-              className="text-xl font-medium hover:text-accent transition-colors"
-              onClick={handleNavClick}
-            >
-              Вторичная недвижимость
-            </Link>
-            <Link 
-              to="/catalog?tab=rent" 
-              className="text-xl font-medium hover:text-accent transition-colors"
-              onClick={handleNavClick}
-            >
-              Аренда квартир
-            </Link>
+            {NAV_LINKS.map((link) => (
+              <Link 
+                key={link.to}
+                to={link.to} 
+                className="text-xl font-medium hover:text-accent transition-colors"
+                onClick={handleNavClick}
+              >
+                {link.label}
+              </Link>
+            ))}
             <div className="my-2 h-[1px] bg-border" />
-            <a href="#team" className="text-lg hover:text-accent transition-colors" onClick={handleNavClick}>
-              Команда
-            </a>
-            <a href="#blog" className="text-lg hover:text-accent transition-colors" onClick={handleNavClick}>
-              Блог
-            </a>
+            {NAV_ANCHORS.map((link) => (
+              <a 
+                key={link.href}
+                href={link.href}
+                className="text-lg hover:text-accent transition-colors"
+                onClick={handleNavClick}
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           <div className="mt-auto flex flex-col gap-4">

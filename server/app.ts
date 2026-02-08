@@ -15,6 +15,7 @@ import leadsRoutes from './routes/leads.js'
 import adminRoutes from './routes/admin.js'
 import { ensureSeed } from './lib/seed.js'
 import analyticsRoutes from './routes/analytics.js'
+import path from 'path'
 
 // load env
 dotenv.config()
@@ -26,6 +27,9 @@ const app: express.Application = express()
 app.use(cors())
 app.use(express.json({ limit: '10mb' }))
 app.use(express.urlencoded({ extended: true, limit: '10mb' }))
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(process.cwd(), 'server', 'uploads')))
 
 /**
  * API Routes

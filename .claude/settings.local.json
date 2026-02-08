@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(taskkill:*)",
+      "Bash(npm run server:dev:*)",
+      "Bash(timeout:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(npm run check:*)",
+      "Bash(npm run dev:*)"
+    ]
+  }
+}

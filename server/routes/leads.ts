@@ -53,6 +53,7 @@ router.post(
 
     const ip = (req.headers['x-forwarded-for'] as string | undefined)?.split(',')[0]?.trim() || req.socket.remoteAddress
     const ua = req.headers['user-agent']
+    const createdAt = new Date().toISOString()
 
     const source = (parsed.data.source && parsed.data.source.page ? parsed.data.source : { page: 'unknown' }) as {
       page: string
@@ -61,22 +62,24 @@ router.post(
       object_type?: 'property' | 'complex' | 'collection'
     }
 
+    const lead = {
+      id: newId(),
+      form_type: parsed.data.form_type,
+      tab: parsed.data.tab,
+      name: parsed.data.name,
+      phone: pretty,
+      comment: parsed.data.comment,
+      source,
+      created_at: createdAt,
+      ip: ip || undefined,
+      user_agent: typeof ua === 'string' ? ua : undefined,
+    }
+
     withDb((db) => {
-      db.leads.unshift({
-        id: newId(),
-        form_type: parsed.data.form_type,
-        tab: parsed.data.tab,
-        name: parsed.data.name,
-        phone: pretty,
-        comment: parsed.data.comment,
-        source,
-        created_at: new Date().toISOString(),
-        ip: ip || undefined,
-        user_agent: typeof ua === 'string' ? ua : undefined,
-      })
+      db.leads.unshift(lead)
     })
 
-    res.json({ success: true })
+    res.json({ success: true, data: { id: lead.id } })
   },
 )
 
