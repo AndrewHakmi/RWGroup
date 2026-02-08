@@ -6,10 +6,12 @@ import type { Collection, DbShape, Property, Complex } from '../../shared/types.
  * @param db - Database instance
  * @returns Array of resolved items with their full object data
  */
+type ResolvedItem = { type: 'property'; ref: Property } | { type: 'complex'; ref: Complex }
+
 export function resolveCollectionItems(
   collection: Collection,
   db: DbShape
-): Array<{ type: 'property' | 'complex'; ref: Property | Complex }> {
+): ResolvedItem[] {
   // Manual mode: return items from the items array (only active)
   if (collection.mode === 'manual') {
     return collection.items
@@ -21,7 +23,7 @@ export function resolveCollectionItems(
         const ref = db.complexes.find((c) => c.id === it.ref_id && c.status === 'active')
         return ref ? { type: 'complex' as const, ref } : null
       })
-      .filter((item): item is { type: 'property' | 'complex'; ref: Property | Complex } => item !== null)
+      .filter((item): item is ResolvedItem => item !== null)
   }
 
   // Auto mode: apply filters from auto_rules
@@ -93,5 +95,9 @@ export function resolveCollectionItems(
     // Sort by updated_at (newest first)
     .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''))
 
-  return filtered.map((ref) => ({ type: rules.type, ref }))
+  return filtered.map((ref) =>
+    rules.type === 'property'
+      ? { type: 'property', ref: ref as Property }
+      : { type: 'complex', ref: ref as Complex },
+  )
 }

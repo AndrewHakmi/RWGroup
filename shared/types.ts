@@ -27,6 +27,7 @@ export interface Complex {
   class?: string
   finish_type?: string
   handover_date?: string
+  description?: string
   geo_lat?: number
   geo_lon?: number
   last_seen_at?: string
@@ -181,4 +182,3 @@ export interface DbShape {
   leads: Lead[]
   import_runs: ImportRun[]
 }
-
