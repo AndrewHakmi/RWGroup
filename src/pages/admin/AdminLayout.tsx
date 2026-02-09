@@ -3,9 +3,9 @@ import { useUiStore } from '@/store/useUiStore'
 import Button from '@/components/ui/Button'
 import AdminHomePage from './pages/AdminHome'
 import AdminCollectionsPage from './pages/AdminCollections'
+import AdminFeedsPage from './pages/AdminFeeds'
 import AdminImportPage from './pages/AdminImport'
 import AdminLeadsPage from './pages/AdminLeads'
-import AdminCatalogPage from './pages/AdminCatalog'
 
 export default function AdminLayout() {
   const token = useUiStore((s) => s.adminToken)
@@ -20,7 +20,7 @@ export default function AdminLayout() {
         <div className="flex items-center justify-between">
           <div>
             <div className="text-2xl font-semibold tracking-tight">Админка</div>
-            <div className="mt-1 text-sm text-slate-600">Витрина, подборки, импорт и лиды.</div>
+            <div className="mt-1 text-sm text-slate-600">Витрина, подборки, фиды, импорт и лиды.</div>
           </div>
           <div className="flex items-center gap-2">
             <Link className="text-sm text-slate-700 hover:text-slate-900" to="/">
@@ -36,8 +36,8 @@ export default function AdminLayout() {
           <aside className="rounded-xl border border-slate-200 bg-white p-3">
             <nav className="space-y-1 text-sm">
               <NavLink to="/admin" current={loc.pathname === '/admin'} title="Витрина" />
-              <NavLink to="/admin/catalog" current={loc.pathname.startsWith('/admin/catalog')} title="Каталог" />
               <NavLink to="/admin/collections" current={loc.pathname.startsWith('/admin/collections')} title="Подборки" />
+              <NavLink to="/admin/feeds" current={loc.pathname.startsWith('/admin/feeds')} title="Фиды" />
               <NavLink to="/admin/import" current={loc.pathname.startsWith('/admin/import')} title="Импорт" />
               <NavLink to="/admin/leads" current={loc.pathname.startsWith('/admin/leads')} title="Лиды" />
             </nav>
@@ -45,8 +45,8 @@ export default function AdminLayout() {
           <section className="rounded-xl border border-slate-200 bg-white p-5">
             <Routes>
               <Route path="/" element={<AdminHomePage />} />
-              <Route path="/catalog" element={<AdminCatalogPage />} />
               <Route path="/collections" element={<AdminCollectionsPage />} />
+              <Route path="/feeds" element={<AdminFeedsPage />} />
               <Route path="/import" element={<AdminImportPage />} />
               <Route path="/leads" element={<AdminLeadsPage />} />
               <Route path="*" element={<Navigate to="/admin" replace />} />

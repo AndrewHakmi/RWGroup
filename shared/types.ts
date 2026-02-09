@@ -6,8 +6,6 @@ export type FormType = 'consultation' | 'buy_sell' | 'view_details' | 'partner'
 
 export type CatalogTab = 'newbuild' | 'secondary' | 'rent'
 
-export type CollectionMode = 'manual' | 'auto'
-
 export type Id = string
 
 export interface Complex {
@@ -27,7 +25,6 @@ export interface Complex {
   class?: string
   finish_type?: string
   handover_date?: string
-  description?: string
   geo_lat?: number
   geo_lon?: number
   last_seen_at?: string
@@ -48,39 +45,13 @@ export interface Property {
   bedrooms: number
   price: number
   price_period?: 'month'
-  old_price?: number
   area_total: number
-  area_living?: number
-  area_kitchen?: number
   district: string
   metro: string[]
   images: string[]
   status: RecordStatus
-  // Additional fields from XML feeds
-  floor?: number
-  floors_total?: number
-  renovation?: string // "Предчистовая", "Под ключ", "Без отделки", etc.
-  is_euroflat?: boolean
-  building_section?: string
-  building_state?: string // "unfinished", "built"
-  ready_quarter?: number
-  built_year?: number
-  description?: string
   last_seen_at?: string
   updated_at: string
-}
-
-export interface CollectionAutoRules {
-  type: 'property' | 'complex'
-  category?: Category
-  bedrooms?: number
-  priceMin?: number
-  priceMax?: number
-  areaMin?: number
-  areaMax?: number
-  district?: string
-  metro?: string[]
-  q?: string
 }
 
 export interface Collection {
@@ -90,10 +61,7 @@ export interface Collection {
   description?: string
   cover_image?: string
   priority: number
-  status: 'visible' | 'hidden'
-  mode: CollectionMode
   items: { type: 'property' | 'complex'; ref_id: Id }[]
-  auto_rules?: CollectionAutoRules
   updated_at: string
 }
 
@@ -117,7 +85,6 @@ export interface FeedSource {
   url?: string
   format: 'xlsx' | 'csv' | 'xml' | 'json'
   is_active: boolean
-  mapping?: Record<string, string>
   created_at: string
 }
 
@@ -130,23 +97,6 @@ export interface ImportRun {
   status: 'success' | 'failed' | 'partial'
   stats: { inserted: number; updated: number; hidden: number }
   error_log?: string
-}
-
-export interface ImportPreviewRow {
-  rowIndex: number
-  data: Record<string, unknown>
-  mappedFields: string[]
-  errors: string[]
-  warnings: string[]
-}
-
-export interface ImportPreview {
-  totalRows: number
-  sampleRows: ImportPreviewRow[]
-  mappedItems: (Property | Complex)[]
-  fieldMappings: Record<string, string[]>
-  validRows: number
-  invalidRows: number
 }
 
 export interface HomeContent {
@@ -182,3 +132,4 @@ export interface DbShape {
   leads: Lead[]
   import_runs: ImportRun[]
 }
+

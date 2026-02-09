@@ -7,6 +7,8 @@ export type FiltersState = {
   priceMax: string
   areaMin: string
   areaMax: string
+  district: string
+  metro: string
   q: string
 }
 
@@ -14,9 +16,10 @@ type Props = {
   tab: 'newbuild' | 'secondary' | 'rent'
   value: FiltersState
   onChange: (next: FiltersState) => void
+  facets: { districts: string[]; metros: string[] } | null
 }
 
-export default function CatalogFilters({ tab, value, onChange }: Props) {
+export default function CatalogFilters({ tab, value, onChange, facets }: Props) {
   // Helper to determine current area value for Select
   const getAreaValue = () => {
     if (value.areaMin === '20' && value.areaMax === '40') return '20-40'
@@ -38,7 +41,7 @@ export default function CatalogFilters({ tab, value, onChange }: Props) {
   }
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-7">
       <Select value={value.bedrooms} onChange={(e) => onChange({ ...value, bedrooms: e.target.value })}>
         <option value="">Спальни</option>
         <option value="0">Студия</option>
@@ -68,8 +71,24 @@ export default function CatalogFilters({ tab, value, onChange }: Props) {
         value={value.priceMax}
         onChange={(e) => onChange({ ...value, priceMax: e.target.value })}
       />
+      <Select value={value.district} onChange={(e) => onChange({ ...value, district: e.target.value })}>
+        <option value="">Район</option>
+        {(facets?.districts || []).map((d) => (
+          <option key={d} value={d}>
+            {d}
+          </option>
+        ))}
+      </Select>
+      <Select value={value.metro} onChange={(e) => onChange({ ...value, metro: e.target.value })}>
+        <option value="">Метро</option>
+        {(facets?.metros || []).map((m) => (
+          <option key={m} value={m}>
+            {m}
+          </option>
+        ))}
+      </Select>
       <Input
-        placeholder={tab === 'newbuild' ? 'ЖК / метро / район / поиск' : 'Метро / район / поиск'}
+        placeholder={tab === 'newbuild' ? 'ЖК' : 'Поиск'}
         value={value.q}
         onChange={(e) => onChange({ ...value, q: e.target.value })}
       />

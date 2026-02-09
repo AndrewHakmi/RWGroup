@@ -1,52 +1,21 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ChevronRight } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import Button from '@/components/ui/Button'
 import { Heading, Text } from '@/components/ui/Typography'
 import PropertyCard from '@/components/catalog/PropertyCard'
 import ComplexCard from '@/components/catalog/ComplexCard'
 import { apiGet } from '@/lib/api'
+import { cn } from '@/lib/utils'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
-import Roadmap from '@/components/Roadmap'
 import type { Collection, Complex, HomeContent, Property } from '../../shared/types'
 
 type HomeApi = {
   home: HomeContent
   featured: { complexes: Complex[]; properties: Property[]; collections: Collection[] }
 }
-
-const CATALOG_CATEGORIES = [
-  {
-    title: 'Новостройки',
-    tab: 'newbuild',
-    image:
-      'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20skyscraper%20architecture%20abstract%2C%20glass%20facade%2C%20dark%20mood&image_size=square',
-  },
-  {
-    title: 'Вторичная',
-    tab: 'secondary',
-    image:
-      'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20apartment%20interior%2C%20dark%20mood%2C%20elegant&image_size=square',
-  },
-  {
-    title: 'Аренда',
-    tab: 'rent',
-    image:
-      'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20modern%20living%20room%20evening%2C%20warm%20light%2C%20dark%20mood&image_size=square',
-  },
-]
-
-const TEAM_QUOTES = [
-  'Мы отвечаем за результат лично — от первой встречи до ключей.',
-  'Сделка должна быть прозрачной, спокойной и выгодной для клиента.',
-]
-
-const FALLBACK_TEAM = [
-  { name: 'Анастасия Шулепова', role: 'Партнёр, жилая недвижимость', photo_url: '' },
-  { name: 'Александр Шулепов', role: 'Партнёр, инвестиции и аренда', photo_url: '' },
-]
 
 export default function Home() {
   const navigate = useNavigate()
@@ -57,16 +26,15 @@ export default function Home() {
     apiGet<HomeApi>('/api/home').then(setHome).catch(() => setHome(null))
   }, [])
 
-  const teamMembers = (home?.home?.team?.founders?.length ? home.home.team.founders : FALLBACK_TEAM).slice(0, 2)
-
+  const heroBg = 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=moscow%20city%20skyline%20night%20lights%2C%20luxury%20real%20estate%2C%20cinematic%20dark%20atmosphere%2C%20professional%20photography%2C%208k&image_size=landscape_16_9'
 
   return (
     <SiteLayout>
       {/* 1. Hero Section - Full Screen */}
-      <section className="relative h-[calc(100vh-80px)] min-h-[600px] w-full overflow-hidden bg-background">
+      <section className="relative h-[calc(100vh-80px)] min-h-[600px] w-full overflow-hidden bg-[#000A0D]">
         <div className="absolute inset-0">
           <img src="/hero-bg.jpg" alt="Luxury Real Estate" className="h-full w-full object-cover opacity-60 max-w-full max-h-full scale-110" style={{ objectPosition: 'center 20%' }} />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/40 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#000A0D]/90 via-[#000A0D]/40 to-transparent" />
         </div>
         
         <div className="relative mx-auto flex h-full w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-10">
@@ -78,33 +46,36 @@ export default function Home() {
           <div className="mt-12 flex flex-col gap-4 sm:flex-row">
             <Button
               variant="default"
-              className="h-14 px-8 text-lg"
+              className="h-14 bg-white px-8 text-lg text-black hover:bg-gray-200"
               onClick={() => {
-                trackEvent('click_buy_sell', { page: 'home', block: 'hero', tab: 'buy' })
-                openLeadModal('buy_sell', { page: 'home', block: 'hero' }, { initialTab: 'buy' })
+                trackEvent('click_consultation', { page: 'home', block: 'hero' })
+                openLeadModal('consultation', { page: 'home', block: 'hero' })
               }}
             >
-              Подобрать объект
+              Получить консультацию
             </Button>
             <Button
               variant="outline"
-              className="h-14 px-8 text-lg text-white border-white/20 hover:bg-white/10 hover:text-white"
+              className="h-14 border-white/20 px-8 text-lg text-white hover:bg-white/10"
               onClick={() => {
-                trackEvent('click_buy_sell', { page: 'home', block: 'hero', tab: 'sell' })
-                openLeadModal('buy_sell', { page: 'home', block: 'hero' }, { initialTab: 'sell' })
+                document.getElementById('catalog-categories')?.scrollIntoView({ behavior: 'smooth' })
               }}
             >
-              Оценить недвижимость
+              Смотреть объекты
             </Button>
           </div>
         </div>
       </section>
 
       {/* 2. Catalog Categories (Whitewill style blocks) */}
-      <section id="catalog-categories" className="bg-background py-20">
+      <section id="catalog-categories" className="bg-[#000A0D] py-20">
         <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-6 md:grid-cols-3">
-            {CATALOG_CATEGORIES.map((item) => (
+            {[
+              { title: 'Новостройки', tab: 'newbuild', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20skyscraper%20architecture%20abstract%2C%20glass%20facade%2C%20dark%20mood&image_size=square' },
+              { title: 'Вторичная', tab: 'secondary', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20classic%20apartment%20interior%2C%20dark%20mood%2C%20elegant&image_size=square' },
+              { title: 'Аренда', tab: 'rent', image: 'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20modern%20living%20room%20evening%2C%20warm%20light%2C%20dark%20mood&image_size=square' },
+            ].map((item) => (
               <div 
                 key={item.tab}
                 onClick={() => navigate(`/catalog?tab=${item.tab}`)}
@@ -130,11 +101,9 @@ export default function Home() {
         </div>
       </section>
 
-            {/* 3. Buy / Sell / Rent (Large Typography) */}
-      <section id="buy-sell" className="relative overflow-hidden bg-[linear-gradient(180deg,_#FFFFFF,_#F6F4EF)] py-24 text-background">
-        <div className="pointer-events-none absolute -top-24 right-0 h-72 w-72 rounded-full bg-[#E7EEF6] blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-20 left-0 h-64 w-64 rounded-full bg-[#EFE7D9] blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4">
+      {/* 3. Buy / Sell / Rent (Large Typography) */}
+      <section id="buy-sell" className="bg-white py-24 text-[#000A0D]">
+        <div className="mx-auto max-w-7xl px-4">
           <div className="grid gap-12 lg:grid-cols-2">
             <div className="flex flex-col justify-center">
               <Heading size="h1" className="uppercase tracking-tighter md:text-8xl">
@@ -143,43 +112,44 @@ export default function Home() {
               <Text size="lg" className="mt-6 max-w-md text-gray-600">
                 Подберем идеальную недвижимость для жизни или инвестиций. Доступ к закрытой базе объектов.
               </Text>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button variant="dark" className="h-11 px-6" onClick={() => navigate('/catalog?tab=newbuild')}>
+              <div className="mt-8">
+                <Button 
+                  variant="default" 
+                  className="bg-[#000A0D] text-white hover:bg-black"
+                  onClick={() => navigate('/catalog?tab=newbuild')}
+                >
                   Найти квартиру
                 </Button>
-                <Button variant="outline" className="h-11 px-6" onClick={() => navigate('/catalog?tab=secondary')}>
-                  Вторичка
-                </Button>
-              </div>            </div>
-            <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/70 bg-white/60 shadow-[0_20px_50px_rgba(15,23,42,0.12)] lg:aspect-auto lg:h-[420px]">
-              <img
-                src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20penthouse%20living%20room%20sunlight%2C%20white%20interior&image_size=landscape_16_9"
+              </div>
+            </div>
+            <div className="relative aspect-video overflow-hidden rounded-sm lg:aspect-auto lg:h-[400px]">
+              <img 
+                src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=luxury%20penthouse%20living%20room%20sunlight%2C%20white%20interior&image_size=landscape_16_9" 
                 alt="Buy"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/30" />
             </div>
           </div>
 
           <div className="mt-24 grid gap-12 lg:grid-cols-2">
-            <div className="order-2 relative aspect-video overflow-hidden rounded-2xl border border-white/70 bg-white/60 shadow-[0_20px_50px_rgba(15,23,42,0.12)] lg:order-1 lg:aspect-auto lg:h-[420px]">
-              <img
-                src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20business%20center%20lobby%2C%20handshake%2C%20professional&image_size=landscape_16_9"
+            <div className="order-2 relative aspect-video overflow-hidden rounded-sm lg:order-1 lg:aspect-auto lg:h-[400px]">
+               <img 
+                src="https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=modern%20business%20center%20lobby%2C%20handshake%2C%20professional&image_size=landscape_16_9" 
                 alt="Sell"
                 className="h-full w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/15 via-transparent to-white/30" />
             </div>
-            <div className="order-1 flex flex-col justify-center lg:order-2 lg:pl-12">              <Heading size="h1" className="uppercase tracking-tighter md:text-8xl">
+            <div className="order-1 flex flex-col justify-center lg:order-2 lg:pl-12">
+              <Heading size="h1" className="uppercase tracking-tighter md:text-8xl">
                 Продать
               </Heading>
               <Text size="lg" className="mt-6 max-w-md text-gray-600">
                 Оценим, подготовим и продадим вашу недвижимость по максимальной рыночной цене.
               </Text>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Button
-                  variant="dark"
-                  className="h-11 px-6"
+              <div className="mt-8">
+                <Button 
+                  variant="default" 
+                  className="bg-[#000A0D] text-white hover:bg-black"
                   onClick={() => {
                     trackEvent('click_buy_sell', { page: 'home', block: 'big_sell', tab: 'sell' })
                     openLeadModal('buy_sell', { page: 'home', block: 'big_sell' }, { initialTab: 'sell' })
@@ -187,23 +157,14 @@ export default function Home() {
                 >
                   Оставить заявку
                 </Button>
-                <Button
-                  variant="outline"
-                  className="h-11 px-6"
-                  onClick={() => {
-                    trackEvent('click_buy_sell', { page: 'home', block: 'big_sell', tab: 'buy' })
-                    openLeadModal('buy_sell', { page: 'home', block: 'big_sell' }, { initialTab: 'buy' })
-                  }}
-                >
-                  Узнать спрос
-                </Button>
-              </div>            </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* 4. Best Offers (Featured) */}
-      <section className="bg-background py-24 text-white">
+      <section className="bg-[#000A0D] py-24 text-white">
         <div className="mx-auto max-w-7xl px-4">
           <div className="mb-12 flex items-end justify-between">
             <div>
@@ -238,82 +199,86 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 5. Roadmap */}
-      <Roadmap />
-
-      {/* 6. Mission */}
-      <section className="relative w-full py-24 md:py-32 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80" 
-            alt="Mission Background" 
-            className="h-full w-full object-cover"
-          />
-          {/* Soft white gradient overlay to blend with card */}
-          <div className="absolute inset-0 bg-white/20" />
+      {/* 5. Stages (Miel style - Clean steps) */}
+      <section className="bg-[#F5F5F5] py-24 text-[#000A0D]">
+        <div className="mx-auto max-w-7xl px-4">
+          <Heading size="h2" className="mb-16 text-center">Этапы работы</Heading>
+          
+          <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-5">
+            {[
+              { num: '01', title: 'Заявка', text: 'Оставляете заявку на сайте или по телефону' },
+              { num: '02', title: 'Подбор', text: 'Формируем персональную подборку объектов' },
+              { num: '03', title: 'Показ', text: 'Организуем просмотры в удобное время' },
+              { num: '04', title: 'Сделка', text: 'Полное юридическое сопровождение' },
+              { num: '05', title: 'Ключи', text: 'Поздравляем вас с новосельем' },
+            ].map((step) => (
+              <div key={step.num} className="group relative pt-8">
+                <div className="absolute top-0 h-[1px] w-full bg-gray-200 transition-colors group-hover:bg-[#000A0D]" />
+                <div className="text-4xl font-light text-gray-300 transition-colors group-hover:text-accent">{step.num}</div>
+                <Heading size="h4" className="mt-4">{step.title}</Heading>
+                <Text size="sm" className="mt-2 text-gray-500">{step.text}</Text>
+              </div>
+            ))}
+          </div>
         </div>
+      </section>
 
-        <div className="relative mx-auto max-w-5xl px-4">
-          <div className="rounded-3xl bg-white/70 p-10 text-center backdrop-blur-md shadow-sm md:p-16 border border-white/50">
-            <Heading size="h6" className="mb-6 text-sm font-bold uppercase tracking-[0.2em] text-gray-500">Миссия</Heading>
-            
-            <Text className="mx-auto max-w-4xl text-xl font-light leading-snug text-slate-800 md:text-3xl lg:text-4xl">
-              «Мы не просто продаем квадратные метры. Мы помогаем людям найти дом, где они будут счастливы, и создаем безопасное пространство для принятия важных решений»
-            </Text>
-            
-            <div className="mt-10 flex justify-center gap-4">
-               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#9FB4FF] text-white font-medium text-sm shadow-sm">
-                  СА
-               </div>
-               <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#6B9E78] text-white font-medium text-sm shadow-sm">
-                  НА
-               </div>
-            </div>
+      {/* 6. Mission (Text block) */}
+      <section className="bg-[#E5E5E5] py-24 text-[#000A0D]">
+        <div className="mx-auto max-w-4xl px-4 text-center">
+          <Heading size="h6" className="mb-8 font-bold uppercase tracking-widest text-gray-500">Миссия</Heading>
+          <Text size="lg" className="leading-relaxed font-light md:text-4xl">
+            «Мы не просто продаем квадратные метры. Мы помогаем людям найти дом, где они будут счастливы, и создаем безопасное пространство для принятия важных решений»
+          </Text>
+          <div className="mt-8 flex justify-center gap-4">
+             <div className="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
+                <img src="https://ui-avatars.com/api/?name=Саша&background=random" alt="Founder" />
+             </div>
+             <div className="h-12 w-12 rounded-full bg-gray-200 overflow-hidden">
+                <img src="https://ui-avatars.com/api/?name=Настя&background=random" alt="Co-founder" />
+             </div>
           </div>
         </div>
       </section>
 
       {/* 7. Team */}
-      <section id="team" className="relative overflow-hidden bg-[linear-gradient(180deg,_#F7F7F7,_#EFEDE8)] py-24 text-[#0B1115]">
-        <div className="pointer-events-none absolute -left-16 -top-16 h-72 w-72 rounded-full bg-[#DDE6F4] blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 right-0 h-80 w-80 rounded-full bg-[#E6DCCB] blur-3xl" />
-        <div className="relative mx-auto max-w-7xl px-4">
-          <div className="mb-12">
+      <section id="team" className="bg-[#F5F5F5] py-24 text-[#000A0D]">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mb-12 flex items-end justify-between">
             <Heading size="h2">Команда</Heading>
-            <Text className="mt-3 max-w-2xl text-sm text-slate-600">
-              Два эксперта, которые ведут сделки лично и несут ответственность за каждый этап.
-            </Text>
+            <Button variant="outline" className="border-gray-200 text-black hover:bg-gray-50">
+               Вся команда
+            </Button>
           </div>
-
-          <div className="grid gap-10 md:grid-cols-2">
-            {teamMembers.map((f, idx) => (
-              <div key={f.name} className="group grid items-center gap-6 rounded-3xl border border-black/5 bg-white/90 p-6 shadow-[0_20px_50px_rgba(15,23,42,0.12)] backdrop-blur md:grid-cols-[220px_1fr]">
-                <div className="relative overflow-hidden rounded-2xl bg-gray-100">
-                  <div className="aspect-[3/4]">
+          
+          <div className="grid gap-8 md:grid-cols-4">
+             {(home?.home.team.founders || []).map((f) => (
+                <div key={f.name} className="group cursor-pointer">
+                  <div className="aspect-[3/4] overflow-hidden rounded-sm bg-gray-100">
                     {f.photo_url ? (
-                      <img src={f.photo_url} alt={f.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                       <img src={f.photo_url} alt={f.name} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                     ) : (
-                      <img
-                        src={`https://ui-avatars.com/api/?name=${encodeURIComponent(f.name)}&size=600&background=F1F3F6&color=0B1115`}
-                        alt={f.name}
-                        className="h-full w-full object-cover grayscale"
-                      />
+                       <div className="flex h-full w-full items-center justify-center text-gray-400">Нет фото</div>
                     )}
                   </div>
-                </div>
-                <div className="flex flex-col gap-4">
-                  <div>
+                  <div className="mt-4">
                     <Text size="lg" weight="medium">{f.name}</Text>
                     <Text size="sm" muted>{f.role}</Text>
                   </div>
-                  <div className="relative pl-7">
-                    <span className="absolute left-0 top-0 text-3xl font-semibold text-slate-300">&ldquo;</span>
-                    <p className="text-sm italic text-slate-600">{TEAM_QUOTES[idx] || TEAM_QUOTES[0]}</p>
+                </div>
+             ))}
+             {/* Placeholders for team members */}
+             {[1, 2].map((i) => (
+                <div key={i} className="group cursor-pointer">
+                  <div className="aspect-[3/4] overflow-hidden rounded-sm bg-gray-100">
+                     <img src={`https://ui-avatars.com/api/?name=Agent+${i}&size=400`} alt="Agent" className="h-full w-full object-cover grayscale transition-all group-hover:grayscale-0" />
+                  </div>
+                  <div className="mt-4">
+                    <Text size="lg" weight="medium">Имя Фамилия</Text>
+                    <Text size="sm" muted>Ведущий брокер</Text>
                   </div>
                 </div>
-              </div>
-            ))}
+             ))}
           </div>
         </div>
       </section>
