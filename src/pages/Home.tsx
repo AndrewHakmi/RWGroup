@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, LayoutGrid, Users, Award, ShieldCheck, Lock, MapPin, Star, ExternalLink } from 'lucide-react'
+import { ArrowRight, LayoutGrid, Users, Award, ShieldCheck, Lock, MapPin, Star, ExternalLink, Phone } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import Button from '@/components/ui/Button'
 import { Heading, Text } from '@/components/ui/Typography'
@@ -70,31 +70,51 @@ export default function Home() {
         </div>
         
         <div className="relative mx-auto flex h-full w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-10">
+          <div className="mb-6 flex flex-col gap-2 text-sm text-gray-300">
+            <div className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-accent" />
+              <span>Москва, Кутузовский пр-т 36 А</span>
+            </div>
+            <a href="tel:+74954101568" className="flex items-center gap-2 hover:text-white transition-colors">
+              <Phone className="h-4 w-4 text-accent" />
+              <span>+7 (495) 410-15-68</span>
+            </a>
+          </div>
+
           <Heading size="h1" className="w-full text-left text-5xl font-bold leading-[1.1] tracking-tight text-white md:text-7xl lg:text-9xl xl:text-[10rem]">
             <span className="block">Эксперты</span>
             <span className="block text-gray-400">по недвижимости</span>
           </Heading>
-          
-          <div className="mt-12 flex flex-col gap-4 sm:flex-row">
+
+          <Text className="mt-6 max-w-lg text-lg text-gray-400">
+            Ваша безопасная сделка — наша репутация
+          </Text>
+
+          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 backdrop-blur">
+            <span className="h-2 w-2 rounded-full bg-accent" />
+            13 лет на рынке недвижимости
+          </div>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
             <Button
               variant="default"
               className="h-14 px-8 text-lg"
               onClick={() => {
-                trackEvent('click_buy_sell', { page: 'home', block: 'hero', tab: 'buy' })
-                openLeadModal('buy_sell', { page: 'home', block: 'hero' }, { initialTab: 'buy' })
+                trackEvent('click_consultation', { page: 'home', block: 'hero' })
+                openLeadModal('consultation', { page: 'home', block: 'hero' })
               }}
             >
-              Подобрать объект
+              Получить консультацию
             </Button>
             <Button
               variant="outline"
               className="h-14 px-8 text-lg text-white border-white/20 hover:bg-white/10 hover:text-white"
               onClick={() => {
-                trackEvent('click_buy_sell', { page: 'home', block: 'hero', tab: 'sell' })
-                openLeadModal('buy_sell', { page: 'home', block: 'hero' }, { initialTab: 'sell' })
+                trackEvent('click_catalog', { page: 'home', block: 'hero' })
+                navigate('/catalog')
               }}
             >
-              Оценить недвижимость
+              Смотреть объекты
             </Button>
           </div>
         </div>
@@ -128,8 +148,31 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Продать / Сдать CTA */}
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
+          {/* Купить / Продать / Сдать CTA */}
+          <div className="mt-6 grid gap-6 md:grid-cols-3">
+            {/* Купить недвижимость */}
+            <div
+              onClick={() => {
+                trackEvent('click_buy_sell', { page: 'home', block: 'buy_cta', tab: 'buy' })
+                openLeadModal('buy_sell', { page: 'home', block: 'buy_cta' }, { initialTab: 'buy' })
+              }}
+              className="group relative flex h-[220px] cursor-pointer items-stretch overflow-hidden rounded-sm border border-white/10 transition-colors hover:border-white/25"
+            >
+              <div className="flex flex-1 flex-col justify-center p-8 lg:p-10">
+                <Heading size="h3" className="font-serif text-2xl font-normal leading-tight text-white lg:text-3xl">
+                  Купить<br />недвижимость
+                </Heading>
+              </div>
+              <div className="relative hidden w-1/2 overflow-hidden sm:block">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                  alt="Купить недвижимость"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
+              </div>
+            </div>
+
             {/* Продать недвижимость */}
             <div
               onClick={() => {
@@ -163,7 +206,7 @@ export default function Home() {
             >
               <div className="flex flex-1 flex-col justify-center p-8 lg:p-10">
                 <Heading size="h3" className="font-serif text-2xl font-normal leading-tight text-white lg:text-3xl">
-                  Сдать недвижимость
+                  Сдать<br />недвижимость
                 </Heading>
               </div>
               <div className="relative hidden w-1/2 overflow-hidden sm:block">
@@ -252,6 +295,14 @@ export default function Home() {
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
               <Heading size="h2">Стоимость услуг</Heading>
+              <div className="mt-6 rounded-xl border border-accent/20 bg-accent/5 p-4">
+                <Text size="lg" weight="semibold" className="text-background">
+                  Подборка новостроек — бесплатно
+                </Text>
+                <Text size="sm" className="mt-1 text-gray-500">
+                  По вторичке — стоимость формируется индивидуально
+                </Text>
+              </div>
               <div className="mt-8 flex items-baseline gap-2">
                 <span className="text-6xl font-bold tracking-tight md:text-8xl">2,5–5%</span>
               </div>

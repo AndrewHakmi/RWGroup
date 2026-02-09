@@ -23,6 +23,8 @@ export default function AdminCatalogPage() {
     priceMax: '',
     areaMin: '',
     areaMax: '',
+    district: '',
+    metro: '',
     q: '',
   })
   const [page, setPage] = useState(1)

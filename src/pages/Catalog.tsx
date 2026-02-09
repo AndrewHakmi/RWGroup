@@ -14,7 +14,7 @@ import type { Complex, Property } from '../../shared/types'
 export default function CatalogPage() {
   const { openLeadModal } = useUiStore()
   const [tab, setTab] = useState<'newbuild' | 'secondary' | 'rent'>('newbuild')
-  const [filters, setFilters] = useState<FiltersState>({ bedrooms: '', priceMin: '', priceMax: '', areaMin: '', areaMax: '', q: '' })
+  const [filters, setFilters] = useState<FiltersState>({ bedrooms: '', priceMin: '', priceMax: '', areaMin: '', areaMax: '', district: '', metro: '', q: '' })
   const [data, setData] = useState<{ complexes: Complex[]; properties: Property[]; total: number; page: number; limit: number } | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -146,10 +146,33 @@ export default function CatalogPage() {
         </div>
       </div>
 
-      {/* CTA: Продать / Сдать */}
+      {/* CTA: Купить / Продать / Сдать */}
       <section className="bg-background py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
+            {/* Купить недвижимость */}
+            <div
+              onClick={() => {
+                trackEvent('click_buy_sell', { page: 'catalog', block: 'buy_cta', tab: 'buy' })
+                openLeadModal('buy_sell', { page: 'catalog', block: 'buy_cta' }, { initialTab: 'buy' })
+              }}
+              className="group relative flex cursor-pointer items-stretch overflow-hidden rounded-sm border border-white/10 transition-colors hover:border-white/25"
+            >
+              <div className="flex flex-1 flex-col justify-center p-8 lg:p-10">
+                <Heading size="h3" className="font-serif text-2xl font-normal leading-tight text-white lg:text-3xl">
+                  Купить<br />недвижимость
+                </Heading>
+              </div>
+              <div className="relative hidden w-1/2 overflow-hidden sm:block">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                  alt="Купить недвижимость"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent" />
+              </div>
+            </div>
+
             {/* Продать недвижимость */}
             <div
               onClick={() => {
@@ -183,7 +206,7 @@ export default function CatalogPage() {
             >
               <div className="flex flex-1 flex-col justify-center p-8 lg:p-10">
                 <Heading size="h3" className="font-serif text-2xl font-normal leading-tight text-white lg:text-3xl">
-                  Сдать недвижимость
+                  Сдать<br />недвижимость
                 </Heading>
               </div>
               <div className="relative hidden w-1/2 overflow-hidden sm:block">

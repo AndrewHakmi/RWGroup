@@ -31,9 +31,7 @@ export default function Footer() {
           <div>
             <Text weight="bold" className="mb-4 text-white">Компания</Text>
             <div className="space-y-2 flex flex-col">
-              <Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">О нас</Link>
-              <Link to="/team" className="text-sm text-gray-400 hover:text-white transition-colors">Команда</Link>
-              <Link to="/contacts" className="text-sm text-gray-400 hover:text-white transition-colors">Контакты</Link>
+              <a href="/#team" className="text-sm text-gray-400 hover:text-white transition-colors">Команда</a>
               <Link to="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">Политика конфиденциальности</Link>
             </div>
           </div>
