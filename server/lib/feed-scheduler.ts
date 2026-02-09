@@ -66,6 +66,11 @@ async function refreshFeed(feed: FeedSource): Promise<void> {
   let errorLog = ''
 
   try {
+    try {
+      new URL(feed.url)
+    } catch {
+      throw new Error('Некорректный URL')
+    }
     const r = await fetch(feed.url)
     if (!r.ok) throw new Error(`Fetch failed: ${r.status}`)
     const ab = await r.arrayBuffer()
@@ -113,6 +118,9 @@ async function refreshFeed(feed: FeedSource): Promise<void> {
         status,
         stats,
         error_log: errorLog || undefined,
+        feed_name: feed.name,
+        feed_url: feed.url,
+        action: 'import',
       })
     })
   }

@@ -9,7 +9,13 @@ import type { Complex } from '../../../shared/types'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
 
-export default function ComplexCard({ item }: { item: Complex }) {
+export default function ComplexCard({
+  item,
+  showStatusBadge = false,
+}: {
+  item: Complex
+  showStatusBadge?: boolean
+}) {
   const openLeadModal = useUiStore((s) => s.openLeadModal)
   const img = selectCoverImage(item.images)
 
@@ -17,8 +23,13 @@ export default function ComplexCard({ item }: { item: Complex }) {
     <Card className="overflow-hidden transition-shadow hover:shadow-md border-slate-200 bg-white flex flex-col">
       <Link to={`/complex/${item.id}`} onClick={() => trackEvent('open_card', { type: 'complex', id: item.id })} className="block relative aspect-[4/3] w-full bg-slate-100">
         {img ? <img src={img} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" /> : null}
-        <div className="absolute top-3 left-3">
-           <Badge variant="secondary" className="bg-white/90 text-slate-900 backdrop-blur-sm shadow-sm">ЖК</Badge>
+        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+          <Badge variant="secondary" className="bg-white/90 text-slate-900 backdrop-blur-sm shadow-sm">ЖК</Badge>
+          {showStatusBadge && item.status !== 'active' && (
+            <Badge variant="warning" className="bg-amber-600/90 text-white backdrop-blur-sm shadow-sm">
+              Скрыто (не в каталоге)
+            </Badge>
+          )}
         </div>
       </Link>
       <CardContent className="p-4">

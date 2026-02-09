@@ -263,9 +263,9 @@ export default function AdminCatalogPage() {
             {items.map((item) => (
               <div key={item.id} className="relative group">
                 {tab === 'property' ? (
-                  <PropertyCard item={item as Property} />
+                  <PropertyCard item={item as Property} showStatusBadge />
                 ) : (
-                  <ComplexCard item={item as Complex} />
+                  <ComplexCard item={item as Complex} showStatusBadge />
                 )}
                 
                 <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex gap-2">
