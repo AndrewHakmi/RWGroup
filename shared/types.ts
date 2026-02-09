@@ -85,6 +85,10 @@ export interface FeedSource {
   url?: string
   format: 'xlsx' | 'csv' | 'xml' | 'json'
   is_active: boolean
+  mapping?: Record<string, string>
+  auto_refresh?: boolean
+  refresh_interval_hours?: number
+  last_auto_refresh?: string
   created_at: string
 }
 

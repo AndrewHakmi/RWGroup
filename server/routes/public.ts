@@ -64,6 +64,8 @@ router.get('/catalog', (req: Request, res: Response) => {
     areaMax: z.string().optional(),
     district: z.string().optional(),
     metro: z.string().optional(),
+    page: z.string().optional(),
+    limit: z.string().optional(),
     q: z.string().optional(),
   })
   const parsed = schema.safeParse(req.query)
@@ -71,13 +73,15 @@ router.get('/catalog', (req: Request, res: Response) => {
     res.status(400).json({ success: false, error: 'Invalid query' })
     return
   }
-  const { tab, bedrooms, priceMin, priceMax, areaMin, areaMax, district, metro, q } = parsed.data
+  const { tab, bedrooms, priceMin, priceMax, areaMin, areaMax, district, metro, q, page, limit } = parsed.data
   const cat = tabToCategory(tab)
   const bed = toNumber(bedrooms)
   const min = toNumber(priceMin)
   const max = toNumber(priceMax)
   const amin = toNumber(areaMin)
   const amax = toNumber(areaMax)
+  const districtLc = (district || '').trim().toLowerCase()
+  const metroLc = (metro || '').trim().toLowerCase()
   const qlc = (q || '').trim().toLowerCase()
 
   const data = withDb((db) => {
@@ -89,18 +93,18 @@ router.get('/catalog', (req: Request, res: Response) => {
       .filter((p) => (typeof max === 'number' ? p.price <= max : true))
       .filter((p) => (typeof amin === 'number' ? p.area_total >= amin : true))
       .filter((p) => (typeof amax === 'number' ? p.area_total <= amax : true))
-      .filter((p) => (district ? p.district === district : true))
-      .filter((p) => (metro ? p.metro.includes(metro) : true))
-      .filter((p) => (qlc ? p.title.toLowerCase().includes(qlc) : true))
+      .filter((p) => (districtLc ? p.district.toLowerCase() === districtLc : true))
+      .filter((p) => (metroLc ? p.metro.some((m) => m.toLowerCase() === metroLc) : true))
+      .filter((p) => (qlc ? p.title.toLowerCase().includes(qlc) || p.district.toLowerCase().includes(qlc) || p.metro.some((m) => m.toLowerCase().includes(qlc)) : true))
       .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''))
 
     const complexes =
       tab === 'newbuild'
         ? db.complexes
             .filter((c) => c.status === 'active')
-            .filter((c) => (district ? c.district === district : true))
-            .filter((c) => (metro ? c.metro.includes(metro) : true))
-            .filter((c) => (qlc ? c.title.toLowerCase().includes(qlc) : true))
+            .filter((c) => (districtLc ? c.district.toLowerCase() === districtLc : true))
+            .filter((c) => (metroLc ? c.metro.some((m) => m.toLowerCase() === metroLc) : true))
+            .filter((c) => (qlc ? c.title.toLowerCase().includes(qlc) || c.district.toLowerCase().includes(qlc) || c.metro.some((m) => m.toLowerCase().includes(qlc)) : true))
             .sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''))
         : []
 
