@@ -25,3 +25,4 @@ dist-ssr
 .vite
 server/data/db.json
 nul
+server/data/db.json
