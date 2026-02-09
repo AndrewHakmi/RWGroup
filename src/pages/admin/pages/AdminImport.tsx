@@ -611,7 +611,7 @@ export default function AdminImportPage() {
                   <div className="flex flex-wrap gap-2">
                     {Object.entries(preview.fieldMappings).map(([field, aliases]) => (
                       <Badge key={field} variant="secondary">
-                        {field} ← {aliases.join(', ')}
+                        {field} ← {Array.isArray(aliases) ? aliases.join(', ') : aliases}
                       </Badge>
                     ))}
                   </div>
