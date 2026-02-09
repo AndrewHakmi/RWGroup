@@ -38,9 +38,9 @@ const IMAGES_INTERIOR = [
   'https://coresg-normal.trae.ai/api/ide/v1/text_to_image?prompt=cozy%20living%20room%20with%20fireplace%2C%20evening%20mood%2C%20warm%20light%2C%20scandinavian%20style&image_size=landscape_16_9',
 ]
 
-export function ensureSeed(): void {
+export async function ensureSeed(): Promise<void> {
   ensureDataDir()
-  if (dbExists()) return // Force re-seed for this task to populate data
+  if (await dbExists()) return // Force re-seed for this task to populate data
 
   const sourceId = newId()
   
@@ -273,6 +273,6 @@ export function ensureSeed(): void {
     import_runs: [],
   }
 
-  writeDb(db)
+  await writeDb(db)
   console.log(`Seeded DB with ${complexes.length} complexes, ${properties.length} properties`)
 }

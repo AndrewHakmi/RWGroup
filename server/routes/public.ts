@@ -22,8 +22,8 @@ function tabToCategory(tab: CatalogTab): Category {
   return 'newbuild'
 }
 
-router.get('/home', (req: Request, res: Response) => {
-  const data = withDb((db) => {
+router.get('/home', async (req: Request, res: Response) => {
+  const data = await withDb((db) => {
     const featuredComplexes = db.home.featured.complexes
       .map((id) => db.complexes.find((c) => c.id === id && c.status === 'active'))
       .filter(Boolean)
@@ -48,8 +48,8 @@ router.get('/home', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.get('/facets', (req: Request, res: Response) => {
-  const data = withDb((db) => {
+router.get('/facets', async (req: Request, res: Response) => {
+  const data = await withDb((db) => {
     const districts = dedupe([...db.complexes, ...db.properties].map((x) => x.district)).sort((a, b) => a.localeCompare(b))
     const metros = dedupe([...db.complexes, ...db.properties].flatMap((x) => x.metro)).sort((a, b) => a.localeCompare(b))
     return { districts, metros }
@@ -57,7 +57,7 @@ router.get('/facets', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.get('/catalog', (req: Request, res: Response) => {
+router.get('/catalog', async (req: Request, res: Response) => {
   const schema = z.object({
     tab: z.enum(['newbuild', 'secondary', 'rent']).default('newbuild'),
     bedrooms: z.string().optional(),
@@ -89,7 +89,7 @@ router.get('/catalog', (req: Request, res: Response) => {
   const pageNum = Math.max(toNumber(page) || 1, 1)
   const limitNum = Math.max(toNumber(limit) || 12, 1)
 
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const filtered = db.properties
       .filter((p) => p.status === 'active')
       .filter((p) => p.category === cat)
@@ -123,9 +123,9 @@ router.get('/catalog', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.get('/property/:id', (req: Request, res: Response) => {
+router.get('/property/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const property = db.properties.find((p) => p.id === id && p.status === 'active')
     if (!property) return null
     const complex = property.complex_id ? db.complexes.find((c) => c.id === property.complex_id) : undefined
@@ -138,9 +138,9 @@ router.get('/property/:id', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.get('/complex/:id', (req: Request, res: Response) => {
+router.get('/complex/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const complex = db.complexes.find((c) => c.id === id && c.status === 'active')
     if (!complex) return null
     const properties = db.properties
@@ -156,9 +156,9 @@ router.get('/complex/:id', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.get('/collection/:id', (req: Request, res: Response) => {
+router.get('/collection/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const collection = db.collections.find((c) => c.id === id)
     if (!collection) return null
 

@@ -27,6 +27,7 @@ import type { Category, Complex, DbShape, Property } from '../../shared/types.js
 import { XMLParser } from 'fast-xml-parser'
 import { parse as parseCsv } from 'csv-parse/sync'
 import * as XLSX from 'xlsx'
+import { getUploadsDir } from '../lib/storage.js'
 
 const router = Router()
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } })
@@ -69,7 +70,7 @@ router.post('/upload', upload.single('file'), (req: Request, res: Response) => {
     }
 
     const filename = `${newId()}${ext}`
-    const uploadsDir = path.join(process.cwd(), 'server', 'uploads')
+    const uploadsDir = getUploadsDir()
     
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true })
@@ -84,36 +85,36 @@ router.post('/upload', upload.single('file'), (req: Request, res: Response) => {
   }
 })
 
-router.get('/home', (req: Request, res: Response) => {
-  const data = withDb((db) => db.home)
+router.get('/home', async (req: Request, res: Response) => {
+  const data = await withDb((db) => db.home)
   res.json({ success: true, data })
 })
 
-router.put('/home', (req: Request, res: Response) => {
+router.put('/home', async (req: Request, res: Response) => {
   const schema = z.object({ home: z.any() })
   const parsed = schema.safeParse(req.body)
   if (!parsed.success) {
     res.status(400).json({ success: false, error: 'Invalid payload' })
     return
   }
-  withDb((db) => {
+  await withDb((db) => {
     db.home = { ...db.home, ...(parsed.data.home as DbShape['home']), updated_at: new Date().toISOString() }
   })
   res.json({ success: true })
 })
 
-router.get('/leads', (req: Request, res: Response) => {
-  const data = withDb((db) => db.leads)
+router.get('/leads', async (req: Request, res: Response) => {
+  const data = await withDb((db) => db.leads)
   res.json({ success: true, data })
 })
 
-router.get('/feeds', (req: Request, res: Response) => {
-  const data = withDb((db) => db.feed_sources)
+router.get('/feeds', async (req: Request, res: Response) => {
+  const data = await withDb((db) => db.feed_sources)
   res.json({ success: true, data })
 })
 
-router.get('/feeds/diagnostics', (req: Request, res: Response) => {
-  const data = withDb((db) => {
+router.get('/feeds/diagnostics', async (req: Request, res: Response) => {
+  const data = await withDb((db) => {
     const lastRunBySource: Record<string, any> = {}
     for (const r of db.import_runs) {
       const current = lastRunBySource[r.source_id]
@@ -173,7 +174,7 @@ router.get('/feeds/diagnostics', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.post('/feeds', (req: Request, res: Response) => {
+router.post('/feeds', async (req: Request, res: Response) => {
   const schema = z.object({ 
     name: z.string().min(1), 
     mode: z.enum(['upload', 'url']), 
@@ -186,7 +187,7 @@ router.post('/feeds', (req: Request, res: Response) => {
     res.status(400).json({ success: false, error: 'Invalid payload' })
     return
   }
-  const duplicate = withDb((db) => {
+  const duplicate = await withDb((db) => {
     const name = parsed.data.name.trim().toLowerCase()
     const url = parsed.data.url?.trim()
     return db.feed_sources.find((f) => {
@@ -200,7 +201,7 @@ router.post('/feeds', (req: Request, res: Response) => {
     return
   }
   const id = newId()
-  withDb((db) => {
+  await withDb((db) => {
     db.feed_sources.unshift({
       id,
       name: parsed.data.name,
@@ -215,7 +216,7 @@ router.post('/feeds', (req: Request, res: Response) => {
   res.json({ success: true, data: { id } })
 })
 
-router.put('/feeds/:id', (req: Request, res: Response) => {
+router.put('/feeds/:id', async (req: Request, res: Response) => {
   const id = req.params.id
   const schema = z.object({
     name: z.string().min(1).optional(),
@@ -232,7 +233,7 @@ router.put('/feeds/:id', (req: Request, res: Response) => {
     res.status(400).json({ success: false, error: 'Invalid payload' })
     return
   }
-  const conflict = withDb((db) => {
+  const conflict = await withDb((db) => {
     const current = db.feed_sources.find((x) => x.id === id)
     if (!current) return null
     const nextName = (parsed.data.name ?? current.name).trim().toLowerCase()
@@ -249,7 +250,7 @@ router.put('/feeds/:id', (req: Request, res: Response) => {
     res.status(409).json({ success: false, error: 'Такой фид уже существует' })
     return
   }
-  const ok = withDb((db) => {
+  const ok = await withDb((db) => {
     const fs = db.feed_sources.find((x) => x.id === id)
     if (!fs) return false
     Object.assign(fs, parsed.data)
@@ -262,10 +263,10 @@ router.put('/feeds/:id', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.delete('/feeds/:id', (req: Request, res: Response) => {
+router.delete('/feeds/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-  const snapshot = withDb((db) => db.feed_sources.find((x) => x.id === id))
-  const ok = withDb((db) => {
+  const snapshot = await withDb((db) => db.feed_sources.find((x) => x.id === id))
+  const ok = await withDb((db) => {
     const before = db.feed_sources.length
     db.feed_sources = db.feed_sources.filter((x) => x.id !== id)
     
@@ -277,7 +278,6 @@ router.delete('/feeds/:id', (req: Request, res: Response) => {
       db.properties = db.properties.filter((p) => p.source_id !== id)
       db.complexes = db.complexes.filter((c) => c.source_id !== id)
       
-      // console.log(`Deleted feed ${id}: removed ${propsBefore - db.properties.length} properties and ${complexesBefore - db.complexes.length} complexes`)
       return true
     }
     return false
@@ -287,7 +287,7 @@ router.delete('/feeds/:id', (req: Request, res: Response) => {
     return
   }
   if (snapshot) {
-    withDb((db) => {
+    await withDb((db) => {
       db.import_runs.unshift({
         id: newId(),
         source_id: snapshot.id,
@@ -306,12 +306,12 @@ router.delete('/feeds/:id', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.get('/collections', (req: Request, res: Response) => {
-  const data = withDb((db) => db.collections.sort((a, b) => b.priority - a.priority))
+router.get('/collections', async (req: Request, res: Response) => {
+  const data = await withDb((db) => db.collections.sort((a, b) => b.priority - a.priority))
   res.json({ success: true, data })
 })
 
-router.post('/collections', (req: Request, res: Response) => {
+router.post('/collections', async (req: Request, res: Response) => {
   const autoRulesSchema = z.object({
     type: z.enum(['property', 'complex']),
     category: z.enum(['newbuild', 'secondary', 'rent']).optional(),
@@ -345,7 +345,7 @@ router.post('/collections', (req: Request, res: Response) => {
     return
   }
   const id = newId()
-  withDb((db) => {
+  await withDb((db) => {
     db.collections.unshift({
       id,
       slug: slugify(parsed.data.title),
@@ -363,7 +363,7 @@ router.post('/collections', (req: Request, res: Response) => {
   res.json({ success: true, data: { id } })
 })
 
-router.put('/collections/:id', (req: Request, res: Response) => {
+router.put('/collections/:id', async (req: Request, res: Response) => {
   const id = req.params.id
   const autoRulesSchema = z.object({
     type: z.enum(['property', 'complex']),
@@ -394,7 +394,7 @@ router.put('/collections/:id', (req: Request, res: Response) => {
     res.status(400).json({ success: false, error: 'Invalid payload' })
     return
   }
-  const ok = withDb((db) => {
+  const ok = await withDb((db) => {
     const col = db.collections.find((c) => c.id === id)
     if (!col) return false
     if (parsed.data.title) col.slug = slugify(parsed.data.title)
@@ -419,9 +419,9 @@ router.put('/collections/:id', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.delete('/collections/:id', (req: Request, res: Response) => {
+router.delete('/collections/:id', async (req: Request, res: Response) => {
   const id = req.params.id
-  const ok = withDb((db) => {
+  const ok = await withDb((db) => {
     const before = db.collections.length
     db.collections = db.collections.filter((c) => c.id !== id)
     return db.collections.length !== before
@@ -433,10 +433,10 @@ router.delete('/collections/:id', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.post('/collections/:id/toggle-status', (req: Request, res: Response) => {
+router.post('/collections/:id/toggle-status', async (req: Request, res: Response) => {
   const id = req.params.id
   let newStatus: 'visible' | 'hidden' | null = null
-  const ok = withDb((db) => {
+  const ok = await withDb((db) => {
     const col = db.collections.find((c) => c.id === id)
     if (!col) return false
     col.status = col.status === 'visible' ? 'hidden' : 'visible'
@@ -451,9 +451,9 @@ router.post('/collections/:id/toggle-status', (req: Request, res: Response) => {
   res.json({ success: true, data: { status: newStatus } })
 })
 
-router.get('/collections/:id/preview', (req: Request, res: Response) => {
+router.get('/collections/:id/preview', async (req: Request, res: Response) => {
   const id = req.params.id
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const collection = db.collections.find((c) => c.id === id)
     if (!collection) return null
 
@@ -495,7 +495,7 @@ router.get('/collections/:id/preview', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.post('/collections/preview-auto', (req: Request, res: Response) => {
+router.post('/collections/preview-auto', async (req: Request, res: Response) => {
   const autoRulesSchema = z.object({
     type: z.enum(['property', 'complex']),
     category: z.enum(['newbuild', 'secondary', 'rent']).optional(),
@@ -520,7 +520,7 @@ router.post('/collections/preview-auto', (req: Request, res: Response) => {
     return
   }
 
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const collection = {
       id: 'preview',
       slug: 'preview',
@@ -544,7 +544,7 @@ router.post('/collections/preview-auto', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.post('/collections/:id/validate-items', (req: Request, res: Response) => {
+router.post('/collections/:id/validate-items', async (req: Request, res: Response) => {
   const id = req.params.id
   const schema = z.object({ cleanInvalid: z.boolean().optional() })
   const parsed = schema.safeParse(req.body)
@@ -553,7 +553,7 @@ router.post('/collections/:id/validate-items', (req: Request, res: Response) => 
     return
   }
 
-  const result = withDb((db) => {
+  const result = await withDb((db) => {
     const collection = db.collections.find((c) => c.id === id)
     if (!collection || collection.mode !== 'manual') return null
 
@@ -589,8 +589,8 @@ router.post('/collections/:id/validate-items', (req: Request, res: Response) => 
   res.json({ success: true, data: result })
 })
 
-router.get('/catalog/outdated', (req: Request, res: Response) => {
-  const data = withDb((db) => {
+router.get('/catalog/outdated', async (req: Request, res: Response) => {
+  const data = await withDb((db) => {
     const isOutdated = (x: { district: string }) => x.district === 'Array'
     const properties = db.properties.filter(isOutdated).length
     const complexes = db.complexes.filter(isOutdated).length
@@ -599,7 +599,7 @@ router.get('/catalog/outdated', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.get('/catalog/items', (req: Request, res: Response) => {
+router.get('/catalog/items', async (req: Request, res: Response) => {
   const type = req.query.type as string
   const page = Math.max(parseInt(req.query.page as string) || 1, 1)
   const limit = Math.max(parseInt(req.query.limit as string) || 50, 1)
@@ -619,7 +619,7 @@ router.get('/catalog/items', (req: Request, res: Response) => {
     return
   }
 
-  const data = withDb((db) => {
+  const data = await withDb((db) => {
     const items =
       type === 'property'
           ? db.properties
@@ -653,7 +653,7 @@ router.get('/catalog/items', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
-router.put('/catalog/items/:type/:id', (req: Request, res: Response) => {
+router.put('/catalog/items/:type/:id', async (req: Request, res: Response) => {
   const { type, id } = req.params
 
   // Common fields for both Property and Complex
@@ -706,7 +706,7 @@ router.put('/catalog/items/:type/:id', (req: Request, res: Response) => {
     return
   }
 
-  const ok = withDb((db) => {
+  const ok = await withDb((db) => {
     if (type === 'property') {
       const item = db.properties.find(p => p.id === id)
       if (!item) return false
@@ -730,10 +730,10 @@ router.put('/catalog/items/:type/:id', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.delete('/catalog/items/:type/:id', (req: Request, res: Response) => {
+router.delete('/catalog/items/:type/:id', async (req: Request, res: Response) => {
   const { type, id } = req.params
   
-  const ok = withDb((db) => {
+  const ok = await withDb((db) => {
     if (type === 'property') {
       const initial = db.properties.length
       db.properties = db.properties.filter(p => p.id !== id)
@@ -759,8 +759,8 @@ router.delete('/catalog/items/:type/:id', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.delete('/catalog/reset', (req: Request, res: Response) => {
-  withDb((db) => {
+router.delete('/catalog/reset', async (req: Request, res: Response) => {
+  await withDb((db) => {
     db.properties = []
     db.complexes = []
     // Optional: also clear feed sources if requested, but for now just catalog
@@ -769,8 +769,8 @@ router.delete('/catalog/reset', (req: Request, res: Response) => {
   res.json({ success: true })
 })
 
-router.get('/import/runs', (req: Request, res: Response) => {
-  const data = withDb((db) => db.import_runs.sort((a, b) => (b.started_at || '').localeCompare(a.started_at || '')))
+router.get('/import/runs', async (req: Request, res: Response) => {
+  const data = await withDb((db) => db.import_runs.sort((a, b) => (b.started_at || '').localeCompare(a.started_at || '')))
   res.json({ success: true, data })
 })
 
@@ -817,7 +817,7 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
   }
 
   let errorLog = ''
-  const sourceSnapshot = withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
+  const sourceSnapshot = await withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
   if (sourceSnapshot) {
     run.feed_name = sourceSnapshot.name
     run.feed_url = sourceSnapshot.url
@@ -843,7 +843,7 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
       rows = parseRows(buffer, ext)
     }
 
-    const stats = withDb((db) => {
+    const stats = await withDb((db) => {
       const source = db.feed_sources.find(s => s.id === parsed.data.source_id)
       const mapping = source?.mapping
 
@@ -871,7 +871,7 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
     errorLog = e instanceof Error ? e.message : 'Unknown error'
   } finally {
     importLocks.delete(lockKey)
-    withDb((db) => {
+    await withDb((db) => {
       db.import_runs.unshift({
         ...run,
         finished_at: new Date().toISOString(),
@@ -1111,14 +1111,14 @@ router.post('/import/preview', upload.single('file'), async (req: Request, res: 
     return
   }
 
-  const sourceSnapshot = withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
+  const sourceSnapshot = await withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
   try {
     const buffer = await getBuffer(req, parsed.data.url)
     const fileName = req.file?.originalname || parsed.data.url || 'feed'
     const ext = guessExt(fileName)
     const rows = parseRows(buffer, ext)
 
-    const source = withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
+    const source = await withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
     const mapping = source?.mapping
 
     const preview = parsed.data.entity === 'complex'
@@ -1128,7 +1128,7 @@ router.post('/import/preview', upload.single('file'), async (req: Request, res: 
     res.json({ success: true, data: preview })
   } catch (e) {
     const errorLog = e instanceof Error ? e.message : 'Unknown error'
-    withDb((db) => {
+    await withDb((db) => {
       db.import_runs.unshift({
         id: newId(),
         source_id: parsed.data.source_id,

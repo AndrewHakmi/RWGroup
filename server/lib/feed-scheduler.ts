@@ -79,7 +79,7 @@ async function refreshFeed(feed: FeedSource): Promise<void> {
     const ext = guessExt(feed.url)
     const rows = parseRows(buffer, ext)
 
-    const result = withDb((db) => {
+    const result = await withDb((db) => {
       const mapping = feed.mapping
       // Auto-upsert complexes from properties
       upsertComplexesFromProperties(db, feed.id, rows, mapping)
@@ -97,7 +97,7 @@ async function refreshFeed(feed: FeedSource): Promise<void> {
     }
 
     // Update last_auto_refresh timestamp
-    withDb((db) => {
+    await withDb((db) => {
       const fs = db.feed_sources.find(s => s.id === feed.id)
       if (fs) fs.last_auto_refresh = new Date().toISOString()
     })
@@ -108,7 +108,7 @@ async function refreshFeed(feed: FeedSource): Promise<void> {
     errorLog = e instanceof Error ? e.message : 'Unknown error'
     console.error(`[feed-scheduler] Feed "${feed.name}" failed:`, errorLog)
   } finally {
-    withDb((db) => {
+    await withDb((db) => {
       db.import_runs.unshift({
         id: runId,
         source_id: feed.id,
@@ -126,10 +126,10 @@ async function refreshFeed(feed: FeedSource): Promise<void> {
   }
 }
 
-function checkFeeds(): void {
+async function checkFeeds(): Promise<void> {
   const now = Date.now()
 
-  const feeds = withDb((db) => db.feed_sources.filter(
+  const feeds = await withDb((db) => db.feed_sources.filter(
     (f) => f.is_active && f.mode === 'url' && f.url && f.auto_refresh
   ))
 

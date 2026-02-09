@@ -21,7 +21,7 @@ import path from 'path'
 // load env
 dotenv.config()
 
-ensureSeed()
+await ensureSeed()
 startFeedScheduler()
 
 const app: express.Application = express()
