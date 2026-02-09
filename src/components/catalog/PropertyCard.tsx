@@ -10,7 +10,15 @@ import type { Property } from '../../../shared/types'
 import { useUiStore } from '@/store/useUiStore'
 import { trackEvent } from '@/lib/analytics'
 
-export default function PropertyCard({ item, variant = 'grid' }: { item: Property; variant?: 'grid' | 'list' }) {
+export default function PropertyCard({
+  item,
+  variant = 'grid',
+  showStatusBadge = false,
+}: {
+  item: Property
+  variant?: 'grid' | 'list'
+  showStatusBadge?: boolean
+}) {
   const openLeadModal = useUiStore((s) => s.openLeadModal)
   const img = selectCoverImage(item.images)
   const dealTypeLabel = item.deal_type === 'rent' ? 'Аренда' : 'Продажа'
@@ -30,19 +38,24 @@ export default function PropertyCard({ item, variant = 'grid' }: { item: Propert
           <img src={img} alt={item.title} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
         ) : null}
         <div className="absolute top-3 left-3 flex flex-wrap gap-2">
-           <Badge variant="secondary" className="bg-white/90 text-slate-900 backdrop-blur-sm shadow-sm">
-             {dealTypeLabel}
-           </Badge>
-           {hasDiscount && (
-             <Badge variant="default" className="bg-green-600/90 text-white backdrop-blur-sm shadow-sm">
-               −{discount}%
-             </Badge>
-           )}
-           {item.is_euroflat && (
-             <Badge variant="accent" className="bg-blue-600/90 text-white backdrop-blur-sm shadow-sm">
-               Евро
-             </Badge>
-           )}
+          <Badge variant="secondary" className="bg-white/90 text-slate-900 backdrop-blur-sm shadow-sm">
+            {dealTypeLabel}
+          </Badge>
+          {showStatusBadge && item.status !== 'active' && (
+            <Badge variant="warning" className="bg-amber-600/90 text-white backdrop-blur-sm shadow-sm">
+              Скрыто (не в каталоге)
+            </Badge>
+          )}
+          {hasDiscount && (
+            <Badge variant="default" className="bg-green-600/90 text-white backdrop-blur-sm shadow-sm">
+              −{discount}%
+            </Badge>
+          )}
+          {item.is_euroflat && (
+            <Badge variant="accent" className="bg-blue-600/90 text-white backdrop-blur-sm shadow-sm">
+              Евро
+            </Badge>
+          )}
         </div>
       </Link>
       <div className={cn('flex flex-col', variant === 'list' && 'flex-1')}>

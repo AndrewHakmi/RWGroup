@@ -117,7 +117,7 @@ export default function ItemPickerModal({ open, onClose, onAdd, existingIds = []
                     key={item.id}
                     className={`relative ${isSelected ? 'ring-2 ring-blue-500 rounded-xl' : ''} ${isExisting ? 'opacity-50' : ''}`}
                   >
-                    {type === 'property' ? <PropertyCard item={item as Property} /> : <ComplexCard item={item as Complex} />}
+                    {type === 'property' ? <PropertyCard item={item as Property} showStatusBadge /> : <ComplexCard item={item as Complex} showStatusBadge />}
 
                     {isExisting ? (
                       <div className="absolute top-2 right-2 bg-slate-700 text-white text-xs px-2 py-1 rounded">

@@ -432,13 +432,20 @@ export function upsertComplexesFromProperties(db: DbShape, sourceId: string, row
   return { inserted: res.inserted, updated: res.updated }
 }
 
-export function upsertProperties(db: DbShape, sourceId: string, rows: Record<string, unknown>[], mapping?: Record<string, string>) {
+export function upsertProperties(
+  db: DbShape,
+  sourceId: string,
+  rows: Record<string, unknown>[],
+  mapping?: Record<string, string>,
+  options?: { hideInvalid?: boolean }
+) {
   const now = new Date().toISOString()
   const seen = new Set<string>()
   const index = new Map(db.properties.filter((p) => p.source_id === sourceId).map((p) => [p.external_id, p]))
   const complexByExternal = new Map(db.complexes.filter((c) => c.source_id === sourceId).map((c) => [c.external_id, c]))
   let inserted = 0
   let updated = 0
+  let hidden = 0
   const errors: Array<{ rowIndex: number; externalId?: string; error: string }> = []
 
   for (let i = 0; i < rows.length; i++) {
@@ -466,6 +473,52 @@ export function upsertProperties(db: DbShape, sourceId: string, rows: Record<str
           externalId,
           error: `Некорректные данные - bedrooms: ${bedrooms}, price: ${price}, area: ${area}`
         })
+        if (options?.hideInvalid) {
+          const fallbackTitle = title || externalId
+          const invalidNext: Omit<Property, 'id'> = {
+            source_id: sourceId,
+            external_id: externalId,
+            slug: slugify(fallbackTitle),
+            lot_number: asString(getField(row, 'lot_number', mapping, ['lotNumber', 'apartment'])),
+            complex_id: complexId,
+            complex_external_id: complexExternal || undefined,
+            deal_type: dealType,
+            category: cat,
+            title: fallbackTitle,
+            bedrooms: typeof bedrooms === 'number' ? bedrooms : 0,
+            price: typeof price === 'number' ? price : 0,
+            old_price: asNumber(getField(row, 'old_price', mapping, ['oldPrice', 'oldprice'])) || undefined,
+            price_period: dealType === 'rent' ? 'month' : undefined,
+            area_total: typeof area === 'number' ? area : 0,
+            area_living: asNumber(getField(row, 'area_living', mapping, ['areaLiving', 'living_space'])) || undefined,
+            area_kitchen: asNumber(getField(row, 'area_kitchen', mapping, ['areaKitchen', 'kitchen_space'])) || undefined,
+            floor: asNumber(getField(row, 'floor', mapping)) || undefined,
+            floors_total: asNumber(getField(row, 'floors_total', mapping, ['floorsTotal', 'floors-total'])) || undefined,
+            district: normalizeLocationValue(getField(row, 'district', mapping, ['area', 'region'])),
+            metro: asStringArray(getField(row, 'metro', mapping)),
+            images: asStringArray(getField(row, 'images', mapping, ['image_urls', 'photos'])),
+            renovation: asString(getField(row, 'renovation', mapping)) || undefined,
+            is_euroflat: asString(getField(row, 'is_euroflat', mapping, ['euroflat'])) === 'true' || asString(getField(row, 'is_euroflat', mapping, ['euroflat'])) === '1' || false,
+            building_section: asString(getField(row, 'building_section', mapping, ['buildingSection', 'building-section'])) || undefined,
+            building_state: asString(getField(row, 'building_state', mapping, ['buildingState', 'building-state'])) || undefined,
+            ready_quarter: asNumber(getField(row, 'ready_quarter', mapping, ['readyQuarter', 'ready-quarter'])) || undefined,
+            built_year: asNumber(getField(row, 'built_year', mapping, ['builtYear', 'built-year'])) || undefined,
+            description: asString(getField(row, 'description', mapping)) || undefined,
+            status: 'hidden',
+            last_seen_at: now,
+            updated_at: now,
+          }
+          const existingInvalid = index.get(externalId)
+          if (existingInvalid) {
+            if (existingInvalid.status !== 'hidden') hidden += 1
+            Object.assign(existingInvalid, invalidNext)
+            updated += 1
+          } else {
+            db.properties.unshift({ id: newId(), ...invalidNext })
+            inserted += 1
+            hidden += 1
+          }
+        }
         continue
       }
 
@@ -520,7 +573,6 @@ export function upsertProperties(db: DbShape, sourceId: string, rows: Record<str
     }
   }
 
-  let hidden = 0
   for (const p of db.properties) {
     if (p.source_id !== sourceId) continue
     if (!seen.has(p.external_id) && p.status === 'active') {

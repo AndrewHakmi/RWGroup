@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { ArrowRight, LayoutGrid, Users, Award, ShieldCheck, Lock, MapPin, Star, ExternalLink, Phone } from 'lucide-react'
+import { ArrowRight, LayoutGrid, Users, Award, ShieldCheck, Lock, MapPin, Star, ExternalLink } from 'lucide-react'
 import SiteLayout from '@/components/layout/SiteLayout'
 import Button from '@/components/ui/Button'
 import { Heading, Text } from '@/components/ui/Typography'
@@ -70,17 +70,6 @@ export default function Home() {
         </div>
         
         <div className="relative mx-auto flex h-full w-full max-w-[1400px] flex-col justify-center px-4 pb-20 pt-10">
-          <div className="mb-6 flex flex-col gap-2 text-sm text-gray-300">
-            <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-accent" />
-              <span>Москва, Кутузовский пр-т 36 А</span>
-            </div>
-            <a href="tel:+74954101568" className="flex items-center gap-2 hover:text-white transition-colors">
-              <Phone className="h-4 w-4 text-accent" />
-              <span>+7 (495) 410-15-68</span>
-            </a>
-          </div>
-
           <Heading size="h1" className="w-full text-left text-5xl font-bold leading-[1.1] tracking-tight text-white md:text-7xl lg:text-9xl xl:text-[10rem]">
             <span className="block">Эксперты</span>
             <span className="block text-gray-400">по недвижимости</span>
@@ -90,9 +79,11 @@ export default function Home() {
             Ваша безопасная сделка — наша репутация
           </Text>
 
-          <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 backdrop-blur">
-            <span className="h-2 w-2 rounded-full bg-accent" />
-            13 лет на рынке недвижимости
+          <div className="mt-4 flex">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-gray-300 backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-accent" />
+              13 лет на рынке недвижимости
+            </div>
           </div>
 
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
@@ -292,52 +283,57 @@ export default function Home() {
         <div className="pointer-events-none absolute -top-20 right-0 h-64 w-64 rounded-full bg-[#E7EEF6] blur-3xl" />
         <div className="pointer-events-none absolute -bottom-16 left-0 h-56 w-56 rounded-full bg-[#EFE7D9] blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-4">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div>
-              <Heading size="h2">Стоимость услуг</Heading>
-              <div className="mt-6 rounded-xl border border-accent/20 bg-accent/5 p-4">
-                <Text size="lg" weight="semibold" className="text-background">
-                  Подборка новостроек — бесплатно
-                </Text>
-                <Text size="sm" className="mt-1 text-gray-500">
-                  По вторичке — стоимость формируется индивидуально
-                </Text>
-              </div>
-              <div className="mt-8 flex items-baseline gap-2">
-                <span className="text-6xl font-bold tracking-tight md:text-8xl">2,5–5%</span>
-              </div>
-              <Text size="lg" className="mt-6 max-w-md text-gray-600">
-                от стоимости объекта недвижимости
-              </Text>
-              <Text className="mt-4 max-w-md text-gray-500">
-                Точная стоимость формируется индивидуально и зависит от типа сделки, сложности задачи и объёма работ.
-              </Text>
-              <Button
-                variant="dark"
-                className="mt-8 h-12 px-8"
-                onClick={() => {
-                  trackEvent('click_pricing_cta', { page: 'home', block: 'pricing' })
-                  openLeadModal('consultation', { page: 'home', block: 'pricing' })
-                }}
-              >
-                Узнать точную стоимость
-              </Button>
-            </div>
+          <Heading size="h2" className="text-center">Стоимость услуг</Heading>
 
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: 'Подбор объекта', value: 'от 2,5%' },
-                { label: 'Продажа', value: 'от 3%' },
-                { label: 'Аренда', value: 'от 50%', sub: 'месячной ставки' },
-                { label: 'Юр. сопровождение', value: 'от 100 000 ₽' },
-              ].map((s) => (
-                <div key={s.label} className="rounded-xl border border-black/5 bg-white/80 p-5 shadow-sm">
-                  <Text size="sm" className="text-gray-500">{s.label}</Text>
-                  <div className="mt-2 text-xl font-semibold">{s.value}</div>
-                  {s.sub && <Text size="sm" className="text-gray-400">{s.sub}</Text>}
-                </div>
-              ))}
-            </div>
+          {/* Главный акцент — бесплатно */}
+          <div className="mx-auto mt-10 max-w-2xl rounded-2xl border-2 border-accent/30 bg-accent/5 p-8 text-center shadow-sm">
+            <Text size="sm" className="uppercase tracking-widest text-accent">Новостройки</Text>
+            <div className="mt-3 text-5xl font-bold tracking-tight md:text-7xl">Бесплатно</div>
+            <Text size="lg" className="mt-3 text-gray-600">
+              Подбор новостройки от застройщика — без комиссии для покупателя
+            </Text>
+            <Button
+              variant="dark"
+              className="mt-6 h-12 px-8"
+              onClick={() => {
+                trackEvent('click_pricing_cta', { page: 'home', block: 'pricing_free' })
+                openLeadModal('consultation', { page: 'home', block: 'pricing_free' })
+              }}
+            >
+              Получить подборку
+            </Button>
+          </div>
+
+          {/* Остальные услуги */}
+          <div className="mx-auto mt-10 grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { label: 'Подбор вторички', value: 'от 2,5%', sub: 'от стоимости' },
+              { label: 'Продажа', value: 'от 3%', sub: 'от стоимости' },
+              { label: 'Аренда', value: 'от 50%', sub: 'месячной ставки' },
+              { label: 'Юр. сопровождение', value: 'от 100 000 ₽' },
+            ].map((s) => (
+              <div key={s.label} className="rounded-xl border border-black/5 bg-white/80 p-5 shadow-sm text-center">
+                <Text size="sm" className="text-gray-500">{s.label}</Text>
+                <div className="mt-2 text-xl font-semibold">{s.value}</div>
+                {s.sub && <Text size="sm" className="text-gray-400">{s.sub}</Text>}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 text-center">
+            <Text className="text-gray-500">
+              Точная стоимость формируется индивидуально и зависит от типа сделки и объёма работ.
+            </Text>
+            <Button
+              variant="dark"
+              className="mt-4 h-12 px-8"
+              onClick={() => {
+                trackEvent('click_pricing_cta', { page: 'home', block: 'pricing' })
+                openLeadModal('consultation', { page: 'home', block: 'pricing' })
+              }}
+            >
+              Узнать точную стоимость
+            </Button>
           </div>
         </div>
       </section>

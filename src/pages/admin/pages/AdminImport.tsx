@@ -27,6 +27,30 @@ const MAPPING_CONFIG = [
   { key: 'status', label: 'Status', placeholder: 'status' },
 ]
 
+const statusLabel = (status: ImportRun['status'], action?: ImportRun['action']) => {
+  if (action === 'delete') return 'Удалено'
+  if (status === 'success') return 'Успешно'
+  if (status === 'partial') return 'Частично'
+  return 'Ошибка'
+}
+
+const normalizeUrlName = (value: string) => {
+  try {
+    const u = new URL(value)
+    const raw = u.pathname.split('/').filter(Boolean).pop() || u.hostname
+    const decoded = decodeURIComponent(raw)
+    return decoded.replace(/\.[a-z0-9]+$/i, '')
+  } catch {
+    const raw = value.split('/').filter(Boolean).pop() || value
+    return raw.replace(/\.[a-z0-9]+$/i, '')
+  }
+}
+
+const normalizeFileName = (value: string) => {
+  const base = value.split(/[/\\]/).pop() || value
+  return base.replace(/\.[a-z0-9]+$/i, '')
+}
+
 export default function AdminImportPage() {
   const token = useUiStore((s) => s.adminToken)
   const headers = useMemo(() => ({ 'x-admin-token': token || '' }), [token])
@@ -34,14 +58,19 @@ export default function AdminImportPage() {
   // Data
   const [feeds, setFeeds] = useState<FeedSource[]>([])
   const [runs, setRuns] = useState<ImportRun[]>([])
+  const [feedDiagnostics, setFeedDiagnostics] = useState<Record<string, { reason?: string; items?: { properties: number; complexes: number; total: number } }>>({})
+  const [dataError, setDataError] = useState<string | null>(null)
+  const [runsPage, setRunsPage] = useState(1)
   
   // UI State
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [pendingSourceIds, setPendingSourceIds] = useState<Set<string>>(new Set())
   
   // Feed Management State
   const [isFeedModalOpen, setIsFeedModalOpen] = useState(false)
   const [editingFeedId, setEditingFeedId] = useState<string | null>(null)
+  const [feedNameTouched, setFeedNameTouched] = useState(false)
   const [feedForm, setFeedForm] = useState<{
     name: string
     format: 'xlsx' | 'csv' | 'xml' | 'json'
@@ -50,11 +79,12 @@ export default function AdminImportPage() {
     mapping: Record<string, string>
   }>({
     name: '',
-    format: 'json',
-    mode: 'upload',
+    format: 'xml',
+    mode: 'url',
     url: '',
     mapping: {}
   })
+  const [feedFile, setFeedFile] = useState<File | null>(null)
 
   // Import State
   const [activeImportSource, setActiveImportSource] = useState<FeedSource | null>(null)
@@ -62,8 +92,18 @@ export default function AdminImportPage() {
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<ImportPreview | null>(null)
   const [isPreviewMode, setIsPreviewMode] = useState(false)
+  const [previewContext, setPreviewContext] = useState<{
+    sourceId: string
+    sourceName?: string
+    entity: 'property' | 'complex'
+    mode: 'upload' | 'url'
+    url?: string
+    fileName?: string
+  } | null>(null)
   const [viewMode, setViewMode] = useState<'table' | 'visual'>('visual')
+  const [cardsPerRow, setCardsPerRow] = useState(3)
   const [autoPreviewSourceId, setAutoPreviewSourceId] = useState<string | null>(null)
+  const [hideInvalid, setHideInvalid] = useState(true)
 
   // Edit Preview State
   const [editingIndex, setEditingIndex] = useState<number | null>(null)
@@ -74,14 +114,98 @@ export default function AdminImportPage() {
     return data.external_id || data.id || data.externalId || ''
   }
 
-  const load = useCallback(() => {
-    apiGet<FeedSource[]>('/api/admin/feeds', headers).then(setFeeds).catch(() => setFeeds([]))
-    apiGet<ImportRun[]>('/api/admin/import/runs', headers).then(setRuns).catch(() => setRuns([]))
-  }, [headers])
+  const load = useCallback(async () => {
+    if (!token) return
+    setDataError(null)
+    const [feedsRes, runsRes, diagRes] = await Promise.allSettled([
+      apiGet<FeedSource[]>('/api/admin/feeds', headers),
+      apiGet<ImportRun[]>('/api/admin/import/runs', headers),
+      apiGet<Record<string, { reason?: string; items?: { properties: number; complexes: number; total: number } }>>('/api/admin/feeds/diagnostics', headers),
+    ])
+
+    if (feedsRes.status === 'fulfilled') setFeeds(feedsRes.value)
+    else setDataError('Не удалось загрузить список источников.')
+
+    if (runsRes.status === 'fulfilled') setRuns(runsRes.value)
+    else setDataError((prev) => prev || 'Не удалось загрузить историю импортов.')
+
+    if (diagRes.status === 'fulfilled') setFeedDiagnostics(diagRes.value)
+    else setFeedDiagnostics({})
+  }, [headers, token])
 
   useEffect(() => {
     load()
   }, [load])
+
+  const runsBySource = useMemo(() => {
+    const map = new Map<string, ImportRun>()
+    for (const r of runs) {
+      const current = map.get(r.source_id)
+      if (!current || (r.started_at || '') > (current.started_at || '')) {
+        map.set(r.source_id, r)
+      }
+    }
+    return map
+  }, [runs])
+
+  const runsPerPage = 10
+  const runsTotalPages = Math.max(1, Math.ceil(runs.length / runsPerPage))
+  const pagedRuns = useMemo(() => {
+    const start = (runsPage - 1) * runsPerPage
+    return runs.slice(start, start + runsPerPage)
+  }, [runs, runsPage])
+
+  useEffect(() => {
+    if (runsPage > runsTotalPages) setRunsPage(runsTotalPages)
+  }, [runsPage, runsTotalPages])
+
+  const duplicateMap = useMemo(() => {
+    const byUrl = new Map<string, string[]>()
+    const byName = new Map<string, string[]>()
+    for (const f of feeds) {
+      if (f.url) {
+        const list = byUrl.get(f.url) || []
+        list.push(f.id)
+        byUrl.set(f.url, list)
+      }
+      const name = f.name.trim().toLowerCase()
+      if (name) {
+        const list = byName.get(name) || []
+        list.push(f.id)
+        byName.set(name, list)
+      }
+    }
+    const dupIds = new Set<string>()
+    for (const list of [...byUrl.values(), ...byName.values()]) {
+      if (list.length > 1) list.forEach((id) => dupIds.add(id))
+    }
+    return dupIds
+  }, [feeds])
+
+  const urlGroups = useMemo(() => {
+    const map = new Map<string, FeedSource[]>()
+    for (const f of feeds) {
+      if (!f.url) continue
+      const list = map.get(f.url) || []
+      list.push(f)
+      map.set(f.url, list)
+    }
+    return map
+  }, [feeds])
+
+  const lastRunByUrl = useMemo(() => {
+    const map = new Map<string, ImportRun>()
+    for (const [url, list] of urlGroups.entries()) {
+      let best: ImportRun | undefined
+      for (const feed of list) {
+        const r = runsBySource.get(feed.id)
+        if (!r) continue
+        if (!best || (r.started_at || '') > (best.started_at || '')) best = r
+      }
+      if (best) map.set(url, best)
+    }
+    return map
+  }, [urlGroups, runsBySource])
 
   const selectFeed = useCallback((feed: FeedSource | null) => {
     setActiveImportSource(feed)
@@ -106,17 +230,42 @@ export default function AdminImportPage() {
     }
   }, [feeds, activeImportSource, selectFeed])
 
+  useEffect(() => {
+    if (feedForm.mode !== 'url') return
+    if (!feedForm.url) return
+    if (feedNameTouched) return
+    const suggested = normalizeUrlName(feedForm.url)
+    if (suggested && suggested !== feedForm.name) {
+      setFeedForm((prev) => ({ ...prev, name: suggested }))
+    }
+  }, [feedForm.mode, feedForm.url, feedForm.name, feedNameTouched])
+
+  const duplicateFeed = useMemo(() => {
+    const name = feedForm.name.trim().toLowerCase()
+    const url = feedForm.url.trim()
+    return feeds.find((f) => {
+      if (editingFeedId && f.id === editingFeedId) return false
+      if (feedForm.mode === 'url' && url && f.mode === 'url' && f.url === url) return true
+      if (name && f.name.trim().toLowerCase() === name) return true
+      return false
+    })
+  }, [feeds, feedForm.mode, feedForm.name, feedForm.url, editingFeedId])
+
 
   // --- Feed Management Functions ---
 
   const openCreateFeed = () => {
     setEditingFeedId(null)
-    setFeedForm({ name: '', format: 'json', mode: 'upload', url: '', mapping: {} })
+    setFeedNameTouched(false)
+    setFeedFile(null)
+    setFeedForm({ name: '', format: 'xml', mode: 'url', url: '', mapping: {} })
     setIsFeedModalOpen(true)
   }
 
   const openEditFeed = (feed: FeedSource) => {
     setEditingFeedId(feed.id)
+    setFeedNameTouched(true)
+    setFeedFile(null)
     setFeedForm({
       name: feed.name,
       format: feed.format,
@@ -160,7 +309,12 @@ export default function AdminImportPage() {
           created_at: new Date().toISOString()
         }
         selectFeed(newFeed)
-        setAutoPreviewSourceId(newFeedId)
+        if (feedForm.mode === 'url') {
+          setAutoPreviewSourceId(newFeedId)
+        } else if (feedFile) {
+          setFile(feedFile)
+          await runPreviewForFeed(newFeed, feedFile)
+        }
       }
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Ошибка сохранения фида')
@@ -183,28 +337,27 @@ export default function AdminImportPage() {
 
   // --- Import Functions ---
 
-  const handleStartImport = (feed: FeedSource) => {
-    selectFeed(feed)
-  }
-
-  const runPreview = async () => {
-    if (!activeImportSource) {
-      setError('Р’С‹Р±РµСЂРёС‚Рµ РёСЃС‚РѕС‡РЅРёРє')
+  const runPreviewForFeed = useCallback(async (feed: FeedSource, fileOverride?: File | null) => {
+    if (feed.mode === 'upload' && !fileOverride) {
+      setError('Для загрузки файла выберите файл перед предпросмотром.')
       return
     }
-    if (activeImportSource.mode === 'upload' && !file) return
-    
+    if (feed.mode === 'url' && !feed.url) {
+      setError('У источника не указан URL.')
+      return
+    }
+
     setLoading(true)
     setError(null)
     setPreview(null)
 
     try {
       const fd = new FormData()
-      if (file) fd.append('file', file)
-      fd.append('source_id', activeImportSource.id)
+      if (fileOverride) fd.append('file', fileOverride)
+      fd.append('source_id', feed.id)
       fd.append('entity', entity)
-      if (activeImportSource.mode === 'url' && activeImportSource.url) {
-        fd.append('url', activeImportSource.url)
+      if (feed.mode === 'url' && feed.url) {
+        fd.append('url', feed.url)
       }
 
       const res = await fetch('/api/admin/import/preview', {
@@ -219,11 +372,36 @@ export default function AdminImportPage() {
       setPreview(json.data)
       setIsPreviewMode(true)
       setViewMode('visual')
+      setHideInvalid(true)
+      setPreviewContext({
+        sourceId: feed.id,
+        sourceName: feed.name,
+        entity,
+        mode: feed.mode,
+        url: feed.url,
+        fileName: fileOverride?.name,
+      })
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Ошибка')
     } finally {
       setLoading(false)
+      void load()
     }
+  }, [entity, token, load])
+
+  const handleStartImport = useCallback((feed: FeedSource, autoPreview = false) => {
+    selectFeed(feed)
+    if (autoPreview && feed.mode === 'url') {
+      void runPreviewForFeed(feed)
+    }
+  }, [runPreviewForFeed, selectFeed])
+
+  const runPreview = async () => {
+    if (!activeImportSource) {
+      setError('Выберите источник')
+      return
+    }
+    await runPreviewForFeed(activeImportSource, file)
   }
 
   useEffect(() => {
@@ -238,11 +416,17 @@ export default function AdminImportPage() {
   }, [autoPreviewSourceId, activeImportSource, runPreview])
 
   const runImport = async () => {
-    if (!activeImportSource) {
-      setError('Р’С‹Р±РµСЂРёС‚Рµ РёСЃС‚РѕС‡РЅРёРє')
+    const sourceId = previewContext?.sourceId || activeImportSource?.id
+    if (!sourceId) {
+      setError('Выберите источник')
       return
     }
     setLoading(true)
+    setPendingSourceIds((prev) => {
+      const next = new Set(prev)
+      next.add(sourceId)
+      return next
+    })
     setError(null)
     try {
       const fd = new FormData()
@@ -250,13 +434,17 @@ export default function AdminImportPage() {
       if (preview && preview.sampleRows.length > 0) {
         const rows = preview.sampleRows.map(r => r.data)
         fd.append('rows', JSON.stringify(rows))
-        fd.append('source_id', activeImportSource.id)
-        fd.append('entity', entity)
+        fd.append('source_id', sourceId)
+        fd.append('entity', previewContext?.entity || entity)
+        fd.append('hide_invalid', String(hideInvalid))
       } else {
         if (file) fd.append('file', file)
-        fd.append('source_id', activeImportSource.id)
-        fd.append('entity', entity)
-        if (activeImportSource.mode === 'url' && activeImportSource.url) {
+        fd.append('source_id', sourceId)
+        fd.append('entity', previewContext?.entity || entity)
+        fd.append('hide_invalid', String(hideInvalid))
+        if (previewContext?.mode === 'url' && previewContext.url) {
+          fd.append('url', previewContext.url)
+        } else if (activeImportSource?.mode === 'url' && activeImportSource.url) {
           fd.append('url', activeImportSource.url)
         }
       }
@@ -272,17 +460,24 @@ export default function AdminImportPage() {
       setFile(null)
       setPreview(null)
       setIsPreviewMode(false)
-      load()
+      setPreviewContext(null)
+      await load()
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Ошибка')
     } finally {
       setLoading(false)
+      setPendingSourceIds((prev) => {
+        const next = new Set(prev)
+        next.delete(sourceId)
+        return next
+      })
     }
   }
 
   const closePreview = () => {
     setIsPreviewMode(false)
     setPreview(null)
+    setPreviewContext(null)
   }
 
   // --- Edit Functions ---
@@ -360,62 +555,127 @@ export default function AdminImportPage() {
       </div>
 
       {error ? <div className="text-sm text-rose-600">{error}</div> : null}
+      {dataError ? <div className="text-sm text-rose-600">{dataError}</div> : null}
 
       {/* Main View: Feed List */}
       <div className="space-y-6">
-          <div className="overflow-hidden rounded-lg border border-slate-200">
-            <table className="w-full text-left text-sm">
+          <div className="overflow-x-auto rounded-lg border border-slate-200">
+            <table className="w-full min-w-[720px] md:min-w-full text-left text-sm">
               <thead className="bg-slate-50 text-xs text-slate-600">
                 <tr>
+                  <th className="px-3 py-2">№</th>
                   <th className="px-3 py-2">Название</th>
                   <th className="px-3 py-2">Формат</th>
-                  <th className="px-3 py-2">Режим</th>
+                  <th className="px-3 py-2">Источник</th>
                   <th className="px-3 py-2">Маппинг</th>
                   <th className="px-3 py-2">Статус</th>
                   <th className="px-3 py-2 text-right">Действия</th>
                 </tr>
               </thead>
               <tbody>
-                {feeds.map((f) => {
-                  const lastRun = runs.filter(r => r.source_id === f.id).sort((a,b) => (b.started_at || '').localeCompare(a.started_at || ''))[0]
+                {feeds.map((f, index) => {
+                  const lastRun = runsBySource.get(f.id)
+                  const duplicateUrlRun = f.url ? lastRunByUrl.get(f.url) : undefined
+                  const displayRun = lastRun || (duplicateMap.has(f.id) ? duplicateUrlRun : undefined)
+                  const isDuplicateUrl = Boolean(f.url && duplicateMap.has(f.id) && duplicateUrlRun)
+                  const isPending = pendingSourceIds.has(f.id)
+                  const canRun = !isDuplicateUrl && !isPending
+                  const statusNote = !displayRun ? (feedDiagnostics[f.id]?.reason || 'Импорт не запускался') : null
                   return (
                   <tr key={f.id} className="border-t border-slate-200">
-                    <td className="px-3 py-2 font-medium text-slate-900">{f.name}</td>
+                    <td className="px-3 py-2 text-slate-500">{index + 1}</td>
+                    <td className="px-3 py-2 font-medium text-slate-900">
+                      <div className="flex items-center gap-2">
+                        <span>{f.name}</span>
+                      {duplicateMap.has(f.id) && (
+                        <Badge variant="warning">Повтор</Badge>
+                      )}
+                      </div>
+                    </td>
                     <td className="px-3 py-2 text-slate-700">{f.format}</td>
                     <td className="px-3 py-2 text-slate-700">
                       {f.mode === 'url' ? (
-                        <span className="truncate max-w-[200px] block" title={f.url}>{f.url}</span>
-                      ) : 'Файл'}
+                        <div className="flex flex-col">
+                          <span className="text-[10px] text-slate-500">URL</span>
+                          <span className="truncate max-w-[220px] block" title={f.url}>{f.url}</span>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col">
+                          <span className="text-[10px] text-slate-500">Файл</span>
+                          <span className="text-slate-700">Загрузка файла</span>
+                        </div>
+                      )}
                     </td>
                     <td className="px-3 py-2 text-slate-500 text-xs">
                       {f.mapping ? Object.keys(f.mapping).length + ' полей' : 'Авто'}
                     </td>
                     <td className="px-3 py-2">
-                      {lastRun ? (
+                      {displayRun ? (
                         <div className="flex flex-col items-start gap-1">
-                          <Badge variant={lastRun.status === 'success' ? 'default' : lastRun.status === 'partial' ? 'warning' : 'destructive'}>{lastRun.status}</Badge>
-                          <span className="text-[10px] text-slate-500">{new Date(lastRun.started_at).toLocaleDateString('ru-RU')}</span>
+                          <Badge variant={displayRun.status === 'success' ? 'default' : displayRun.status === 'partial' ? 'warning' : 'destructive'}>
+                            {statusLabel(displayRun.status, displayRun.action)}
+                          </Badge>
+                          <span className="text-[10px] text-slate-500">{new Date(displayRun.started_at).toLocaleDateString('ru-RU')}</span>
+                          {isDuplicateUrl && (
+                            <span className="text-[10px] text-amber-600">Запуск у дубля URL</span>
+                          )}
+                          {displayRun.status !== 'success' && displayRun.error_log && (
+                            <span className="text-[10px] text-rose-600">{String(displayRun.error_log).split('\n')[0]}</span>
+                          )}
                         </div>
                       ) : (
-                        <span className="text-xs text-slate-400">Не импортировано</span>
+                        <div className="flex flex-col items-start gap-1">
+                          <span className="text-xs text-slate-600">{statusNote}</span>
+                          {feedDiagnostics[f.id]?.items?.total ? (
+                            <span className="text-[10px] text-slate-500">
+                              Данных: {feedDiagnostics[f.id]?.items?.total}
+                            </span>
+                          ) : null}
+                        </div>
                       )}
                     </td>
-                    <td className="px-3 py-2 text-right space-x-2">
-                      <Button size="sm" variant={lastRun ? "secondary" : "default"} onClick={() => handleStartImport(f)}>
-                        {lastRun ? 'Импорт' : 'Запустить'}
-                      </Button>
-                      <Button size="sm" variant="secondary" onClick={() => openEditFeed(f)}>
-                        Настроить
-                      </Button>
-                      <Button size="sm" variant="secondary" className="text-rose-600 bg-rose-50 hover:bg-rose-100" onClick={() => handleDeleteFeed(f.id)}>
-                        Удалить
-                      </Button>
+                    <td className="px-3 py-2">
+                      <div className="ml-auto flex w-fit flex-col gap-2">
+                        <Button
+                          size="sm"
+                          className="min-w-[110px]"
+                          variant={displayRun ? "secondary" : "default"}
+                          onClick={() => handleStartImport(f, true)}
+                          disabled={!canRun}
+                        >
+                          {isPending ? 'Публикация…' : displayRun ? 'Импорт' : 'Запустить'}
+                        </Button>
+                        {f.mode === 'upload' && (
+                          <label className="inline-flex items-center">
+                            <input
+                              type="file"
+                              accept=".json,.csv,.xlsx,.xls,.xml"
+                              className="hidden"
+                              onChange={(e) => {
+                                const selected = e.target.files?.[0] || null
+                                if (!selected) return
+                                setFile(selected)
+                                handleStartImport(f)
+                              }}
+                            />
+                            <span className="inline-flex">
+                              <Button size="sm" className="min-w-[110px]" variant="secondary">Файл</Button>
+                            </span>
+                          </label>
+                        )}
+                        <Button size="sm" className="min-w-[110px]" variant="secondary" onClick={() => openEditFeed(f)}>
+                          Настроить
+                        </Button>
+                        <Button size="sm" className="min-w-[110px] text-rose-600 bg-rose-50 hover:bg-rose-100" variant="secondary" onClick={() => handleDeleteFeed(f.id)}>
+                          Удалить
+                        </Button>
+                      </div>
                     </td>
                   </tr>
                 )})}
                 {feeds.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="px-3 py-8 text-center text-slate-500">
+                    <td colSpan={7} className="px-3 py-8 text-center text-slate-500">
                       Нет источников. Добавьте первый фид для начала работы.
                     </td>
                   </tr>
@@ -426,11 +686,13 @@ export default function AdminImportPage() {
 
           <div>
             <div className="mb-3 text-sm font-semibold text-slate-900">История импорта</div>
-            <div className="overflow-hidden rounded-lg border border-slate-200">
-              <table className="w-full text-left text-sm">
+            <div className="overflow-x-auto rounded-lg border border-slate-200 max-h-[360px] overflow-y-auto">
+              <table className="w-full min-w-[720px] md:min-w-full text-left text-sm">
                 <thead className="bg-slate-50 text-xs text-slate-600">
                   <tr>
                     <th className="px-3 py-2">Время</th>
+                    <th className="px-3 py-2">Источник</th>
+                    <th className="px-3 py-2">Действие</th>
                     <th className="px-3 py-2">Сущность</th>
                     <th className="px-3 py-2">Статус</th>
                     <th className="px-3 py-2">Статистика</th>
@@ -438,10 +700,16 @@ export default function AdminImportPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {runs.map((r) => (
+                  {pagedRuns.map((r) => (
                     <tr key={r.id} className="border-t border-slate-200">
                       <td className="px-3 py-2 text-slate-700">
                         {new Date(r.started_at).toLocaleString('ru-RU')}
+                      </td>
+                      <td className="px-3 py-2 text-slate-700">
+                        {r.feed_name || r.feed_file || r.feed_url || r.source_id}
+                      </td>
+                      <td className="px-3 py-2 text-slate-700">
+                        {r.action === 'preview' ? 'Предпросмотр' : r.action === 'delete' ? 'Удаление' : 'Импорт'}
                       </td>
                       <td className="px-3 py-2 text-slate-700">{r.entity}</td>
                       <td className="px-3 py-2">
@@ -452,7 +720,7 @@ export default function AdminImportPage() {
                             'destructive'
                           }
                         >
-                          {r.status}
+                          {statusLabel(r.status, r.action)}
                         </Badge>
                       </td>
                       <td className="px-3 py-2 text-slate-700">
@@ -476,7 +744,7 @@ export default function AdminImportPage() {
                   ))}
                   {runs.length === 0 && (
                     <tr>
-                      <td colSpan={5} className="px-3 py-8 text-center text-slate-500">
+                      <td colSpan={7} className="px-3 py-8 text-center text-slate-500">
                         История пуста
                       </td>
                     </tr>
@@ -484,6 +752,19 @@ export default function AdminImportPage() {
                 </tbody>
               </table>
             </div>
+            {runs.length > 0 && (
+              <div className="mt-3 flex items-center justify-between text-xs text-slate-600">
+                <span>Страница {runsPage} из {runsTotalPages}</span>
+                <div className="flex gap-2">
+                  <Button size="sm" variant="secondary" onClick={() => setRunsPage((p) => Math.max(1, p - 1))} disabled={runsPage === 1}>
+                    Назад
+                  </Button>
+                  <Button size="sm" variant="secondary" onClick={() => setRunsPage((p) => Math.min(runsTotalPages, p + 1))} disabled={runsPage === runsTotalPages}>
+                    Вперёд
+                  </Button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -548,25 +829,61 @@ export default function AdminImportPage() {
           </div>
 
           {preview && (
-            <Modal open={isPreviewMode} onClose={closePreview} title="Предпросмотр">
-              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-4">
+            <Modal
+              open={isPreviewMode}
+              onClose={closePreview}
+              title="Предпросмотр"
+              className="max-w-6xl"
+            >
+              <div className="rounded-lg border border-slate-200 bg-slate-50 p-4 space-y-4 text-slate-900">
                 <div className="flex items-center justify-between">
                   <div className="text-sm font-semibold">Предпросмотр</div>
                   <div className="flex items-center gap-4">
+                    {previewContext?.sourceName && (
+                      <div className="text-xs text-slate-500">
+                        Источник: <span className="font-medium text-slate-700">{previewContext.sourceName}</span>
+                      </div>
+                    )}
+                    <label className="inline-flex items-center gap-2 text-xs text-slate-600">
+                      <input
+                        type="checkbox"
+                        checked={hideInvalid}
+                        onChange={(e) => setHideInvalid(e.target.checked)}
+                      />
+                      Скрывать записи с ошибками
+                    </label>
                     <div className="flex bg-slate-200 rounded p-1">
                       <button 
-                        className={cn("px-3 py-1 text-xs rounded transition-colors", viewMode === 'table' ? "bg-white shadow" : "text-slate-600 hover:text-slate-900")}
+                        className={cn("px-3 py-1 text-xs rounded transition-colors", viewMode === 'table' ? "bg-white text-slate-900 shadow" : "text-slate-600 hover:text-slate-900")}
                         onClick={() => setViewMode('table')}
                       >
                         Таблица
                       </button>
                       <button 
-                        className={cn("px-3 py-1 text-xs rounded transition-colors", viewMode === 'visual' ? "bg-white shadow" : "text-slate-600 hover:text-slate-900")}
+                        className={cn("px-3 py-1 text-xs rounded transition-colors", viewMode === 'visual' ? "bg-white text-slate-900 shadow" : "text-slate-600 hover:text-slate-900")}
                         onClick={() => setViewMode('visual')}
                       >
                         Визуально
                       </button>
                     </div>
+                    {viewMode === 'visual' && (
+                      <div className="flex items-center gap-1">
+                        {[2, 3, 4, 5].map((count) => (
+                          <button
+                            key={count}
+                            className={cn(
+                              "px-2 py-1 text-xs rounded border transition-colors",
+                              cardsPerRow === count
+                                ? "bg-slate-900 text-white border-slate-900"
+                                : "bg-white text-slate-600 border-slate-200 hover:text-slate-900"
+                            )}
+                            onClick={() => setCardsPerRow(count)}
+                          >
+                            {count}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                     <div className="text-xs text-slate-600">
                       Всего: {preview.totalRows} | Валидных: {preview.validRows} | Ошибок: {preview.invalidRows}
                     </div>
@@ -650,10 +967,13 @@ export default function AdminImportPage() {
                     ))}
                   </div>
                 ) : (
-                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 max-h-[800px] overflow-y-auto p-2">
+                  <div
+                    className="grid gap-6 max-h-[800px] overflow-y-auto p-2"
+                    style={{ gridTemplateColumns: `repeat(${cardsPerRow}, minmax(220px, 1fr))` }}
+                  >
                     {preview.mappedItems.map((item, index) => (
                       <div key={index} className="relative group">
-                        {entity === 'property' ? <PropertyCard item={item as Property} /> : <ComplexCard item={item as Complex} />}
+                        {entity === 'property' ? <PropertyCard item={item as Property} showStatusBadge /> : <ComplexCard item={item as Complex} showStatusBadge />}
                         <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                           <Button size="sm" onClick={() => handleEdit(index)}>Ред.</Button>
                         </div>
@@ -666,7 +986,7 @@ export default function AdminImportPage() {
                   <Button variant="secondary" onClick={closePreview}>
                     Оставить
                   </Button>
-                  <Button onClick={runImport} disabled={loading}>
+                  <Button onClick={runImport} disabled={loading || (activeImportSource ? pendingSourceIds.has(activeImportSource.id) : false)}>
                     {loading ? 'Импорт…' : 'Опубликовать'}
                   </Button>
                 </div>
@@ -703,7 +1023,15 @@ export default function AdminImportPage() {
         <div className="space-y-4 max-h-[80vh] overflow-y-auto p-1">
           <div>
             <label className="text-xs font-medium text-slate-700">Название</label>
-            <Input value={feedForm.name} onChange={(e) => setFeedForm({...feedForm, name: e.target.value})} placeholder="Например: Циан XML" />
+            <Input
+              value={feedForm.name}
+              onChange={(e) => {
+                const next = e.target.value
+                setFeedNameTouched(next.trim().length > 0)
+                setFeedForm({ ...feedForm, name: next })
+              }}
+              placeholder="Например: Циан XML"
+            />
           </div>
           
           <div className="grid grid-cols-2 gap-4">
@@ -728,7 +1056,41 @@ export default function AdminImportPage() {
           {feedForm.mode === 'url' && (
             <div>
               <label className="text-xs font-medium text-slate-700">URL фида</label>
-              <Input value={feedForm.url} onChange={(e) => setFeedForm({...feedForm, url: e.target.value})} placeholder="https://example.com/feed.xml" />
+              <Input
+                value={feedForm.url}
+                onChange={(e) => setFeedForm({ ...feedForm, url: e.target.value })}
+                placeholder="https://example.com/feed.xml"
+              />
+            </div>
+          )}
+          {feedForm.mode === 'upload' && (
+            <div>
+              <label className="text-xs font-medium text-slate-700">Файл фида</label>
+              <input
+                type="file"
+                accept=".json,.csv,.xlsx,.xls,.xml"
+                onChange={(e) => {
+                  const selected = e.target.files?.[0] || null
+                  setFeedFile(selected)
+                  setFile(selected)
+                  if (selected && !feedNameTouched) {
+                    const suggested = normalizeFileName(selected.name)
+                    if (suggested && suggested !== feedForm.name) {
+                      setFeedForm((prev) => ({ ...prev, name: suggested }))
+                    }
+                  }
+                }}
+                className="text-sm w-full"
+              />
+              {feedFile && (
+                <div className="mt-1 text-[10px] text-slate-500">Выбран файл: {feedFile.name}</div>
+              )}
+            </div>
+          )}
+
+          {duplicateFeed && (
+            <div className="rounded border border-amber-200 bg-amber-50 p-2 text-xs text-amber-700">
+              Такой фид уже загружен: <span className="font-medium">{duplicateFeed.name}</span>
             </div>
           )}
 
@@ -766,7 +1128,12 @@ export default function AdminImportPage() {
 
           <div className="pt-4 flex justify-end gap-2">
             <Button variant="secondary" onClick={() => setIsFeedModalOpen(false)}>Отмена</Button>
-            <Button onClick={handleSaveFeed} disabled={!feedForm.name}>Сохранить</Button>
+            <Button
+              onClick={handleSaveFeed}
+              disabled={!feedForm.name || (feedForm.mode === 'upload' && !feedFile) || Boolean(duplicateFeed)}
+            >
+              Сохранить
+            </Button>
           </div>
         </div>
       </Modal>

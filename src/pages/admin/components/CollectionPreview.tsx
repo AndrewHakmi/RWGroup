@@ -86,7 +86,7 @@ export default function CollectionPreview({ open, onClose, collectionId }: Props
 
                     return (
                       <div key={idx} className={`relative ${isInvalid ? 'opacity-50 ring-2 ring-rose-500 rounded-xl' : ''}`}>
-                        {item.type === 'property' ? <PropertyCard item={item.ref as Property} /> : <ComplexCard item={item.ref as Complex} />}
+                        {item.type === 'property' ? <PropertyCard item={item.ref as Property} showStatusBadge /> : <ComplexCard item={item.ref as Complex} showStatusBadge />}
                         {isInvalid && (
                           <div className="absolute top-2 left-2 bg-rose-500 text-white text-xs px-2 py-1 rounded">Невалидный</div>
                         )}

@@ -126,9 +126,9 @@ export default function ManualItemsEditor({ value, onChange, collectionId }: Pro
               <div key={item.ref_id} className={`relative ${isInvalid ? 'opacity-50 ring-2 ring-rose-500 rounded-xl' : ''}`}>
                 {data ? (
                   item.type === 'property' ? (
-                    <PropertyCard item={data as Property} />
+                    <PropertyCard item={data as Property} showStatusBadge />
                   ) : (
-                    <ComplexCard item={data as Complex} />
+                    <ComplexCard item={data as Complex} showStatusBadge />
                   )
                 ) : (
                   <div className="rounded-xl border border-slate-200 bg-slate-50 p-4">

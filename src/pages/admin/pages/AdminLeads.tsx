@@ -39,8 +39,8 @@ export default function AdminLeadsPage() {
 
       {error ? <div className="text-sm text-rose-600">{error}</div> : null}
 
-      <div className="overflow-hidden rounded-lg border border-slate-200">
-        <table className="w-full text-left text-sm">
+      <div className="overflow-x-auto rounded-lg border border-slate-200">
+        <table className="w-full min-w-[720px] md:min-w-full text-left text-sm">
           <thead className="bg-slate-50 text-xs text-slate-600">
             <tr>
               <th className="px-3 py-2">Время</th>

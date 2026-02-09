@@ -166,9 +166,9 @@ export default function AutoRulesBuilder({ value, onChange }: Props) {
             {preview.items.map((item, idx) => (
               <div key={idx}>
                 {item.type === 'property' ? (
-                  <PropertyCard item={item.ref as Property} />
+                  <PropertyCard item={item.ref as Property} showStatusBadge />
                 ) : (
-                  <ComplexCard item={item.ref as Complex} />
+                  <ComplexCard item={item.ref as Complex} showStatusBadge />
                 )}
               </div>
             ))}

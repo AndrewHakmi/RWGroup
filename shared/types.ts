@@ -133,6 +133,10 @@ export interface ImportRun {
   status: 'success' | 'failed' | 'partial'
   stats: { inserted: number; updated: number; hidden: number }
   error_log?: string
+  feed_name?: string
+  feed_url?: string
+  feed_file?: string
+  action?: 'import' | 'preview' | 'delete'
 }
 
 export interface ImportPreviewRow {

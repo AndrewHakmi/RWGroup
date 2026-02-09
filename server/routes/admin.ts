@@ -30,6 +30,7 @@ import * as XLSX from 'xlsx'
 
 const router = Router()
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 15 * 1024 * 1024 } })
+const importLocks = new Map<string, number>()
 
 function toNumber(v: unknown): number | undefined {
   const n = typeof v === 'string' && v.trim() !== '' ? Number(v) : typeof v === 'number' ? v : NaN
@@ -111,6 +112,67 @@ router.get('/feeds', (req: Request, res: Response) => {
   res.json({ success: true, data })
 })
 
+router.get('/feeds/diagnostics', (req: Request, res: Response) => {
+  const data = withDb((db) => {
+    const lastRunBySource: Record<string, any> = {}
+    for (const r of db.import_runs) {
+      const current = lastRunBySource[r.source_id]
+      if (!current || (r.started_at || '') > (current.started_at || '')) {
+        lastRunBySource[r.source_id] = r
+      }
+    }
+
+    const itemsBySource: Record<string, { properties: number; complexes: number; total: number }> = {}
+    for (const p of db.properties) {
+      const entry = itemsBySource[p.source_id] || { properties: 0, complexes: 0, total: 0 }
+      entry.properties += 1
+      entry.total += 1
+      itemsBySource[p.source_id] = entry
+    }
+    for (const c of db.complexes) {
+      const entry = itemsBySource[c.source_id] || { properties: 0, complexes: 0, total: 0 }
+      entry.complexes += 1
+      entry.total += 1
+      itemsBySource[c.source_id] = entry
+    }
+
+    const diagnostics: Record<string, {
+      reason?: string
+      items: { properties: number; complexes: number; total: number }
+      last_status?: 'success' | 'failed' | 'partial'
+      last_started_at?: string
+    }> = {}
+
+    for (const feed of db.feed_sources) {
+      const lastRun = lastRunBySource[feed.id]
+      const items = itemsBySource[feed.id] || { properties: 0, complexes: 0, total: 0 }
+      let reason: string | undefined
+
+      if (!lastRun) {
+        if (!feed.is_active) reason = 'Источник отключен'
+        else if (feed.mode === 'url' && !feed.url) reason = 'URL не указан'
+        else if (feed.mode === 'upload') reason = 'Ожидается загрузка файла'
+        else if (items.total > 0) reason = 'Данные есть, но нет записей об импорте'
+        else if (feed.auto_refresh) reason = 'Автообновление еще не запускалось'
+        else reason = 'Импорт не запускался'
+      } else if (lastRun.status !== 'success' && lastRun.error_log) {
+        reason = String(lastRun.error_log).split('\n')[0]
+      }
+
+      diagnostics[feed.id] = {
+        reason,
+        items,
+        last_status: lastRun?.status,
+        last_started_at: lastRun?.started_at,
+      }
+    }
+
+    return diagnostics
+  })
+
+  res.json({ success: true, data })
+})
+
 router.post('/feeds', (req: Request, res: Response) => {
   const schema = z.object({ 
     name: z.string().min(1), 
@@ -122,6 +184,19 @@ router.post('/feeds', (req: Request, res: Response) => {
   const parsed = schema.safeParse(req.body)
   if (!parsed.success) {
     res.status(400).json({ success: false, error: 'Invalid payload' })
+    return
+  }
+  const duplicate = withDb((db) => {
+    const name = parsed.data.name.trim().toLowerCase()
+    const url = parsed.data.url?.trim()
+    return db.feed_sources.find((f) => {
+      if (parsed.data.mode === 'url' && url && f.mode === 'url' && f.url === url) return true
+      if (name && f.name.trim().toLowerCase() === name) return true
+      return false
+    })
+  })
+  if (duplicate) {
+    res.status(409).json({ success: false, error: 'Такой фид уже существует' })
     return
   }
   const id = newId()
@@ -157,6 +232,23 @@ router.put('/feeds/:id', (req: Request, res: Response) => {
     res.status(400).json({ success: false, error: 'Invalid payload' })
     return
   }
+  const conflict = withDb((db) => {
+    const current = db.feed_sources.find((x) => x.id === id)
+    if (!current) return null
+    const nextName = (parsed.data.name ?? current.name).trim().toLowerCase()
+    const nextMode = parsed.data.mode ?? current.mode
+    const nextUrl = (parsed.data.url ?? current.url)?.trim()
+    return db.feed_sources.find((f) => {
+      if (f.id === id) return false
+      if (nextMode === 'url' && nextUrl && f.mode === 'url' && f.url === nextUrl) return true
+      if (nextName && f.name.trim().toLowerCase() === nextName) return true
+      return false
+    })
+  })
+  if (conflict) {
+    res.status(409).json({ success: false, error: 'Такой фид уже существует' })
+    return
+  }
   const ok = withDb((db) => {
     const fs = db.feed_sources.find((x) => x.id === id)
     if (!fs) return false
@@ -172,6 +264,7 @@ router.put('/feeds/:id', (req: Request, res: Response) => {
 
 router.delete('/feeds/:id', (req: Request, res: Response) => {
   const id = req.params.id
+  const snapshot = withDb((db) => db.feed_sources.find((x) => x.id === id))
   const ok = withDb((db) => {
     const before = db.feed_sources.length
     db.feed_sources = db.feed_sources.filter((x) => x.id !== id)
@@ -192,6 +285,23 @@ router.delete('/feeds/:id', (req: Request, res: Response) => {
   if (!ok) {
     res.status(404).json({ success: false, error: 'Not found' })
     return
+  }
+  if (snapshot) {
+    withDb((db) => {
+      db.import_runs.unshift({
+        id: newId(),
+        source_id: snapshot.id,
+        entity: 'property',
+        started_at: new Date().toISOString(),
+        finished_at: new Date().toISOString(),
+        status: 'failed',
+        stats: { inserted: 0, updated: 0, hidden: 0 },
+        error_log: 'Источник удален',
+        feed_name: snapshot.name,
+        feed_url: snapshot.url,
+        action: 'delete',
+      })
+    })
   }
   res.json({ success: true })
 })
@@ -669,13 +779,20 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
     source_id: z.string().min(1),
     entity: z.enum(['property', 'complex']),
     url: z.string().optional(),
-    rows: z.string().optional()
+    rows: z.string().optional(),
+    hide_invalid: z.coerce.boolean().optional()
   })
   const parsed = schema.safeParse(req.body)
   if (!parsed.success) {
     res.status(400).json({ success: false, error: 'Invalid payload' })
     return
   }
+  const lockKey = `${parsed.data.source_id}:${parsed.data.entity}`
+  if (importLocks.has(lockKey)) {
+    res.status(409).json({ success: false, error: 'Импорт уже выполняется для этого источника' })
+    return
+  }
+  importLocks.set(lockKey, Date.now())
   const runId = newId()
   const startedAt = new Date().toISOString()
   const run: {
@@ -685,6 +802,10 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
     started_at: string
     status: 'success' | 'failed' | 'partial'
     stats: { inserted: number; updated: number; hidden: number }
+    feed_name?: string
+    feed_url?: string
+    feed_file?: string
+    action?: 'import' | 'preview' | 'delete'
   } = {
     id: runId,
     source_id: parsed.data.source_id,
@@ -692,9 +813,18 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
     started_at: startedAt,
     status: 'success',
     stats: { inserted: 0, updated: 0, hidden: 0 },
+    action: 'import',
   }
 
   let errorLog = ''
+  const sourceSnapshot = withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
+  if (sourceSnapshot) {
+    run.feed_name = sourceSnapshot.name
+    run.feed_url = sourceSnapshot.url
+  }
+  if (req.file?.originalname) {
+    run.feed_file = req.file.originalname
+  }
 
   try {
     let rows: Record<string, unknown>[] = []
@@ -724,7 +854,7 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
       // Auto-upsert complexes from properties to ensure linking works
       upsertComplexesFromProperties(db, parsed.data.source_id, rows, mapping)
       
-      return upsertProperties(db, parsed.data.source_id, rows, mapping)
+      return upsertProperties(db, parsed.data.source_id, rows, mapping, { hideInvalid: parsed.data.hide_invalid })
     })
 
     run.stats = { inserted: stats.inserted, updated: stats.updated, hidden: stats.hidden }
@@ -740,6 +870,7 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
     run.status = 'failed'
     errorLog = e instanceof Error ? e.message : 'Unknown error'
   } finally {
+    importLocks.delete(lockKey)
     withDb((db) => {
       db.import_runs.unshift({
         ...run,
@@ -749,7 +880,7 @@ router.post('/import/run', upload.single('file'), async (req: Request, res: Resp
     })
   }
 
-  if (run.status !== 'success') {
+  if (run.status === 'failed') {
     res.status(500).json({ success: false, error: 'Import failed', details: errorLog })
     return
   }
@@ -980,6 +1111,7 @@ router.post('/import/preview', upload.single('file'), async (req: Request, res: 
     return
   }
 
+  const sourceSnapshot = withDb((db) => db.feed_sources.find(s => s.id === parsed.data.source_id))
   try {
     const buffer = await getBuffer(req, parsed.data.url)
     const fileName = req.file?.originalname || parsed.data.url || 'feed'
@@ -995,10 +1127,27 @@ router.post('/import/preview', upload.single('file'), async (req: Request, res: 
 
     res.json({ success: true, data: preview })
   } catch (e) {
+    const errorLog = e instanceof Error ? e.message : 'Unknown error'
+    withDb((db) => {
+      db.import_runs.unshift({
+        id: newId(),
+        source_id: parsed.data.source_id,
+        entity: parsed.data.entity,
+        started_at: new Date().toISOString(),
+        finished_at: new Date().toISOString(),
+        status: 'failed',
+        stats: { inserted: 0, updated: 0, hidden: 0 },
+        error_log: errorLog,
+        feed_name: sourceSnapshot?.name,
+        feed_url: sourceSnapshot?.url || parsed.data.url,
+        feed_file: req.file?.originalname,
+        action: 'preview',
+      })
+    })
     res.status(500).json({
       success: false,
       error: 'Preview failed',
-      details: e instanceof Error ? e.message : 'Unknown error'
+      details: errorLog
     })
   }
 })
@@ -1014,6 +1163,12 @@ function guessExt(name: string): 'csv' | 'xlsx' | 'xml' | 'json' {
 async function getBuffer(req: Request, url?: string): Promise<Buffer> {
   if (req.file?.buffer) return req.file.buffer
   if (url) {
+    try {
+      // Validate URL early for clearer errors
+      new URL(url)
+    } catch {
+      throw new Error('Некорректный URL')
+    }
     const r = await fetch(url)
     if (!r.ok) throw new Error(`Fetch failed: ${r.status}`)
     const ab = await r.arrayBuffer()
